@@ -1,6 +1,7 @@
 /* ------------------ GLOBAL ------------------ */
 body {
     background-color: var(--color-background-alt);
+    overflow-x: hidden;
 }
 
 /* ------------------ PAGE HEADER ------------------ */
@@ -29,16 +30,15 @@ body {
 #contact-page-content {
     padding: 6rem 0;
     background-color: var(--color-background-alt);
+    overflow-x: hidden;
 }
 
-
-/*After*/
 .contact-page-wrapper {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 4rem;
     align-items: flex-start;
-    /* max-width, margin, and padding are now handled by the parent .container div */
+    width: 100%;
 }
 
 /* ------------------ CONTACT FORM ------------------ */
@@ -48,6 +48,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
 }
 .contact-form:hover {
     transform: translateY(-5px);
@@ -131,6 +132,10 @@ body {
 }
 
 /* ------------------ CONTACT INFO & MAP ------------------ */
+.contact-details {
+    width: 100%;
+}
+
 .contact-info {
     background: var(--color-background-main);
     padding: 2.5rem;
@@ -150,6 +155,7 @@ body {
     width: 30px;
     text-align: center;
     margin-top: 4px;
+    flex-shrink: 0;
 }
 .contact-info h3 {
     font-family: var(--font-heading);
@@ -158,12 +164,14 @@ body {
 }
 .contact-info p {
     margin: 0;
+    word-wrap: break-word;
 }
 .contact-info a {
     color: var(--color-secondary);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
+    word-wrap: break-word;
 }
 .contact-info a:hover {
     color: var(--color-primary);
@@ -176,6 +184,7 @@ body {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 .map-container iframe {
     width: 100%;
@@ -185,7 +194,9 @@ body {
 
 /* ------------------ RESPONSIVE ------------------ */
 @media (max-width: 992px) {
-    #page-header h1 { font-size: 2.4rem; }
+    #page-header h1 { 
+        font-size: 2.4rem; 
+    }
 
     .contact-page-wrapper {
         grid-template-columns: 1fr;
@@ -198,8 +209,79 @@ body {
     }
 }
 
+@media (max-width: 768px) {
+    #page-header {
+        padding: 140px 1rem 60px 1rem;
+    }
+    
+    #page-header h1 {
+        font-size: 2rem;
+    }
+    
+    #page-header p {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+    
+    #contact-page-content { 
+        padding: 3rem 0; 
+    }
+    
+    .contact-page-wrapper {
+        gap: 2rem;
+    }
+    
+    .contact-form, .contact-info { 
+        padding: 1.5rem; 
+    }
+    
+    .contact-form h3 { 
+        font-size: 1.8rem; 
+        margin-bottom: 2rem; 
+    }
+    
+    .contact-info .info-item {
+        font-size: 1rem;
+    }
+    
+    .contact-info h3 {
+        font-size: 1.3rem;
+    }
+}
+
 @media (max-width: 576px) {
-    #contact-page-content { padding: 4rem 0; }
-    .contact-form, .contact-info { padding: 1.5rem; }
-    .contact-form h3 { font-size: 1.8rem; margin-bottom: 2rem; }
+    #page-header {
+        padding: 120px 0.75rem 50px 0.75rem;
+    }
+    
+    #page-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    #contact-page-content { 
+        padding: 2.5rem 0; 
+    }
+    
+    .contact-form, .contact-info { 
+        padding: 1.25rem; 
+    }
+    
+    .contact-form h3 { 
+        font-size: 1.6rem; 
+        margin-bottom: 1.5rem; 
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-control {
+        padding: 0.875rem;
+        font-size: 0.95rem;
+    }
+    
+    .contact-form button.btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.95rem;
+    }
 }
