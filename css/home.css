@@ -11,7 +11,7 @@
     padding-top: 80px; /* Header offset */
     background:
         linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)),
-        url(../images/recyclinghero.jpeg) no-repeat center center; /* Note the ../ path */
+        url(../images/recycling3.jpg) no-repeat center center; /* Note the ../ path */
     background-size: cover;
     color: var(--color-text-on-dark);
 }
