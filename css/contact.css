@@ -1,6 +1,3 @@
-/* === css/contact.css === */
-* { max-width: 100%; box-sizing: border-box; }
-
 body {
     background-color: var(--color-background-alt); /* Page-specific background */
 }
