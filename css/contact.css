@@ -31,14 +31,14 @@ body {
     background-color: var(--color-background-alt);
 }
 
+
+/*After*/
 .contact-page-wrapper {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 4rem;
     align-items: flex-start;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+    /* max-width, margin, and padding are now handled by the parent .container div */
 }
 
 /* ------------------ CONTACT FORM ------------------ */
