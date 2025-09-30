@@ -1,14 +1,15 @@
+/* ------------------ GLOBAL ------------------ */
 body {
-    background-color: var(--color-background-alt); /* Page-specific background */
+    background-color: var(--color-background-alt);
 }
 
-/* --- PAGE HEADER (for sub-pages) --- */
+/* ------------------ PAGE HEADER ------------------ */
 #page-header {
     padding: 160px 0 80px 0;
     text-align: center;
     background:
         linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)),
-        url(../images/recycling3.jpg) no-repeat center center; /* Note the ../ path */
+        url(../images/recycling3.jpg) no-repeat center center;
     background-size: cover;
     color: var(--color-text-on-dark);
 }
@@ -24,19 +25,23 @@ body {
     opacity: 0.9;
 }
 
-/* --- CONTACT PAGE CONTENT --- */
+/* ------------------ CONTACT PAGE LAYOUT ------------------ */
 #contact-page-content {
     padding: 6rem 0;
     background-color: var(--color-background-alt);
 }
+
 .contact-page-wrapper {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 4rem;
     align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
-/* --- CONTACT FORM --- */
+/* ------------------ CONTACT FORM ------------------ */
 .contact-form {
     background-color: var(--color-background-main);
     padding: 2.5rem;
@@ -48,65 +53,153 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
 }
-.contact-form h3 { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 2.5rem; text-transform: uppercase; text-align: center; color: var(--color-primary); }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-.form-group { position: relative; margin-bottom: 2rem; }
-.form-control { width: 100%; padding: 1rem; border: none; border-bottom: 2px solid var(--color-border-subtle); background-color: transparent; font-family: var(--font-body); font-size: 1rem; color: var(--color-text-primary); transition: border-color 0.3s ease; border-radius: 0; }
-.form-control:focus { outline: none; border-color: var(--color-primary); }
-.form-group label { position: absolute; top: 1rem; left: 1rem; font-size: 1rem; color: var(--color-text-secondary); pointer-events: none; transition: all 0.3s ease; }
-.form-control:focus + label, .form-control:not(:placeholder-shown) + label { top: -0.6rem; left: 0.5rem; font-size: 0.8rem; color: var(--color-primary); background-color: var(--color-background-main); padding: 0 0.4rem; }
-.contact-form textarea.form-control { resize: vertical; min-height: 150px; }
-.contact-form button.btn { width: 100%; margin: 1rem 0 0 0; padding: 1rem 2rem; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
-.contact-form button.btn::after { content: '\f1d8'; font-family: "Font Awesome 6 Free"; font-weight: 900; transition: transform 0.3s ease; }
-.contact-form button.btn:hover::after { transform: translateX(5px); }
+.contact-form h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--color-primary);
+}
 
-/* --- CONTACT INFO & MAP --- */
-.contact-info { background: var(--color-background-main); padding: 2.5rem; border-radius: 8px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); }
-.contact-info .info-item { display: flex; align-items: flex-start; margin-bottom: 1.5rem; font-size: 1.1rem; }
-.contact-info .icon { color: var(--color-primary); font-size: 1.5rem; margin-right: 1.5rem; width: 30px; text-align: center; margin-top: 4px; }
-.contact-info h3 { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.2rem; }
-.contact-info p { margin: 0; }
-.contact-info a { color: var(--color-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
-.contact-info a:hover { color: var(--color-primary); }
-.map-container { height: 300px; margin-top: 2rem; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1); }
-.map-container iframe { width: 100%; height: 100%; border: 0; }
+/* Form groups */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+.form-group {
+    position: relative;
+    margin-bottom: 2rem;
+}
+.form-control {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-bottom: 2px solid var(--color-border-subtle);
+    background-color: transparent;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    transition: border-color 0.3s ease;
+    border-radius: 0;
+}
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+.form-group label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+.form-control:focus + label,
+.form-control:not(:placeholder-shown) + label {
+    top: -0.6rem;
+    left: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-primary);
+    background-color: var(--color-background-main);
+    padding: 0 0.4rem;
+}
+.contact-form textarea.form-control {
+    resize: vertical;
+    min-height: 150px;
+}
+.contact-form button.btn {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+.contact-form button.btn::after {
+    content: '\f1d8';
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    transition: transform 0.3s ease;
+}
+.contact-form button.btn:hover::after {
+    transform: translateX(5px);
+}
 
-/* --- RESPONSIVE STYLES (for contact page) --- */
+/* ------------------ CONTACT INFO & MAP ------------------ */
+.contact-info {
+    background: var(--color-background-main);
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+.contact-info .info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+.contact-info .icon {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    margin-right: 1.5rem;
+    width: 30px;
+    text-align: center;
+    margin-top: 4px;
+}
+.contact-info h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+}
+.contact-info p {
+    margin: 0;
+}
+.contact-info a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+.contact-info a:hover {
+    color: var(--color-primary);
+}
 
-/* For tablets and smaller devices */
+/* Map */
+.map-container {
+    height: 300px;
+    margin-top: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+}
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ------------------ RESPONSIVE ------------------ */
 @media (max-width: 992px) {
-    #page-header h1 {
-        font-size: 2.4rem;
-    }
+    #page-header h1 { font-size: 2.4rem; }
 
     .contact-page-wrapper {
-        grid-template-columns: 1fr; /* Stacks the main form and contact info */
+        grid-template-columns: 1fr;
         gap: 3rem;
     }
 
-    /* 
-     * KEY FIX: Stack the form fields earlier.
-     * This ensures that as soon as the main layout becomes a single column,
-     * the form fields inside it also become a single column.
-    */
     .form-row {
         grid-template-columns: 1fr;
-        gap: 0; /* Remove horizontal gap, as fields are now stacked */
+        gap: 0;
     }
 }
 
-/* For smaller mobile phones, reduce padding for more space */
 @media (max-width: 576px) {
-    #contact-page-content {
-        padding: 4rem 0; /* Reduce vertical padding */
-    }
-
-    .contact-form, .contact-info {
-        padding: 1.5rem; /* Reduce padding inside the cards */
-    }
-
-    .contact-form h3 {
-        font-size: 1.8rem;
-        margin-bottom: 2rem;
-    }
+    #contact-page-content { padding: 4rem 0; }
+    .contact-form, .contact-info { padding: 1.5rem; }
+    .contact-form h3 { font-size: 1.8rem; margin-bottom: 2rem; }
 }
