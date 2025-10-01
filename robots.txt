@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://amabongosolutions.co.za/sitemap.xml
