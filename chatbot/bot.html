@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Glass Recycling Chatbot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --green-600: #2E7D32;
+      --bg-0: #0b0f14;
+      --bg-1: #0f141a;
+      --elev: 0 10px 30px rgba(0, 0, 0, .35);
+      --text-1: #eaf1f5;
+      --muted: #8fa3ad;
+      --bot-bubble: #16222c;
+      --user-bubble: linear-gradient(135deg, #2E7D32, #219653);
+      --accent-2: #60a5fa;
+      --stroke: #1f2a36;
+      --glass: rgba(255, 255, 255, 0.06);
+      --blur: blur(10px);
+      --r-md: 12px;
+      --t: 220ms;
+    }
+    * { box-sizing: border-box; }
+    html { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text-1);
+      background: var(--bg-1); /* Match chat background */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      height: 100%;
+      overflow: hidden;
+    }
+    .app {
+      width: 100%;
+      height: 100%;
+    }
+    .chat-wrap {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .chat {
+      background: var(--bg-1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      height: 100%;
+    }
+    .chat-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--stroke);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .04), transparent);
+      flex-shrink: 0;
+    }
+    .chat-header .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #0b1117;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--stroke);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .chat-header .logo img {
+      width: 100%; height: 100%; object-fit: cover;
+      background: #fff; padding: 6px; border-radius: 8px;
+    }
+    .chat-header .chat-title { flex-grow: 1; }
+    .chat-header .chat-title h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      margin: 0; display: flex; align-items: center; gap: 8px;
+    }
+    .chat-header .chat-title p {
+      margin: 2px 0 0; color: var(--muted); font-size: .85rem;
+    }
+    .live-ai-dot {
+      display: inline-block; width: 10px; height: 10px;
+      margin-left: 8px; background: #22c55e; border-radius: 50%;
+      position: relative; top: -1px; box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      50% { transform: scale(1.3); opacity: 0.6; }
+    }
+    main {
+      flex: 1; display: flex; flex-direction: column; overflow: hidden;
+    }
+    .messages {
+      flex: 1; overflow-y: auto; padding: 18px 16px;
+      display: flex; flex-direction: column; gap: 12px;
+      scroll-behavior: smooth;
+    }
+    .messages::-webkit-scrollbar { width: 8px; }
+    .messages::-webkit-scrollbar-thumb { background: #253241; border-radius: 8px; }
+    .msg {
+      max-width: 86%; padding: 10px 12px; border-radius: 16px;
+      line-height: 1.5; font-size: .98rem; border: 1px solid var(--stroke);
+      opacity: 0; transform: translateY(6px); animation: pop .25s ease-out forwards;
+      word-wrap: break-word;
+    }
+    @keyframes pop { to { opacity: 1; transform: translateY(0); } }
+    .bot { background: var(--bot-bubble); color: var(--text-1); border-bottom-left-radius: 6px; }
+    .user {
+      background: var(--user-bubble); color: #fff; border-bottom-right-radius: 6px;
+      align-self: flex-end; border: none;
+    }
+    .msg b { color: #d2f9e7; }
+    .msg a { color: var(--accent-2); text-decoration: none; }
+    .msg a:hover { text-decoration: underline; }
+    .image-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 8px; }
+    .image-grid img { width: 100%; height: 120px; object-fit: cover; border-radius: 12px; border: 1px solid var(--stroke); }
+    .map { margin-top: 8px; border-radius: 12px; overflow: hidden; border: 1px solid var(--stroke); }
+    .map iframe { width: 100%; height: 220px; border: 0; display: block; }
+    .typing { padding: 0 16px 8px; }
+    .dots { display: inline-flex; gap: 6px; padding: 8px 10px; background: var(--bot-bubble); border: 1px solid var(--stroke); border-radius: 999px; }
+    .dots span { width: 8px; height: 8px; border-radius: 50%; background: #9fb3bf; animation: bounce 1s infinite ease-in-out; }
+    .dots span:nth-child(2) { animation-delay: .2s; }
+    .dots span:nth-child(3) { animation-delay: .4s; }
+    @keyframes bounce { 50% { transform: translateY(-4px); } }
+    .quickbar {
+      padding: 10px 12px; display: flex; flex-wrap: wrap; gap: 8px;
+      border-top: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .02), transparent);
+      flex-shrink: 0;
+    }
+    .qbtn {
+      background: transparent; border: 1px solid var(--stroke); color: var(--text-1);
+      padding: 8px 12px; border-radius: 999px; font-size: .92rem;
+      font-weight: 600; cursor: pointer; transition: all var(--t) ease;
+    }
+    .qbtn:hover {
+      background: rgba(52, 211, 153, .12);
+      transform: translateY(-1px); border-color: rgba(52, 211, 153, .35);
+    }
+    .composer {
+      display: flex; gap: 8px; padding: 12px;
+      border-top: 1px solid var(--stroke); background: rgba(255, 255, 255, .02);
+      flex-shrink: 0;
+    }
+    .input {
+      flex: 1; background: #0c1218; color: var(--text-1);
+      border: 1px solid var(--stroke); border-radius: var(--r-md);
+      padding: 12px; font-size: 1rem; outline: none;
+      transition: all var(--t) ease;
+    }
+    .input:focus {
+      border-color: rgba(52, 211, 153, .6);
+      box-shadow: 0 0 0 3px rgba(52, 211, 153, .12);
+    }
+    .send {
+      width: 46px; height: 46px; border-radius: var(--r-md);
+      border: 1px solid var(--stroke);
+      background: linear-gradient(135deg, rgba(46, 125, 50, .9), rgba(33, 150, 83, .9));
+      color: #fff; cursor: pointer; display: grid; place-items: center;
+      transition: all var(--t) ease;
+      box-shadow: 0 8px 20px rgba(33, 150, 83, .25);
+    }
+    .send:hover { transform: translateY(-1px); }
+    .send svg { width: 22px; height: 22px; }
+    .hidden { display: none !important; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+    @media (max-width: 500px) {
+      .chat-header .chat-title h1 { font-size: 1rem; }
+      .chat-header .chat-title p { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section class="chat-wrap">
+      <div class="chat">
+        <header class="chat-header">
+          <div class="logo">
+            <img src="../images/apple-touch-icon.png" alt="Amabongo Solutions Logo" width="48" height="48">
+          </div>
+          <div class="chat-title">
+            <h1>
+              AMABONGO SOLUTIONS<span aria-hidden="true">🤖</span>
+              <span class="live-ai-dot" role="status" aria-label="AI Assistant Active"></span>
+            </h1>
+            <p>Your Smart Glass Recycling Partner</p>
+          </div>
+        </header>
+        <main>
+          <div id="messages" class="messages" role="log" aria-live="polite"></div>
+          <div id="typing" class="typing hidden" aria-hidden="true" aria-label="Assistant is typing">
+            <div class="dots"><span></span><span></span><span></span></div>
+          </div>
+          <div id="quickbar" class="quickbar" role="group" aria-label="Quick action buttons"></div>
+        </main>
+        <form id="composer" class="composer" autocomplete="off">
+          <label for="input" class="visually-hidden">Type your message</label>
+          <input id="input" class="input" type="text" placeholder="Ask about services, materials, rates..." required>
+          <button id="send" class="send" type="submit" aria-label="Send message">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M3.2 2.4a.9.9 0 0 0-1.1 1.1l3 9h9.9a.9.9 0 1 1 0 1.8H5.1l-3 9a.9.9 0 0 0 1.1 1.1c7.2-2 12.9-5.1 17.7-9.3a.9.9 0 0 0 0-1.5C16.1 7.5 10.4 4.4 3.2 2.4Z" />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const $messages = document.getElementById('messages');
+    const $typing = document.getElementById('typing');
+    const $quickbar = document.getElementById('quickbar');
+    const $composer = document.getElementById('composer');
+    const $input = document.getElementById('input');
+    const responses = {
+      greeting: "Welcome to <b>Amabongo Solutions</b> — KZN's trusted glass recycling partner! 🌍♻️<br><br>How can I assist you today?",
+      mainMenu: { text: "Please choose from the options below:", options: [{ text: "🏢 View Services", value: "services" }, { text: "🍾 Materials We Buy", value: "materials" }, { text: "💰 Get a Quote", value: "quote" }, { text: "📍 Location & Hours", value: "contact" }, { text: "📸 Gallery", value: "gallery" }, { text: "❓ FAQs", value: "faqs" }] },
+      services: { text: "We offer <b>professional recycling services</b> across KwaZulu-Natal:<ul><li>🔄 Glass bottle & jar collection</li><li>⚖️ Sorting and weighing at our depots</li><li>📦 Bulk recycling and processing</li><li>🚚 Reliable commercial pickups</li><li>💵 Instant payment at fair rates</li></ul>", options: [{ text: "📋 Get a Quote", value: "quote" }, { text: "📸 See Our Work", value: "gallery" }, { text: "⬅️ Main Menu", value: "menu" }] },
+      materials: { text: "We buy <b>all types of glass bottles and jars</b>:<br><br><b>✓ Clear, Brown, Green & Blue Glass</b><br><br>💡 <i>No need to wash or clean — bring them as they are!</i>", options: [{ text: "❌ What We DON'T Accept", value: "not_accepted" }, { text: "📍 Our Location", value: "contact" }, { text: "⬅️ Main Menu", value: "menu" }] },
+      not_accepted: { text: "<b>❌ Materials We DON'T Accept:</b><br><br>• Aluminium cans or metal<br>• Plastic bottles or containers<br>• Window glass or mirrors<br>• Light bulbs or ceramics", options: [{ text: "✓ What We Accept", value: "materials" }, { text: "⬅️ Main Menu", value: "menu" }] },
+      quote: { text: "For a <b>competitive quote</b>, please contact us directly:<br><br>📞 <b>Call/WhatsApp:</b> <a href='tel:+27648784287'>064 878 4287</a><br>📧 <b>Email:</b> <a href='mailto:info@amabongosolutions.co.za'>info@amabongosolutions.co.za</a><br><br>💵 We offer <b>instant payment</b>!", options: [{ text: "📞 Call Now", value: "call_now" }, { text: "📧 Send Email", value: "email_now" }, { text: "⬅️ Main Menu", value: "menu" }] },
+      contact: { text: "📍 <b>Our Location:</b><br>72 C B Downes Rd, Mkondeni<br>Pietermaritzburg, 3201<br><br>⏰ <b>Business Hours:</b><br>Mon–Fri: 08:00–16:30<br>Sat: 08:00–15:00<br>Sun: Closed", showMap: true, options: [{ text: "🗺️ Get Directions", value: "directions" }, { text: "📞 Call Us", value: "call_now" }, { text: "⬅️ Main Menu", value: "menu" }] },
+      gallery: { text: "📸 <b>Our Operations in Action:</b>", images: [{ src: "../images/recycling.jpg", alt: "Weighing station" }, { src: "../images/recycling1.jpg", alt: "Truck with glass" }, { src: "../images/recycling2.jpg", alt: "Sorted glass" }, { src: "../images/recycling3.jpg", alt: "Mixed glass" }], options: [{ text: "🏢 Our Services", value: "services" }, { text: "⬅️ Main Menu", value: "menu" }] },
+      faqs: { text: "<b>❓ Frequently Asked Questions:</b>", options: [{ text: "Do you accept aluminium?", value: "faq_aluminium" }, { text: "Do I need to sort glass?", value: "faq_sorting" }, { text: "How do you pay?", value: "faq_payment" }, { text: "Do you collect?", value: "faq_collection" }, { text: "⬅️ Main Menu", value: "menu" }] },
+      faq_aluminium: { text: "<b>❌ NO</b> — We do <b>NOT</b> accept aluminium cans or any metal materials. We <b>ONLY</b> accept glass bottles and jars.", options: [{ text: "✓ What We Accept", value: "materials" }, { text: "❓ More FAQs", value: "faqs" }] },
+      faq_sorting: { text: "<b>No need to sort!</b> 🎉 You can bring mixed glass — we handle all the sorting at our facility.", options: [{ text: "❓ More FAQs", value: "faqs" }, { text: "⬅️ Main Menu", value: "menu" }] },
+      faq_payment: { text: "<b>💵 Instant Payment!</b> We pay immediately after weighing your glass via cash or bank transfer.", options: [{ text: "💰 Get a Quote", value: "quote" }, { text: "❓ More FAQs", value: "faqs" }] },
+      faq_collection: { text: "<b>Yes!</b> We offer collection services for commercial clients with larger quantities.<br><br>📞 Contact us to arrange: <b>064 878 4287</b>", options: [{ text: "📞 Call Now", value: "call_now" }, { text: "❓ More FAQs", value: "faqs" }] },
+      fallback: { text: "I'm not sure how to answer that. 🤔 Try choosing from the main menu options!", options: [{ text: "⬅️ Main Menu", value: "menu" }] }
+    };
+    const showTyping = (v) => $typing.classList.toggle('hidden', !v);
+    const scrollToEnd = () => $messages.scrollTop = $messages.scrollHeight;
+    function addMessage(html, role = 'bot', opts = {}) {
+      const node = document.createElement('div');
+      node.className = `msg ${role}`;
+      node.innerHTML = html;
+      if (opts.images?.length) {
+        const grid = document.createElement('div'); grid.className = 'image-grid';
+        opts.images.forEach(img => { const el = document.createElement('img'); el.src = img.src; el.alt = img.alt; el.loading = 'lazy'; grid.appendChild(el); });
+        node.appendChild(grid);
+      }
+      if (opts.showMap) {
+        const map = document.createElement('div'); map.className = 'map';
+        map.innerHTML = `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.856985790409!2d30.41235181510848!3d-29.65213608201207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ef6b9d1f3e7b165%3A0x6d9e0b82f1b80f14!2s72%20CB%20Downes%20Rd%2C%20Mkondeni%2C%20Pietermaritzburg%2C%203201!5e0!3m2!1sen!2sza!4v1664455883584!5m2!1sen!2sza" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+        node.appendChild(map);
+      }
+      $messages.appendChild(node);
+      scrollToEnd();
+    }
+    function setQuickReplies(options = []) {
+      $quickbar.innerHTML = '';
+      options.forEach(opt => { const b = document.createElement('button'); b.className = 'qbtn'; b.textContent = opt.text; b.dataset.value = opt.value; $quickbar.appendChild(b); });
+    }
+    function handleInput(text) {
+      showTyping(true);
+      setQuickReplies([]);
+      const lower = text.toLowerCase().trim();
+      setTimeout(() => {
+        showTyping(false);
+        let key = 'fallback';
+        if (lower.includes("service")) key = "services";
+        else if (lower.includes("material") || lower.includes("buy")) key = "materials";
+        else if (lower.includes("aluminium")) key = "faq_aluminium";
+        else if (lower.includes("quote") || lower.includes("price")) key = "quote";
+        else if (lower.includes("contact") || lower.includes("address")) key = "contact";
+        else if (lower.includes("gallery") || lower.includes("photo")) key = "gallery";
+        else if (lower.includes("sort")) key = "faq_sorting";
+        else if (lower.includes("pay")) key = "faq_payment";
+        else if (lower.includes("collect")) key = "faq_collection";
+        else if (lower.includes("faq")) key = "faqs";
+        else if (lower.includes("menu")) key = "mainMenu";
+        else if (lower === "call_now") { window.open("tel:+27648784287", "_blank"); key = "quote"; }
+        else if (lower === "email_now") { window.open("mailto:info@amabongosolutions.co.za", "_blank"); key = "quote"; }
+        else if (lower === "directions") { window.open("https://www.google.com/maps/dir/?api=1&destination=-29.6492168,30.4160811", "_blank"); key = "contact"; }
+        else if (lower === "not_accepted") key = "not_accepted";
+        const res = responses[key] || responses.fallback;
+        addMessage(res.text, 'bot', { images: res.images, showMap: res.showMap });
+        setQuickReplies(res.options || []);
+      }, 800);
+    }
+    $composer.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = $input.value.trim();
+      if (!text) return;
+      addMessage(text, 'user');
+      $input.value = '';
+      handleInput(text);
+    });
+    $quickbar.addEventListener('click', (e) => {
+      if (e.target.closest('.qbtn')) {
+        const btn = e.target.closest('.qbtn');
+        addMessage(btn.textContent, 'user');
+        handleInput(btn.dataset.value);
+      }
+    });
+    function start() {
+      showTyping(true);
+      setTimeout(() => {
+        showTyping(false);
+        addMessage(responses.greeting, 'bot');
+        setTimeout(() => handleInput('menu'), 500);
+      }, 1000);
+    }
+    start();
+  </script>
+</body>
+</html>
