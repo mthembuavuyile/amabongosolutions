@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Basic Meta Tags -->
+    <!-- ========== META TAGS ========== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | AMABONGO SOLUTIONS | Pietermaritzburg, KZN</title>
     <meta name="description" content="Get in touch with AMABONGO SOLUTIONS. Find our address, phone number, business hours, and use our contact form for all your glass recycling enquiries in Pietermaritzburg.">
-    
-    <!-- Author & SEO -->
     <meta name="author" content="AMABONGO SOLUTIONS">
     <meta name="robots" content="index, follow">
-
-    <!-- Geolocation -->
-    <meta name="geo.region" content="ZA-NL"> <!-- ZA = South Africa, NL = KwaZulu-Natal -->
+    
+    <!-- Geolocation Meta -->
+    <meta name="geo.region" content="ZA-NL">
     <meta name="geo.placename" content="Pietermaritzburg, KwaZulu-Natal, South Africa">
-    <meta name="ICBM" content="-29.6521, 30.4145"> <!-- Latitude, Longitude for specific address -->
+    <meta name="ICBM" content="-29.6521, 30.4145">
+    
+    <title>Contact Us | AMABONGO SOLUTIONS | Pietermaritzburg, KZN</title>
 
+    <!-- ========== LINKS ========== -->
     <!-- Canonical & Favicons -->
     <link rel="canonical" href="https://www.amabongosolutions.co.za/contact.html">
     <link rel="icon" type="image/png" href="images/transparent-logo.png">
     <link rel="shortcut icon" href="images/transparent-logo.png">
 
-    <!-- Open Graph / Social Sharing -->
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/contact.css">
+
+    <!-- ========== OPEN GRAPH / SOCIAL SHARING ========== -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Contact Us | AMABONGO SOLUTIONS">
     <meta property="og:description" content="Get in touch for professional glass and bottle recycling services in Pietermaritzburg, KZN.">
@@ -34,7 +44,7 @@
     <meta name="twitter:description" content="Get in touch for professional glass and bottle recycling services in Pietermaritzburg, KZN.">
     <meta name="twitter:image" content="images/transparent-logo.png">
 
-    <!-- Structured Data (JSON-LD) -->
+    <!-- ========== STRUCTURED DATA (JSON-LD) ========== -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -42,11 +52,7 @@
         "name": "AMABONGO SOLUTIONS",
         "url": "https://www.amabongosolutions.co.za",
         "logo": "https://www.amabongosolutions.co.za/images/transparent-logo.png",
-        "sameAs": [
-            "#",
-            "#",
-            "#"
-        ],
+        "sameAs": ["#", "#", "#"],
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+27648784287",
@@ -65,25 +71,16 @@
     }
     </script>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/contact.css">
-
-    <!-- Chatbot Popup Styles -->
+    <!-- ========== CHATBOT STYLES ========== -->
     <style>
+        /* Chatbot Toggle Button */
         .chatbot-toggler {
             position: fixed;
             bottom: 30px;
             right: 35px;
             width: 60px;
             height: 60px;
-            background-color: #2E7D32; /* Brand green color */
+            background-color: #2E7D32;
             color: #fff;
             border: none;
             border-radius: 50%;
@@ -96,10 +93,13 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s ease-in-out, background-color 0.2s;
         }
+
         .chatbot-toggler:hover {
             transform: scale(1.1);
             background-color: #256a29;
         }
+
+        /* Chatbot Popup Container */
         .chatbot-popup {
             display: none;
             position: fixed;
@@ -111,30 +111,28 @@
             background: #0f141a;
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-            z-index: 999;
+            z-index: 9999;
             overflow: hidden;
             transform: scale(0.5);
             transform-origin: bottom right;
             opacity: 0;
             transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-        }
-        .chatbot-popup.active {
-            display: flex; /* Use flex to manage children */
             flex-direction: column;
+        }
+
+        .chatbot-popup.active {
+            display: flex;
             transform: scale(1);
             opacity: 1;
         }
-        .chatbot-popup iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            flex-grow: 1; /* Allow iframe to fill space */
-        }
+
+        /* Chatbot Close Button */
         .chatbot-popup .close-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.1);
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
             width: 32px;
@@ -144,23 +142,54 @@
             font-size: 20px;
             line-height: 30px;
             text-align: center;
-            z-index: 1000; /* Ensures it's above the iframe */
+            z-index: 10000;
+            transition: background 0.2s;
         }
-        .chatbot-popup .close-btn:hover { background: rgba(255, 255, 255, 0.2); }
-        
+
+        .chatbot-popup .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Chatbot Iframe */
+        .chatbot-popup iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            flex-grow: 1;
+        }
+
+        /* Z-Index Management */
+        .header {
+            z-index: 500;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .chatbot-toggler { bottom: 20px; right: 20px; }
+            .chatbot-toggler {
+                bottom: 20px;
+                right: 20px;
+            }
+
             .chatbot-popup {
-                bottom: 0; right: 0; width: 100%; height: 100%;
-                max-height: 100%; border-radius: 0;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                max-height: 100%;
+                border-radius: 0;
                 transform-origin: bottom center;
+            }
+
+            .chatbot-popup .close-btn {
+                top: 18px;
+                right: 18px;
             }
         }
     </style>
 </head>
 
 <body>
+    <!-- ========== HEADER ========== -->
     <header class="header">
         <nav class="container nav-container">
             <a href="index.html" class="logo">AMABONGO <span>SOLUTIONS</span></a>
@@ -172,12 +201,16 @@
                 <li><a href="contact.html" class="cta-btn">Get a Quote</a></li>
             </ul>
             <div class="hamburger">
-                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
         </nav>
     </header>
 
+    <!-- ========== MAIN CONTENT ========== -->
     <main>
+        <!-- Page Header -->
         <section id="page-header">
             <div class="container">
                 <h1>Contact Us</h1>
@@ -185,64 +218,121 @@
             </div>
         </section>
 
+        <!-- Contact Page Content -->
         <section id="contact-page-content">
             <div class="container">
                 <div class="contact-page-wrapper">
+                    <!-- Contact Form -->
                     <div class="contact-form">
                         <h3>Send Us a Message</h3>
                         <form action="#" method="POST">
                             <div class="form-row">
                                 <div class="form-group">
-                                    <input type="text" id="name" name="name" class="form-control" placeholder=" " required><label for="name">Full Name</label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder=" " required>
+                                    <label for="name">Full Name</label>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" id="email" name="email" class="form-control" placeholder=" " required><label for="email">Email Address</label>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder=" " required>
+                                    <label for="email">Email Address</label>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="tel" id="phone" name="phone" class="form-control" placeholder=" " required><label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-control" placeholder=" " required>
+                                <label for="phone">Phone Number</label>
                             </div>
                             <div class="form-group">
-                                <textarea id="message" name="message" class="form-control" placeholder=" " required></textarea><label for="message">Your Message</label>
+                                <textarea id="message" name="message" class="form-control" placeholder=" " required></textarea>
+                                <label for="message">Your Message</label>
                             </div>
                             <button type="submit" class="btn btn-primary">Send Message</button>
                         </form>
                     </div>
+
+                    <!-- Contact Details -->
                     <div class="contact-details">
                         <div class="contact-info">
-                            <div class="info-item"><i class="fas fa-map-marker-alt icon"></i><div><h3>Our Address</h3><p>72 C B Downes Rd, Mkondeni, <br> Pietermaritzburg, 3201</p></div></div>
-                            <div class="info-item"><i class="fas fa-phone icon"></i><div><h3>Phone / WhatsApp</h3><p><a href="tel:+27648784287">064 878 4287</a></p></div></div>
-                            <div class="info-item"><i class="fas fa-envelope icon"></i><div><h3>Email</h3><p><a href="mailto:info@amabongosolutions.co.za">info@amabongosolutions.co.za</a></p></div></div>
-                            <div class="info-item"><i class="fas fa-clock icon"></i><div><h3>Business Hours</h3><p>Mon–Fri: 08:00 – 16:30<br>Sat: 08:00 – 15:00</p></div></div>
+                            <!-- Address -->
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt icon"></i>
+                                <div>
+                                    <h3>Our Address</h3>
+                                    <p>72 C B Downes Rd, Mkondeni, <br> Pietermaritzburg, 3201</p>
+                                </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="info-item">
+                                <i class="fas fa-phone icon"></i>
+                                <div>
+                                    <h3>Phone / WhatsApp</h3>
+                                    <p><a href="tel:+27648784287">064 878 4287</a></p>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="info-item">
+                                <i class="fas fa-envelope icon"></i>
+                                <div>
+                                    <h3>Email</h3>
+                                    <p><a href="mailto:info@amabongosolutions.co.za">info@amabongosolutions.co.za</a></p>
+                                </div>
+                            </div>
+
+                            <!-- Business Hours -->
+                            <div class="info-item">
+                                <i class="fas fa-clock icon"></i>
+                                <div>
+                                    <h3>Business Hours</h3>
+                                    <p>Mon–Fri: 08:00 – 16:30<br>Sat: 08:00 – 15:00</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.856985790409!2d30.41235181510848!3d-29.65213608201207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ef6b9d1f3e7b165%3A0x6d9e0b82f1b80f14!2s72%20CB%20Downes%20Rd%2C%20Mkondeni%2C%20Pietermaritzburg%2C%203201!5e0!3m2!1sen!2sza!4v1664455883584!5m2!1sen!2sza" allowfullscreen="" loading="lazy"></iframe></div>
+
+                        <!-- Map -->
+                        <div class="map-container">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.856985790409!2d30.41235181510848!3d-29.65213608201207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ef6b9d1f3e7b165%3A0x6d9e0b82f1b80f14!2s72%20CB%20Downes%20Rd%2C%20Mkondeni%2C%20Pietermaritzburg%2C%203201!5e0!3m2!1sen!2sza!4v1664455883584!5m2!1sen!2sza" 
+                                allowfullscreen="" 
+                                loading="lazy"
+                                title="AMABONGO SOLUTIONS Location Map">
+                            </iframe>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- ========== FOOTER ========== -->
     <footer class="footer">
         <div class="container">
             <a href="index.html" class="logo">AMABONGO <span>SOLUTIONS</span></a>
             <p>Your trusted partner for sustainable glass recycling across South Africa.</p>
-            <nav class="footer-nav"><a href="index.html">Home</a><a href="index.html#services">Services</a><a href="contact.html">Contact</a></nav>
+            <nav class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="index.html#services">Services</a>
+                <a href="contact.html">Contact</a>
+                <a href="chatbot/index.html">ChatBot</a>
+
+            </nav>
             <div class="footer-bottom">© 2025 AMABONGO SOLUTIONS. All Rights Reserved.</div>
         </div>
     </footer>
 
-    <!-- Chatbot Elements -->
+    <!-- ========== CHATBOT ========== -->
+    <!-- Chatbot Toggle Button -->
     <button id="open-chatbot-btn" class="chatbot-toggler" aria-label="Open AI Chat Assistant">
         <i class="fas fa-robot"></i>
     </button>
+
+    <!-- Chatbot Popup -->
     <div id="chatbot-popup" class="chatbot-popup">
-        <!-- The close button is now here -->
         <button id="close-chatbot-btn" class="close-btn" aria-label="Close Chat">&times;</button>
-        <!-- The chatbot iframe will be loaded here by JavaScript -->
+        <!-- Chatbot iframe loaded by JavaScript -->
     </div>
 
-    <!-- Scripts -->
+    <!-- ========== SCRIPTS ========== -->
     <script src="js/main.js"></script>
-    <script src="js/chatbot-loader.js" defer></script> 
+    <script src="js/chatbot-loader.js" defer></script>
 </body>
 </html>
