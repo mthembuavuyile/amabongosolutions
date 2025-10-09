@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Glass Recycling Chatbot | Amabongo Solutions South Africa</title>
+  <meta name="description"
+    content="Get instant answers about glass recycling services, rates, and collection in South Africa. Amabongo Solutions' smart AI assistant helps 24/7.">
+  <meta name="keywords"
+    content="glass recycling, South Africa, chatbot, recycling services, waste management, Amabongo Solutions">
+  
+  <!-- Open Graph & Canonical -->
+  <meta property="og:title" content="AI Glass Recycling Assistant - Amabongo Solutions">
+  <meta property="og:description" content="Smart chatbot for glass recycling inquiries in South Africa">
+  <meta property="og:url" content="https://amabongosolutions.co.za/chatbot">
+  <link rel="canonical" href="https://amabongosolutions.co.za/chatbot">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app">
+    <section class="chat-wrap">
+      <div class="chat">
+        <header class="chat-header">
+          <div class="logo">
+            <img src="../images/apple-touch-icon.png" alt="Amabongo Solutions Logo" width="48" height="48">
+          </div>
+          <div class="chat-title">
+            <h1>
+              AMABONGO SOLUTIONS<span aria-hidden="true">🤖</span>
+              <span class="live-ai-dot" role="status" aria-label="AI Assistant Active"></span>
+              <span class="flag" aria-label="South Africa">🇿🇦</span>
+            </h1>
+            <p>Your Smart Glass Recycling Partner</p>
+          </div>
+          <nav class="home-link">
+            <a href="/index.html" aria-label="Return to Homepage">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <path d="M3 12L12 3l9 9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M9 21V12h6v9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span class="home-text">Home</span>
+            </a>
+          </nav>
+        </header>
+        <main>
+          <div id="messages" class="messages" role="log" aria-live="polite" aria-atomic="false"></div>
+          <div id="typing" class="typing hidden" aria-hidden="true" aria-label="Assistant is typing">
+            <div class="dots">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <div id="quickbar" class="quickbar" role="group" aria-label="Quick action buttons"></div>
+        </main>
+        <form id="composer" class="composer" autocomplete="off">
+          <label for="input" class="visually-hidden">Type your message</label>
+          <input id="input" class="input" type="text" placeholder="Ask about services, materials, rates, or directions…"
+            aria-label="Chat message input" required>
+          <button id="send" class="send" type="submit" aria-label="Send message">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M3.2 2.4a.9.9 0 0 0-1.1 1.1l3 9h9.9a.9.9 0 1 1 0 1.8H5.1l-3 9a.9.9 0 0 0 1.1 1.1c7.2-2 12.9-5.1 17.7-9.3a.9.9 0 0 0 0-1.5C16.1 7.5 10.4 4.4 3.2 2.4Z" />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </section>
+  </div>
+  
+  <!-- External Script (defer attribute added) -->
+  <script src="script.js" defer></script>
+</body>
+
+</html>
