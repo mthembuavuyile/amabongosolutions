@@ -1,0 +1,12 @@
+/* =========================================
+   SERVICES PAGE-SPECIFIC STYLES
+   Overrides for services.html only.
+   Shared card and grid styles live in
+   components.css.
+========================================= */
+
+/* --- SERVICE CARD DESCRIPTION TEXT --- */
+.card--service .card-desc {
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+}

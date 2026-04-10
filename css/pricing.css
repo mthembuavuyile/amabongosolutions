@@ -1,0 +1,19 @@
+/* =========================================
+   PRICING PAGE-SPECIFIC STYLES
+   Overrides for pricing.html only.
+   Shared .price-value, .faq-item, .page-hero
+   etc. live in components.css.
+========================================= */
+
+/* --- PRICING CARDS LAYOUT --- */
+.pricing-section {
+    padding: 5rem 1.5rem;
+}
+
+.pricing-section .card--service {
+    text-align: center;
+}
+
+.pricing-section .card--service p {
+    margin-bottom: 2rem;
+}
