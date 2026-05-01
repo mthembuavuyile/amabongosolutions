@@ -76,6 +76,69 @@
             </div>
         </section>
 
+        <section class="container calculator-section fade-in">
+            <div class="section-title">
+                <h2>Quick Price Calculator</h2>
+                <p>Estimate how much you’ll earn from your glass.</p>
+            </div>
+
+            <div class="calculator-wrapper">
+                <div class="calculator-box card">
+                    <div class="input-group">
+                        <label for="weight">Enter Weight</label>
+                        <input type="number" id="weight" placeholder="e.g. 1000">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="unit">Select Unit</label>
+                        <select id="unit">
+                            <option value="kg">Kilograms (kg)</option>
+                            <option value="ton">Tons</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="type">Material Type</label>
+                        <select id="type">
+                            <option value="0.5">Uncrushed (R0.50/kg)</option>
+                            <option value="0.6">Crushed (R0.60/kg)</option>
+                        </select>
+                    </div>
+
+                    <button onclick="calculatePrice()" class="btn btn-primary btn-block">
+                        <i class="fas fa-calculator"></i> Calculate
+                    </button>
+
+                    <div class="result" id="result" style="display: none;">
+                        <span class="result-label">Estimated Value:</span>
+                        <div class="result-value" id="result-value">R0.00</div>
+                    </div>
+                </div>
+
+                <!-- Quick examples -->
+                <div class="calculator-info card card--process">
+                    <div class="icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <h3>Fast & Fair Payouts</h3>
+                    <p>We believe in transparent pricing. Here are some quick estimates based on our standard uncrushed rate:</p>
+                    <ul class="quick-examples-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div><strong>1 ton (1000 kg)</strong><br><span>Est. R500</span></div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div><strong>5 tons (5000 kg)</strong><br><span>Est. R2,500</span></div>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div><strong>10 tons (10000 kg)</strong><br><span>Est. R5,000</span></div>
+                        </li>
+                    </ul>
+                    <p class="note"><small>* Crushed glass commands a premium rate of R0.60/kg.</small></p>
+                </div>
+            </div>
+        </section>
+
         <!-- FAQ -->
         <section class="bg-alt">
             <div class="container fade-in">
