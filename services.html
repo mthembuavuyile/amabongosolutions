@@ -55,8 +55,24 @@
 
 <body>
 
-    <!-- ========== HEADER (injected by JS) ========== -->
-    <div id="site-header"></div>
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+        <nav class="container nav-container">
+            <a href="index.html" class="logo">AMABONGO <span>SOLUTIONS</span></a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="services.html" class="nav-link active-link">Services</a></li>
+                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="tel:+27648784287" class="cta-btn">Get a Quote</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
 
     <main>
 
@@ -79,8 +95,9 @@
                 <div class="card card--service fade-in">
                     <div class="icon"><i class="fas fa-warehouse"></i></div>
                     <h3>Depot Drop-Off</h3>
-                    <p class="card-desc">Bring your glass directly to our Mkondeni facility. No prior arrangement needed — just arrive, we weigh, and we pay. Suitable for households and small businesses.</p>
+                    <p class="card-desc">Bring your glass directly to our Mkondeni facility. We accept both crushed and uncrushed glass for self-delivery. No prior arrangement needed — just arrive, we weigh, and we pay. Suitable for households and small businesses.</p>
                     <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> Crushed or uncrushed glass</li>
                         <li><i class="fas fa-check-circle"></i> No appointment required</li>
                         <li><i class="fas fa-check-circle"></i> All glass types accepted</li>
                         <li><i class="fas fa-check-circle"></i> Instant cash payment</li>
@@ -91,11 +108,11 @@
                 <div class="card card--service fade-in" style="transition-delay: 150ms;">
                     <div class="icon"><i class="fas fa-truck-moving"></i></div>
                     <h3>Commercial Collection</h3>
-                    <p class="card-desc">We dispatch our fleet to collect from your business premises. Ideal for restaurants, hotels, distributors, bottle stores, and manufacturers with regular output.</p>
+                    <p class="card-desc">We dispatch our vehicles to collect from your premises. Truck collections require a minimum of 32 tonnes (we highly recommend crushing glass for these loads to maximize capacity and payout). For smaller loads, we collect bagged glass with bakkies depending on location.</p>
                     <ul class="feature-list">
-                        <li><i class="fas fa-check-circle"></i> Scheduled collections</li>
-                        <li><i class="fas fa-check-circle"></i> Large-volume pickups</li>
-                        <li><i class="fas fa-check-circle"></i> Contracted service agreements</li>
+                        <li><i class="fas fa-check-circle"></i> Large truck pickups (32t min)</li>
+                        <li><i class="fas fa-check-circle"></i> Bakkie collections for smaller loads</li>
+                        <li><i class="fas fa-check-circle"></i> Crushing recommended for bulk</li>
                         <li><i class="fas fa-check-circle"></i> Serving greater KZN Midlands</li>
                     </ul>
                 </div>
@@ -182,8 +199,32 @@
 
     </main>
 
-    <!-- ========== FOOTER (injected by JS) ========== -->
-    <div id="site-footer"></div>
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">AMABONGO <span>SOLUTIONS</span></a>
+                    <p>Your trusted partner for sustainable glass recycling across South Africa.</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="pricing.html">Pricing</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="chatbot/index.html">ChatBot</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-info">
+                    <p>&copy; 2026 AMABONGO SOLUTIONS. All Rights Reserved. | Enterprise: K2025490106</p>
+                </div>
+                <div class="dev-credit">
+                    Developed by <a href="https://vylex.co.za" target="_blank" rel="noopener noreferrer">Vylex</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Scripts -->
     <script src="js/components.js"></script>

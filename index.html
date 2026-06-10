@@ -100,8 +100,24 @@
 
 <body>
 
-    <!-- ========== HEADER (injected by JS) ========== -->
-    <div id="site-header"></div>
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+        <nav class="container nav-container">
+            <a href="index.html" class="logo">AMABONGO <span>SOLUTIONS</span></a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active-link">Home</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="tel:+27648784287" class="cta-btn">Get a Quote</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
 
     <main>
 
@@ -336,13 +352,43 @@
                         We accept clear, brown, and green glass.
                     </p>
                 </div>
+                <div class="faq-item">
+                    <h3>Do you collect glass, and what are the requirements?</h3>
+                    <p>
+                        Yes, we collect! For large commercial volumes, we collect using our trucks, which requires a minimum load of <strong>32 tonnes</strong> (we highly recommend crushing your glass for truck collections to maximize capacity and payout). For smaller volumes, we can collect bagged glass using our bakkies depending on your location. Self-delivery of any amount (crushed or uncrushed) is always welcome at our depot.
+                    </p>
+                </div>
             </div>
         </section>
 
     </main>
 
-    <!-- ========== FOOTER (injected by JS) ========== -->
-    <div id="site-footer"></div>
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">AMABONGO <span>SOLUTIONS</span></a>
+                    <p>Your trusted partner for sustainable glass recycling across South Africa.</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="pricing.html">Pricing</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="chatbot/index.html">ChatBot</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-info">
+                    <p>&copy; 2026 AMABONGO SOLUTIONS. All Rights Reserved. | Enterprise: K2025490106</p>
+                </div>
+                <div class="dev-credit">
+                    Developed by <a href="https://vylex.co.za" target="_blank" rel="noopener noreferrer">Vylex</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Scripts -->
     <script src="js/components.js"></script>
