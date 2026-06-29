@@ -50,7 +50,7 @@ const responses = {
 
   // FIXED: was defined twice — merged both phone numbers and kept WhatsApp button
   quote: {
-    text: "For a <b>competitive quote</b>, please contact us directly:<br><br>📞 <b>Call/WhatsApp:</b><br><a href='tel:+27648784287'>064 878 4287</a><br><a href='tel:+27795589684'>079 558 9684</a><br><br>📧 <b>Email:</b> <a href='mailto:info@amabongosolutions.co.za'>info@amabongosolutions.co.za</a><br><br>💵 We offer <b>instant payment</b>!",
+    text: "For a <b>competitive quote</b>, please contact us directly:<br><br>📞 <b>Call/WhatsApp:</b><br><a href='tel:+27648784287'>064 878 4287</a> (MR A Mthembu)<br><a href='tel:+27648145432'>064 814 5432</a> (F Mthembu)<br><a href='tel:+27762507239'>076 250 7239</a> (T Shezi)<br><br>📧 <b>Email:</b> <a href='mailto:info@amabongosolutions.co.za'>info@amabongosolutions.co.za</a><br><br>💵 We offer <b>instant payment</b>!",
     options: [
       { text: "📲 WhatsApp Us", value: "whatsapp_now" },
       { text: "📞 Call Now", value: "call_now" },
@@ -120,7 +120,7 @@ const responses = {
 
   // FIXED: was defined twice — merged the detailed out-of-province info with the WhatsApp button
   faq_collection: {
-    text: "<b>Yes, we collect! 🚚</b><br><br>📍 <b>In KZN:</b> We collect commercial quantities.<br>📍 <b>Outside KZN (e.g., Eastern Cape, Johannesburg):</b> We collect strictly from <b>25 tons minimum</b>.<br><br>📸 <i>For out-of-province collections, please WhatsApp us images of your glass first!</i><br><br>📞 <b>Contact our team:</b><br><a href='tel:+27648784287'>064 878 4287</a> or <a href='tel:+27795589684'>079 558 9684</a>",
+    text: "<b>Yes, we collect! 🚚</b><br><br>📍 <b>In KZN:</b> We collect commercial quantities.<br>📍 <b>Outside KZN (e.g., Eastern Cape, Johannesburg):</b> We collect strictly from <b>25 tons minimum</b>.<br><br>📸 <i>For out-of-province collections, please WhatsApp us images of your glass first!</i><br><br>📞 <b>Contact our team:</b><br><a href='tel:+27648784287'>064 878 4287</a> / <a href='tel:+27648145432'>064 814 5432</a> / <a href='tel:+27762507239'>076 250 7239</a>",
     options: [
       { text: "📲 WhatsApp Images", value: "whatsapp_now" },
       { text: "❓ More FAQs", value: "faqs" },
