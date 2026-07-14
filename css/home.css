@@ -12,7 +12,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: 80px;
+    padding-top: var(--header-height);
     background:
         linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)),
         url(../images/recycling3.jpg) no-repeat center center;

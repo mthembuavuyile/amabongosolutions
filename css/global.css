@@ -18,6 +18,14 @@
     --color-text-on-dark: #FFFFFF;
     --color-footer-bg: #212529;
     --color-border-subtle: #dee2e6;
+    /* Header Heights */
+    --header-height: 70px;
+}
+
+@media (max-width: 991px) {
+    :root {
+        --header-height: 60px;
+    }
 }
 
 * {
@@ -28,7 +36,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px;
+    scroll-padding-top: var(--header-height);
 }
 
 body {

@@ -7,25 +7,33 @@
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.9);
+    height: var(--header-height);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
 }
 
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
+    height: 100%;
+    width: 100%;
 }
 
 .logo {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     font-weight: 600;
     color: var(--color-text-primary);
     text-decoration: none;
+    flex-shrink: 0;
+    white-space: nowrap;
+    transition: font-size 0.3s ease;
 }
 
 .logo span {
@@ -35,7 +43,7 @@
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 2.5rem;
+    gap: 1.5rem;
     align-items: center;
 }
 
@@ -46,6 +54,7 @@
     transition: color 0.3s ease;
     position: relative;
     padding-bottom: 5px;
+    white-space: nowrap;
 }
 
 .nav-menu a::after {
@@ -72,10 +81,12 @@
 .cta-btn {
     background: var(--color-primary);
     color: var(--color-text-on-dark);
-    padding: 0.6rem 1.5rem;
+    padding: 0.5rem 1.2rem;
     border-radius: 5px;
     font-weight: bold;
     transition: all 0.3s ease;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .cta-btn:hover {
@@ -91,6 +102,10 @@
 .hamburger {
     display: none;
     cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 5px;
 }
 
 .hamburger .bar {
@@ -100,6 +115,16 @@
     margin: 5px auto;
     background-color: var(--color-text-primary);
     transition: all 0.3s ease-in-out;
+}
+
+/* Intermediate size layout to prevent wrapping on medium desktop views */
+@media (min-width: 992px) and (max-width: 1150px) {
+    .logo {
+        font-size: 1.4rem;
+    }
+    .nav-menu {
+        gap: 1rem;
+    }
 }
 
 /* --- FOOTER --- */
@@ -201,31 +226,48 @@
 }
 
 /* --- RESPONSIVE LAYOUT --- */
-@media (max-width: 768px) {
-    html { scroll-padding-top: 70px; }
+@media (max-width: 991px) {
+    html { scroll-padding-top: var(--header-height); }
     
-    .nav-container { height: 70px; }
+    .nav-container { height: var(--header-height); }
 
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: var(--header-height);
         flex-direction: column;
         background-color: var(--color-background-main);
         width: 100%;
-        height: calc(100vh - 70px);
+        height: calc(100vh - var(--header-height));
         text-align: center;
-        transition: 0.3s;
+        transition: 0.3s ease-in-out;
         gap: 0;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        padding-top: 2rem;
+        overflow-y: auto;
     }
 
-    .nav-menu li { width: 100%; }
+    .nav-menu li { 
+        width: 100%; 
+        padding: 0 1.5rem;
+    }
 
     .nav-menu a {
-        padding: 1.5rem 0;
+        padding: 1.2rem 0;
         display: block;
         width: 100%;
         border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .nav-menu li:last-child {
+        margin-top: 2rem;
+    }
+
+    .nav-menu .cta-btn {
+        display: block;
+        width: 100%;
+        padding: 0.8rem;
+        text-align: center;
     }
 
     .nav-menu.active { left: 0; }
