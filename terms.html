@@ -133,15 +133,17 @@
     <!-- ========== FOOTER (Injected from js/components.js) ========== -->
     <footer id="main-footer" class="footer"></footer>
 
-    <!-- Chatbot Container & Scripts -->
-    <div id="chatbot-popup" class="chatbot-popup"></div>
-    <button id="open-chatbot-btn" class="chatbot-btn" aria-label="Open Virtual Assistant">
+    <!-- ========== CHATBOT ========== -->
+    <button id="open-chatbot-btn" class="chatbot-toggler" aria-label="Open Virtual Assistant">
         <i class="fas fa-robot"></i>
     </button>
+    <div id="chatbot-popup" class="chatbot-popup">
+        <button id="close-chatbot-btn" class="close-btn" aria-label="Close Chat">&times;</button>
+    </div>
 
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/chatbot-loader.js"></script>
+    <script src="js/chatbot-loader.js" defer></script>
 </body>
 
 </html>

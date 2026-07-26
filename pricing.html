@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/pricing.css">
+    <link rel="stylesheet" href="css/chatbot.css">
 </head>
 
 <body>
@@ -234,9 +235,18 @@
     <!-- ========== FOOTER (Injected from js/components.js) ========== -->
     <footer id="main-footer" class="footer"></footer>
 
+    <!-- ========== CHATBOT ========== -->
+    <button id="open-chatbot-btn" class="chatbot-toggler" aria-label="Open Virtual Assistant">
+        <i class="fas fa-robot"></i>
+    </button>
+    <div id="chatbot-popup" class="chatbot-popup">
+        <button id="close-chatbot-btn" class="close-btn" aria-label="Close Chat">&times;</button>
+    </div>
+
     <!-- Scripts -->
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/chatbot-loader.js" defer></script>
 
 </body>
 
