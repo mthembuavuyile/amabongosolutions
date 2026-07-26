@@ -26,8 +26,11 @@
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 
     <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/global.css">
@@ -39,14 +42,16 @@
     <!-- ========== OPEN GRAPH / SOCIAL SHARING ========== -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Contact Us | AMABONGO SOLUTIONS">
-    <meta property="og:description" content="Get in touch for professional glass and bottle recycling services in Pietermaritzburg, KZN.">
+    <meta property="og:description"
+        content="Get in touch for professional glass and bottle recycling services in Pietermaritzburg, KZN.">
     <meta property="og:image" content="https://www.amabongosolutions.co.za/images/transparent-logo.png">
     <meta property="og:locale" content="en_ZA">
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Contact Us | AMABONGO SOLUTIONS">
-    <meta name="twitter:description" content="Get in touch for professional glass and bottle recycling services in Pietermaritzburg, KZN.">
+    <meta name="twitter:description"
+        content="Get in touch for professional glass and bottle recycling services in Pietermaritzburg, KZN.">
     <meta name="twitter:image" content="https://www.amabongosolutions.co.za/images/transparent-logo.png">
 
     <!-- ========== STRUCTURED DATA (JSON-LD) ========== -->
@@ -88,8 +93,9 @@
         <!-- Page Hero -->
         <section class="page-hero">
             <div class="container">
-                <h1>Contact & Bulk Procurement (RFQ)</h1>
-                <p>Submit an industrial cullet supply quote request (RFQ), inquire about commercial collections, or visit our central Mkondeni depot.</p>
+                <h1>Contact & Trade Enquiry Portal</h1>
+                <p>Whether you are a company buying bulk glass cullet, a business scheduling collections, or an
+                    individual selling collected glass, we are ready to assist you.</p>
             </div>
         </section>
 
@@ -100,42 +106,93 @@
 
                     <!-- Contact Form -->
                     <div class="contact-form" id="rfq">
-                        <h3>Send an Enquiry / Request a Quote (RFQ)</h3>
+                        <h3>Send an Enquiry / Request a Quote</h3>
                         <form id="contactForm">
+
+                            <!-- Step 1: Account / Entity Type -->
                             <div class="form-group">
-                                <label for="inquiryType">Inquiry Type</label>
-                                <select id="inquiryType" name="inquiryType" class="form-control">
-                                    <option value="rfq">Industrial Bulk Cullet Supply (RFQ)</option>
-                                    <option value="commercial">Commercial Collection Services</option>
-                                    <option value="public">Public Glass Drop-off / Sell Glass</option>
-                                    <option value="partnership">Waste Management & Municipal Partnership</option>
+                                <label class="form-label-title">I am contacting as:</label>
+                                <div class="entity-selector">
+                                    <label class="entity-option">
+                                        <input type="radio" name="entityType" value="company" checked>
+                                        <span class="entity-btn"><i class="fas fa-building"></i> Company /
+                                            Business</span>
+                                    </label>
+                                    <label class="entity-option">
+                                        <input type="radio" name="entityType" value="individual">
+                                        <span class="entity-btn"><i class="fas fa-user"></i> Individual</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Primary Purpose / Intent -->
+                            <div class="form-group">
+                                <label for="inquiryType">Primary Purpose / Intent <span class="required-asterisk">*</span></label>
+                                <select id="inquiryType" name="inquiryType" class="form-control" required>
+                                    <option value="sell_glass">I want to Sell Glass / Bottles</option>
+                                    <option value="buy_cullet">Looking for a Glass / Cullet Supplier</option>
+                                    <option value="commercial_pickup">Schedule Business / Venue Collection</option>
+                                    <option value="general">General Enquiry / Drop-off Information</option>
                                 </select>
                             </div>
+
+                            <!-- Step 3: Contact & Business Information -->
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="name">Full Name / Company Name</label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="e.g. John Doe / Apex Bottlers" required>
+                                    <label for="name">Full Name <span class="required-asterisk">*</span></label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="e.g. Sipho Ndlovu" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input type="email" id="email" name="email" class="form-control" placeholder="e.g. name@company.com" required>
+                                <div class="form-group" id="companyGroup">
+                                    <label for="companyName" id="companyLabel">Company / Business Name <span class="required-asterisk" id="companyAsterisk">*</span></label>
+                                    <input type="text" id="companyName" name="companyName" class="form-control" placeholder="e.g. Apex Bottling Corp" required>
                                 </div>
                             </div>
+
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="phone">Phone / WhatsApp Number</label>
+                                    <label for="email">Email Address <span class="required-asterisk">*</span></label>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="e.g. info@company.co.za" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone / WhatsApp Number <span class="required-asterisk">*</span></label>
                                     <input type="tel" id="phone" name="phone" class="form-control" placeholder="e.g. 064 878 4287" required>
                                 </div>
+                            </div>
+
+                            <!-- Step 4: Glass & Supply Details -->
+                            <div class="form-row">
                                 <div class="form-group">
-                                    <label for="volume">Est. Volume / Tonnage</label>
-                                    <input type="text" id="volume" name="volume" class="form-control" placeholder="e.g. 34 Tons / Month">
+                                    <label for="glassType">Glass Category / Product</label>
+                                    <select id="glassType" name="glassType" class="form-control">
+                                        <option value="General Glass / Bottles">General Glass / Bottles</option>
+                                        <option value="Mixed Glass Bottles">Mixed Glass Bottles</option>
+                                        <option value="Whole Bottles & Containers">Whole Bottles & Containers</option>
+                                        <option value="Clear / Flint Glass">Clear / Flint Glass</option>
+                                        <option value="Amber / Brown Glass">Amber / Brown Glass</option>
+                                        <option value="Green Glass">Green Glass</option>
+                                        <option value="Industrial Cullet / Other">Industrial Cullet / Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="volume" id="volumeLabel">Est. Quantity / Amount (Optional)</label>
+                                    <input type="text" id="volume" name="volume" class="form-control" placeholder="e.g. 5 bags, 2 crates, or est. weight">
                                 </div>
                             </div>
+
                             <div class="form-group">
-                                <label for="message">Detailed Requirement / Message</label>
-                                <textarea id="message" name="message" class="form-control" placeholder="Describe your required glass cullet quantities, delivery schedules, or collection details..." required></textarea>
+                                <label for="location">Location / Suburb / City</label>
+                                <input type="text" id="location" name="location" class="form-control" placeholder="e.g. Mkondeni, Pietermaritzburg">
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit Request / Quote</button>
+
+                            <!-- Step 5: Detailed Message -->
+                            <div class="form-group">
+                                <label for="message">Message / Details <span class="required-asterisk">*</span></label>
+                                <textarea id="message" name="message" class="form-control" placeholder="Tell us about the glass you want to sell or buy, pickup/drop-off details, or any questions..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
+                                Send Enquiry via WhatsApp
+                            </button>
                         </form>
                     </div>
 
@@ -162,7 +219,8 @@
                                 <i class="fas fa-envelope icon"></i>
                                 <div>
                                     <h3>Email</h3>
-                                    <p><a href="mailto:info@amabongosolutions.co.za">info@amabongosolutions.co.za</a></p>
+                                    <p><a href="mailto:info@amabongosolutions.co.za">info@amabongosolutions.co.za</a>
+                                    </p>
                                 </div>
                             </div>
                             <div class="info-item">

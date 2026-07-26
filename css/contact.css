@@ -57,14 +57,79 @@
     margin-bottom: 1.25rem;
 }
 
-.form-group label {
+.form-group label,
+.form-label-title {
     position: static;
     display: block;
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--color-text-primary, #2d3748);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.45rem;
     pointer-events: auto;
+}
+
+.required-asterisk {
+    color: #e53e3e;
+    font-weight: bold;
+    margin-left: 2px;
+}
+
+/* --- ENTITY SELECTOR PILLS --- */
+.entity-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 0.2rem;
+}
+
+.entity-option {
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+}
+
+.entity-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.entity-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--color-border-subtle, #d1d5db);
+    border-radius: 8px;
+    background-color: #fafafa;
+    color: #4a5568;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.entity-option:hover .entity-btn {
+    border-color: var(--color-primary, #2e7d32);
+    background-color: #f0fdf4;
+    color: var(--color-primary, #2e7d32);
+}
+
+.entity-option input[type="radio"]:checked + .entity-btn {
+    border-color: var(--color-primary, #2e7d32);
+    background-color: #2e7d32;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.25);
+}
+
+.entity-option input[type="radio"]:focus-visible + .entity-btn {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.3);
 }
 
 .form-control {
@@ -100,7 +165,7 @@ select.form-control {
 
 .contact-form textarea.form-control {
     resize: vertical;
-    min-height: 130px;
+    min-height: 120px;
 }
 
 .contact-form button.btn {
@@ -115,17 +180,21 @@ select.form-control {
     justify-content: center;
     gap: 0.75rem;
     border-radius: 8px;
+    background-color: #25D366;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
 }
 
-.contact-form button.btn::after {
-    content: '\f1d8';
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    transition: transform 0.3s ease;
+.contact-form button.btn:hover {
+    background-color: #1eb956;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
 }
 
-.contact-form button.btn:hover::after {
-    transform: translateX(5px);
+.contact-form button.btn i {
+    font-size: 1.25rem;
 }
 
 /* --- CONTACT DETAILS SIDEBAR --- */
@@ -168,4 +237,5 @@ select.form-control {
     .form-group { margin-bottom: 1.5rem; }
     .form-control { padding: 0.875rem; font-size: 0.95rem; }
     .contact-form button.btn { padding: 0.875rem 1.5rem; font-size: 0.95rem; }
+    .entity-selector { grid-template-columns: 1fr; gap: 0.5rem; }
 }
