@@ -71,7 +71,8 @@
                         <li><a href="services.html">Services</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="chatbot/index.html">Virtual Assistant</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms & Conditions</a></li>
                     </ul>
                 </div>
 
@@ -104,6 +105,9 @@
             <div class="footer-bottom">
                 <div class="footer-info">
                     <p>&copy; 2026 AMABONGO SOLUTIONS t/a AMABONGO GLASS RECYCLING. Enterprise: K2025490106/07. All Rights Reserved.</p>
+                    <p class="footer-legal-links">
+                        <a href="privacy-policy.html">Privacy Policy</a> &bull; <a href="terms.html">Terms & Conditions</a>
+                    </p>
                 </div>
                 <div class="dev-credit">
                     Developed by <a href="https://vylex.co.za" target="_blank" rel="noopener noreferrer">Vylex</a>

@@ -301,6 +301,22 @@
     margin: 0;
 }
 
+.footer-legal-links {
+    margin-top: 0.4rem !important;
+    font-size: 0.85rem;
+}
+
+.footer-legal-links a {
+    color: #bbb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-legal-links a:hover {
+    color: var(--color-primary, #4caf50);
+}
+
 .dev-credit {
     font-size: 0.9rem;
 }

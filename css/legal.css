@@ -1,0 +1,113 @@
+/* =========================================
+   LEGAL PAGES STYLES (Privacy Policy & Terms)
+   Imported on privacy-policy.html and terms.html
+========================================= */
+
+.legal-section {
+    padding: 4rem 0 6rem;
+    background: var(--color-background-alt);
+}
+
+.legal-card {
+    background: var(--color-background-main);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    padding: 3rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.legal-card h2 {
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    margin-top: 2.2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-background-alt);
+    padding-bottom: 0.5rem;
+}
+
+.legal-card h2:first-of-type {
+    margin-top: 1rem;
+}
+
+.legal-card h3 {
+    font-size: 1.25rem;
+    color: var(--color-text-primary);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.legal-card p {
+    margin-bottom: 1.25rem;
+    color: var(--color-text-primary);
+    line-height: 1.7;
+}
+
+.legal-card ul {
+    margin-bottom: 1.25rem;
+    padding-left: 1.75rem;
+}
+
+.legal-card li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.legal-card a {
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.legal-card a:hover {
+    color: var(--color-secondary);
+}
+
+.legal-meta {
+    background: var(--color-background-alt);
+    border-left: 4px solid var(--color-primary);
+    padding: 1.25rem 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 2.5rem;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+}
+
+.legal-meta p {
+    margin-bottom: 0.4rem;
+}
+
+.legal-meta p:last-child {
+    margin-bottom: 0;
+}
+
+.legal-meta strong {
+    color: var(--color-text-primary);
+}
+
+.legal-contact-box {
+    background: var(--color-background-alt);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    border: 1px solid var(--color-border-subtle);
+}
+
+.legal-contact-box p {
+    margin-bottom: 0.5rem;
+}
+
+.legal-contact-box p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .legal-card {
+        padding: 1.75rem 1.25rem;
+    }
+    
+    .legal-card h2 {
+        font-size: 1.5rem;
+    }
+}
