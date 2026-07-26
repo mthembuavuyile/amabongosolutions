@@ -27,17 +27,52 @@
 
 .logo {
     font-family: var(--font-heading);
-    font-size: 1.7rem;
-    font-weight: 600;
-    color: var(--color-text-primary);
     text-decoration: none;
     flex-shrink: 0;
     white-space: nowrap;
-    transition: font-size 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    transition: all 0.3s ease;
 }
 
-.logo span {
+.header-logo-img {
+    height: 42px;
+    width: auto;
+    max-height: 44px;
+    object-fit: contain;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover .header-logo-img {
+    transform: scale(1.03);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.1;
+}
+
+.logo-text .brand-name {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    letter-spacing: 0.02em;
+}
+
+.logo-text .brand-tag {
+    font-size: 0.68rem;
+    font-weight: 700;
     color: var(--color-primary);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.footer-brand .brand-name {
+    color: #ffffff;
 }
 
 .nav-menu {
@@ -127,64 +162,126 @@
     }
 }
 
-/* --- FOOTER --- */
+/* --- FOOTER (3 Columns on Desktop) --- */
 .footer {
-    background: var(--color-footer-bg);
+    background: var(--color-footer-bg, #0b150c);
     color: #ccc;
     padding: 4rem 0 2rem 0;
 }
 
-.footer-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-    margin-bottom: 3rem;
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.6fr;
+    gap: 3rem;
+    align-items: start;
+    margin-bottom: 2rem;
 }
 
-.footer-brand {
-    max-width: 400px;
+.footer-heading {
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .footer-brand .logo {
-    color: var(--color-text-on-dark); /* Ensure this variable exists and is light */
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
     margin-bottom: 1rem;
+    color: #ffffff;
 }
 
 .footer-brand p {
-    margin: 0;
+    color: #a0a0a0;
     line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0;
 }
 
-.footer-nav {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 1rem;
 }
 
-.footer-nav a {
-    color: #ccc;
+.footer-links a {
+    color: #bbbbbb;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
-.footer-nav a:hover {
-    color: var(--color-accent); /* Make sure this matches your brand */
+.footer-links a:hover {
+    color: var(--color-primary, #4caf50);
 }
 
-/* Bottom Legal & Dev Row */
+.footer-downloads-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footer-download-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.footer-download-item:hover {
+    background: rgba(76, 175, 80, 0.15);
+    border-color: var(--color-primary, #4caf50);
+    transform: translateX(4px);
+}
+
+.footer-download-item i {
+    font-size: 1.3rem;
+    color: var(--color-primary, #4caf50);
+    flex-shrink: 0;
+}
+
+.footer-download-item strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.footer-download-item span {
+    display: block;
+    font-size: 0.75rem;
+    color: #a0a0a0;
+}
+
+.footer-divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin: 2.5rem 0 2rem 0;
+}
+
+/* Bottom Legal & Dev Row (Centered) */
 .footer-bottom {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Softer, more minimalist border */
+    text-align: center;
+    gap: 0.5rem;
     font-size: 0.9rem;
     color: #999;
 }
@@ -198,26 +295,21 @@
 }
 
 .dev-credit a {
-    color: #fff; /* Replaced the moving gradient with a clean, solid color */
+    color: #fff;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .dev-credit a:hover {
-    color: var(--color-primary);
+    color: var(--color-primary, #4caf50);
 }
 
 /* --- RESPONSIVE FOOTER --- */
-@media (max-width: 768px) {
-    .footer-top {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
+@media (max-width: 991px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
     }
 }
 

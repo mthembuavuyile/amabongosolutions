@@ -79,24 +79,8 @@
 
 <body>
 
-    <!-- ========== HEADER ========== -->
-    <header class="header">
-        <nav class="container nav-container">
-            <a href="index.html" class="logo">AMABONGO <span>SOLUTIONS</span></a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="services.html" class="nav-link">Services</a></li>
-                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-                <li><a href="contact.html" class="nav-link active-link">Contact</a></li>
-                <li><a href="tel:+27648784287" class="cta-btn">Get a Quote</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
-    </header>
+    <!-- ========== HEADER (Injected from js/components.js) ========== -->
+    <header id="main-header" class="header"></header>
 
     <!-- ========== MAIN CONTENT ========== -->
     <main>
@@ -104,8 +88,8 @@
         <!-- Page Hero -->
         <section class="page-hero">
             <div class="container">
-                <h1>Contact Us</h1>
-                <p>We're here to help. Reach out with any questions, for a quote, or to schedule a collection.</p>
+                <h1>Contact & Bulk Procurement (RFQ)</h1>
+                <p>Submit an industrial cullet supply quote request (RFQ), inquire about commercial collections, or visit our central Mkondeni depot.</p>
             </div>
         </section>
 
@@ -115,28 +99,43 @@
                 <div class="contact-page-wrapper">
 
                     <!-- Contact Form -->
-                    <div class="contact-form">
-                        <h3>Send Us a Message</h3>
+                    <div class="contact-form" id="rfq">
+                        <h3>Send an Enquiry / Request a Quote (RFQ)</h3>
                         <form id="contactForm">
+                            <div class="form-group">
+                                <label for="inquiryType">Inquiry Type</label>
+                                <select id="inquiryType" name="inquiryType" class="form-control">
+                                    <option value="rfq">Industrial Bulk Cullet Supply (RFQ)</option>
+                                    <option value="commercial">Commercial Collection Services</option>
+                                    <option value="public">Public Glass Drop-off / Sell Glass</option>
+                                    <option value="partnership">Waste Management & Municipal Partnership</option>
+                                </select>
+                            </div>
                             <div class="form-row">
                                 <div class="form-group">
-                                    <input type="text" id="name" name="name" class="form-control" placeholder=" " required>
-                                    <label for="name">Full Name</label>
+                                    <label for="name">Full Name / Company Name</label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="e.g. John Doe / Apex Bottlers" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" id="email" name="email" class="form-control" placeholder=" " required>
                                     <label for="email">Email Address</label>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="e.g. name@company.com" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="phone">Phone / WhatsApp Number</label>
+                                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="e.g. 064 878 4287" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="volume">Est. Volume / Tonnage</label>
+                                    <input type="text" id="volume" name="volume" class="form-control" placeholder="e.g. 32 Tons / Month">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="tel" id="phone" name="phone" class="form-control" placeholder=" " required>
-                                <label for="phone">Phone Number</label>
+                                <label for="message">Detailed Requirement / Message</label>
+                                <textarea id="message" name="message" class="form-control" placeholder="Describe your required glass cullet quantities, delivery schedules, or collection details..." required></textarea>
                             </div>
-                            <div class="form-group">
-                                <textarea id="message" name="message" class="form-control" placeholder=" " required></textarea>
-                                <label for="message">Your Message</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Send Message</button>
+                            <button type="submit" class="btn btn-primary">Submit Request / Quote</button>
                         </form>
                     </div>
 
@@ -187,32 +186,8 @@
         </section>
     </main>
 
-    <!-- ========== FOOTER ========== -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <a href="index.html" class="logo">AMABONGO <span>SOLUTIONS</span></a>
-                    <p>Your trusted partner for sustainable glass recycling across South Africa.</p>
-                </div>
-                <nav class="footer-nav">
-                    <a href="index.html">Home</a>
-                    <a href="services.html">Services</a>
-                    <a href="pricing.html">Pricing</a>
-                    <a href="contact.html">Contact</a>
-                    <a href="chatbot/index.html">ChatBot</a>
-                </nav>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-info">
-                    <p>&copy; 2026 AMABONGO SOLUTIONS. All Rights Reserved. | Enterprise: K2025490106</p>
-                </div>
-                <div class="dev-credit">
-                    Developed by <a href="https://vylex.co.za" target="_blank" rel="noopener noreferrer">Vylex</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- ========== FOOTER (Injected from js/components.js) ========== -->
+    <footer id="main-footer" class="footer"></footer>
 
     <!-- ========== CHATBOT ========== -->
     <button id="open-chatbot-btn" class="chatbot-toggler" aria-label="Open AI Chat Assistant">

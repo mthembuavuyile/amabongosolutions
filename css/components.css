@@ -371,3 +371,238 @@
 .bg-alt {
     background-color: var(--color-background-alt);
 }
+
+/* ======================
+   ENTERPRISE METRICS STRIP
+====================== */
+.metrics-strip {
+    background: #0f2942;
+    color: #ffffff;
+    padding: 3rem 0;
+    margin-top: -30px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.metric-item {
+    padding: 1rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.metric-item:last-child {
+    border-right: none;
+}
+
+.metric-number {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+}
+
+.metric-label {
+    font-size: 0.95rem;
+    color: #d0d7de;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .metric-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 1.5rem;
+    }
+    .metric-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+}
+
+/* ======================
+   INDUSTRY & PRODUCT CARDS
+====================== */
+.card--industry {
+    text-align: left;
+    padding: 2rem;
+    border: 1px solid var(--color-border-subtle);
+    border-top: 4px solid var(--color-secondary);
+    background: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.card--industry:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(13, 71, 161, 0.12);
+}
+
+.card--industry .icon {
+    font-size: 2.2rem;
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+}
+
+.card--industry h3 {
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Technical Product Spec Card */
+.card--product-spec {
+    text-align: left;
+    border: 1px solid var(--color-border-subtle);
+    padding: 2rem;
+    border-top: 4px solid var(--color-primary);
+    background: #ffffff;
+}
+
+.card--product-spec .product-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.badge-clear { background: #e3f2fd; color: #0d47a1; }
+.badge-amber { background: #fff8e1; color: #b78103; }
+.badge-emerald { background: #e8f5e9; color: #1b5e20; }
+.badge-mixed { background: #f3e5f5; color: #4a148c; }
+
+.spec-list {
+    list-style: none;
+    margin: 1rem 0 1.5rem 0;
+    padding: 0;
+}
+
+.spec-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border-bottom: 1px dashed var(--color-border-subtle);
+    font-size: 0.9rem;
+}
+
+.spec-list li span.spec-title {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.spec-list li span.spec-val {
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+/* ======================
+   DOWNLOADS & RESOURCES CARD
+====================== */
+.download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.download-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border-subtle);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.download-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 8px 25px rgba(46, 125, 50, 0.12);
+    transform: translateY(-3px);
+}
+
+.download-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    background: rgba(46, 125, 50, 0.1);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.download-info h4 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+    color: var(--color-text-primary);
+}
+
+.download-info p {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* ======================
+   ENTERPRISE RFQ FORM
+====================== */
+.rfq-container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+    border-top: 5px solid var(--color-primary);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-text-primary);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+}

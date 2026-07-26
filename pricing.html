@@ -36,24 +36,8 @@
 
 <body>
 
-    <!-- ========== HEADER ========== -->
-    <header class="header">
-        <nav class="container nav-container">
-            <a href="index.html" class="logo">AMABONGO <span>SOLUTIONS</span></a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="services.html" class="nav-link">Services</a></li>
-                <li><a href="pricing.html" class="nav-link active-link">Pricing</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-                <li><a href="tel:+27648784287" class="cta-btn">Get a Quote</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
-    </header>
+    <!-- ========== HEADER (Injected from js/components.js) ========== -->
+    <header id="main-header" class="header"></header>
 
     <main>
 
@@ -88,6 +72,16 @@
                     <div class="price-value">60<span>c/kg</span></div>
                     <p>Processed glass cullet (R0.60 per kg). Premium rates for prepared materials.</p>
                     <a href="contact.html" class="btn btn-primary">Sell Bulk Glass</a>
+                </div>
+
+                <div class="card card--service" style="border-top-color: var(--color-secondary);">
+                    <div class="icon" style="color: var(--color-secondary);"><i class="fas fa-industry"></i></div>
+                    <h3>Industrial Cullet Supply</h3>
+                    <div class="price-value" style="font-size: 2.2rem; margin: 1.5rem 0;">RFQ <span>/ Custom Rate</span>
+                    </div>
+                    <p>High-tonnage commercial cullet supply contracts for glass container manufacturers and industrial
+                        buyers.</p>
+                    <a href="contact.html#rfq" class="btn btn-dark">Request Industrial RFQ</a>
                 </div>
             </div>
         </section>
@@ -135,7 +129,8 @@
                 <div class="calculator-info card card--process">
                     <div class="icon"><i class="fas fa-money-bill-wave"></i></div>
                     <h3>Fast & Fair Payouts</h3>
-                    <p>We believe in transparent pricing. Here are some quick estimates based on our standard uncrushed rate:</p>
+                    <p>We believe in transparent pricing. Here are some quick estimates based on our standard uncrushed
+                        rate:</p>
                     <ul class="quick-examples-list">
                         <li>
                             <i class="fas fa-check-circle"></i>
@@ -174,7 +169,11 @@
                     <div class="faq-item">
                         <h3>Do you collect glass, and what are the requirements?</h3>
                         <p>
-                            Yes, we collect! For large commercial volumes, we collect using our trucks, which requires a minimum load of <strong>32 tonnes</strong> (we highly recommend crushing your glass for truck collections to maximize capacity and payout). For smaller volumes, we can collect bagged glass using our bakkies depending on your location. Self-delivery of any amount (crushed or uncrushed) is always welcome at our depot.
+                            Yes, we collect! For large commercial volumes, we collect using our trucks, which requires a
+                            minimum load of <strong>32 tonnes</strong> (we highly recommend crushing your glass for
+                            truck collections to maximize capacity and payout). For smaller volumes, we can collect
+                            bagged glass using our bakkies depending on your location. Self-delivery of any amount
+                            (crushed or uncrushed) is always welcome at our depot.
                         </p>
                     </div>
                     <div class="faq-item">
@@ -215,32 +214,8 @@
 
     </main>
 
-    <!-- ========== FOOTER ========== -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <a href="index.html" class="logo">AMABONGO <span>SOLUTIONS</span></a>
-                    <p>Your trusted partner for sustainable glass recycling across South Africa.</p>
-                </div>
-                <nav class="footer-nav">
-                    <a href="index.html">Home</a>
-                    <a href="services.html">Services</a>
-                    <a href="pricing.html">Pricing</a>
-                    <a href="contact.html">Contact</a>
-                    <a href="chatbot/index.html">ChatBot</a>
-                </nav>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-info">
-                    <p>&copy; 2026 AMABONGO SOLUTIONS. All Rights Reserved. | Enterprise: K2025490106</p>
-                </div>
-                <div class="dev-credit">
-                    Developed by <a href="https://vylex.co.za" target="_blank" rel="noopener noreferrer">Vylex</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- ========== FOOTER (Injected from js/components.js) ========== -->
+    <footer id="main-footer" class="footer"></footer>
 
     <!-- Scripts -->
     <script src="js/components.js"></script>
