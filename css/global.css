@@ -94,6 +94,8 @@ section {
     font-weight: 700;
     text-transform: uppercase;
     display: inline-block;
+    white-space: nowrap;
+    text-align: center;
     transition: all 0.3s ease;
     border: 2px solid transparent;
     cursor: pointer;

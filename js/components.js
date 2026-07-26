@@ -30,7 +30,6 @@
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link ${isHome ? 'active-link' : ''}">Home</a></li>
                 <li><a href="services.html" class="nav-link ${isServices ? 'active-link' : ''}">Services</a></li>
-                <li><a href="index.html#products" class="nav-link">Products & Specs</a></li>
                 <li><a href="index.html#industries" class="nav-link">Industries Served</a></li>
                 <li><a href="pricing.html" class="nav-link ${isPricing ? 'active-link' : ''}">Pricing</a></li>
                 <li><a href="contact.html" class="nav-link ${isContact ? 'active-link' : ''}">Contact</a></li>
@@ -70,7 +69,6 @@
                     <ul class="footer-links">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="services.html">Services</a></li>
-                        <li><a href="index.html#products">Products & Specs</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         <li><a href="chatbot/index.html">AI Assistant</a></li>
@@ -86,13 +84,6 @@
                             <div>
                                 <strong>Company Profile</strong>
                                 <span>Credentials & Capabilities</span>
-                            </div>
-                        </a>
-                        <a href="index.html#products" class="footer-download-item">
-                            <i class="fas fa-file-invoice"></i>
-                            <div>
-                                <strong>Cullet Specifications</strong>
-                                <span>Sieve & Purity Specs</span>
                             </div>
                         </a>
                         <a href="contact.html#rfq" class="footer-download-item">
