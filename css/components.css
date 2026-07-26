@@ -21,6 +21,7 @@
 .page-hero h1 {
     font-family: var(--font-heading);
     font-size: 3.2rem;
+    line-height: 1.15;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 1rem;

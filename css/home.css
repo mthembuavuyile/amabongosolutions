@@ -6,34 +6,50 @@
 
 /* --- HOME HERO --- */
 #home {
-    height: 90vh;
-    min-height: 600px;
+    min-height: calc(100vh - var(--header-height));
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: var(--header-height);
+    padding: calc(var(--header-height) + 3rem) 1.5rem 5rem;
     background:
-        linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)),
+        linear-gradient(rgba(20, 20, 20, 0.65), rgba(20, 20, 20, 0.65)),
         url(../images/recycling3.jpg) no-repeat center center;
     background-size: cover;
     color: var(--color-text-on-dark);
+}
+
+.hero-content {
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .hero-content h1 {
     font-family: var(--font-heading);
     font-size: 3.8rem;
     font-weight: 600;
+    line-height: 1.15;
     text-transform: uppercase;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
     letter-spacing: 2px;
+    margin-bottom: 1.25rem;
 }
 
 .hero-content p {
-    font-size: 1.3rem;
-    margin: 1rem auto 2.5rem;
-    max-width: 700px;
-    opacity: 0.9;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin: 0 auto 2rem;
+    max-width: 750px;
+    opacity: 0.95;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
 }
 
 /* --- HOME SECTION BACKGROUNDS --- */
