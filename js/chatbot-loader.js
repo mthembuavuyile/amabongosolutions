@@ -11,12 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Change to close icon
             icon.classList.remove('fa-robot');
             icon.classList.add('fa-times');
-            openChatbotBtn.setAttribute('aria-label', 'Close AI Chat Assistant');
+            openChatbotBtn.setAttribute('aria-label', 'Close Virtual Assistant');
         } else {
             // Change back to robot icon
             icon.classList.remove('fa-times');
             icon.classList.add('fa-robot');
-            openChatbotBtn.setAttribute('aria-label', 'Open AI Chat Assistant');
+            openChatbotBtn.setAttribute('aria-label', 'Open Virtual Assistant');
         }
     };
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 2. Create the iframe that will securely contain the chatbot
             const iframe = document.createElement('iframe');
             iframe.src = 'chatbot/index.html'; // Path to your self-contained chatbot
-            iframe.setAttribute('title', 'Amabongo Solutions AI Chat Assistant');
+            iframe.setAttribute('title', 'Amabongo Solutions Virtual Assistant');
 
             // 3. Append the iframe to the popup container
             chatbotPopup.appendChild(iframe);

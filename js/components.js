@@ -71,7 +71,7 @@
                         <li><a href="services.html">Services</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="chatbot/index.html">AI Assistant</a></li>
+                        <li><a href="chatbot/index.html">Virtual Assistant</a></li>
                     </ul>
                 </div>
 

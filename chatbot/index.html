@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Glass Recycling Chatbot</title>
+  <title>Amabongo Virtual Assistant</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
     rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <link rel="stylesheet" href="chatbot.css">
 </head>
 <!-- new design -->
@@ -20,12 +21,12 @@
       <div class="chat">
         <header class="chat-header">
           <div class="logo">
-            <img src="../images/apple-touch-icon.png" alt="Amabongo Solutions Logo" width="48" height="48">
+            <i class="ph ph-recycle logo-icon"></i>
           </div>
           <div class="chat-title">
             <h1>
-              AMABONGO SOLUTIONS<span aria-hidden="true">🤖</span>
-              <span class="live-ai-dot" role="status" aria-label="AI Assistant Active"></span>
+              AMABONGO SOLUTIONS
+              <span class="live-dot" role="status" aria-label="Assistant Active"></span>
             </h1>
             <p>Your Smart Glass Recycling Partner</p>
           </div>
@@ -41,10 +42,7 @@
           <label for="input" class="visually-hidden">Type your message</label>
           <input id="input" class="input" type="text" placeholder="Ask about services, materials, rates..." required>
           <button id="send" class="send" type="submit" aria-label="Send message">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path
-                d="M3.2 2.4a.9.9 0 0 0-1.1 1.1l3 9h9.9a.9.9 0 1 1 0 1.8H5.1l-3 9a.9.9 0 0 0 1.1 1.1c7.2-2 12.9-5.1 17.7-9.3a.9.9 0 0 0 0-1.5C16.1 7.5 10.4 4.4 3.2 2.4Z" />
-            </svg>
+            <i class="ph ph-paper-plane-right"></i>
           </button>
         </form>
       </div>

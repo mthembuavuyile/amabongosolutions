@@ -8,69 +8,68 @@ const $input = document.getElementById('input');
 // ─── Response Data ────────────────────────────────────────────────────────────
 // NOTE: Each key is defined ONCE. Duplicate keys have been merged.
 const responses = {
-  greeting: "Welcome to <b>Amabongo Solutions</b> — KZN's trusted glass recycling partner! 🌍♻️<br><br>How can I assist you today?",
+  greeting: "Welcome to <b>Amabongo Solutions</b> — KZN's trusted glass recycling partner! <i class='ph-fill ph-plant'></i><br><br>How can I assist you today?",
 
   mainMenu: {
     text: "Please choose from the options below:",
     options: [
-      { text: "🏢 View Services", value: "services" },
-      { text: "🍾 Materials We Buy", value: "materials" },
-      { text: "💰 Get a Quote", value: "quote" },
-      { text: "📍 Location & Hours", value: "contact" },
-      { text: "📸 Gallery", value: "gallery" },
-      { text: "❓ FAQs", value: "faqs" },
+      { text: "<i class='ph ph-buildings'></i> View Services", value: "services" },
+      { text: "<i class='ph ph-recycle'></i> Materials We Buy", value: "materials" },
+      { text: "<i class='ph ph-currency-circle-dollar'></i> Get a Quote", value: "quote" },
+      { text: "<i class='ph ph-map-pin'></i> Location & Hours", value: "contact" },
+      { text: "<i class='ph ph-image'></i> Gallery", value: "gallery" },
+      { text: "<i class='ph ph-question'></i> FAQs", value: "faqs" },
     ],
   },
 
   services: {
-    text: "We offer <b>professional recycling services</b> across KwaZulu-Natal:<ul><li>🔄 Glass bottle & jar collection</li><li>⚖️ Sorting and weighing at our depots</li><li>📦 Bulk recycling and processing</li><li>🚚 Reliable commercial pickups</li><li>💵 Instant payment at fair rates</li></ul>",
+    text: "We offer <b>professional recycling services</b> across KwaZulu-Natal:<ul><li><i class='ph ph-arrows-clockwise'></i> Glass bottle & jar collection</li><li><i class='ph ph-scales'></i> Sorting and weighing at our depots</li><li><i class='ph ph-package'></i> Bulk recycling and processing</li><li><i class='ph ph-truck'></i> Reliable commercial pickups</li><li><i class='ph ph-money'></i> Instant payment at fair rates</li></ul>",
     options: [
-      { text: "📋 Get a Quote", value: "quote" },
-      { text: "📸 See Our Work", value: "gallery" },
-      { text: "⬅️ Main Menu", value: "menu" },
+      { text: "<i class='ph ph-receipt'></i> Get a Quote", value: "quote" },
+      { text: "<i class='ph ph-images'></i> See Our Work", value: "gallery" },
+      { text: "<i class='ph ph-arrow-left'></i> Main Menu", value: "menu" },
     ],
   },
 
   materials: {
-    text: "We buy <b>all types of glass bottles and jars</b>:<br><br><b>✓ Clear, Brown, Green & Blue Glass</b><br><br>💡 <i>No need to wash or clean — bring them as they are!</i>",
+    text: "We buy <b>all types of glass bottles and jars</b>:<br><br><b><i class='ph ph-check-circle'></i> Clear, Brown, Green & Blue Glass</b><br><br><i class='ph ph-lightbulb'></i> <i>No need to wash or clean — bring them as they are!</i>",
     options: [
-      { text: "❌ What We DON'T Accept", value: "not_accepted" },
-      { text: "📍 Our Location", value: "contact" },
-      { text: "⬅️ Main Menu", value: "menu" },
+      { text: "<i class='ph ph-x-circle'></i> What We DON'T Accept", value: "not_accepted" },
+      { text: "<i class='ph ph-map-pin'></i> Our Location", value: "contact" },
+      { text: "<i class='ph ph-arrow-left'></i> Main Menu", value: "menu" },
     ],
   },
 
   not_accepted: {
-    text: "<b>❌ Materials We DON'T Accept:</b><br><br>• Aluminium cans or metal<br>• Plastic bottles or containers<br>• Window glass or mirrors<br>• Light bulbs or ceramics",
+    text: "<b><i class='ph ph-x-circle'></i> Materials We DON'T Accept:</b><br><br>• Aluminium cans or metal<br>• Plastic bottles or containers<br>• Window glass or mirrors<br>• Light bulbs or ceramics",
     options: [
-      { text: "✓ What We Accept", value: "materials" },
-      { text: "⬅️ Main Menu", value: "menu" },
+      { text: "<i class='ph ph-check-circle'></i> What We Accept", value: "materials" },
+      { text: "<i class='ph ph-arrow-left'></i> Main Menu", value: "menu" },
     ],
   },
 
-  // FIXED: was defined twice — merged both phone numbers and kept WhatsApp button
   quote: {
-    text: "For a <b>competitive quote</b>, please contact us directly:<br><br>📞 <b>Call/WhatsApp:</b><br><a href='tel:+27648784287'>064 878 4287</a> (MR A Mthembu)<br><a href='tel:+27648145432'>064 814 5432</a> (F Mthembu)<br><a href='tel:+27762507239'>076 250 7239</a> (T Shezi)<br><br>📧 <b>Email:</b> <a href='mailto:info@amabongosolutions.co.za'>info@amabongosolutions.co.za</a><br><br>💵 We offer <b>instant payment</b>!",
+    text: "For a <b>competitive quote</b>, please contact us directly:<br><br><i class='ph ph-phone'></i> <b>Call/WhatsApp:</b><br><a href='tel:+27648784287'>064 878 4287</a> (MR A Mthembu)<br><a href='tel:+27648145432'>064 814 5432</a> (F Mthembu)<br><a href='tel:+27762507239'>076 250 7239</a> (T Shezi)<br><br><i class='ph ph-envelope'></i> <b>Email:</b> <a href='mailto:info@amabongosolutions.co.za'>info@amabongosolutions.co.za</a><br><br><i class='ph ph-money'></i> We offer <b>instant payment</b>!",
     options: [
-      { text: "📲 WhatsApp Us", value: "whatsapp_now" },
-      { text: "📞 Call Now", value: "call_now" },
-      { text: "📧 Send Email", value: "email_now" },
-      { text: "⬅️ Main Menu", value: "menu" },
+      { text: "<i class='ph ph-whatsapp-logo'></i> WhatsApp Us", value: "whatsapp_now" },
+      { text: "<i class='ph ph-phone-call'></i> Call Now", value: "call_now" },
+      { text: "<i class='ph ph-paper-plane-tilt'></i> Send Email", value: "email_now" },
+      { text: "<i class='ph ph-arrow-left'></i> Main Menu", value: "menu" },
     ],
   },
 
   contact: {
-    text: "📍 <b>Our Location:</b><br>72 C B Downes Rd, Mkondeni<br>Pietermaritzburg, 3201<br><br>⏰ <b>Business Hours:</b><br>Mon–Fri: 08:00–16:30<br>Sat: 08:00–15:00<br>Sun: Closed",
+    text: "<i class='ph ph-map-pin'></i> <b>Our Location:</b><br>72 C B Downes Rd, Mkondeni<br>Pietermaritzburg, 3201<br><br><i class='ph ph-clock'></i> <b>Business Hours:</b><br>Mon–Fri: 08:00–16:30<br>Sat: 08:00–15:00<br>Sun: Closed",
     showMap: true,
     options: [
-      { text: "🗺️ Get Directions", value: "directions" },
-      { text: "📞 Call Us", value: "call_now" },
-      { text: "⬅️ Main Menu", value: "menu" },
+      { text: "<i class='ph ph-navigation-arrow'></i> Get Directions", value: "directions" },
+      { text: "<i class='ph ph-phone'></i> Call Us", value: "call_now" },
+      { text: "<i class='ph ph-arrow-left'></i> Main Menu", value: "menu" },
     ],
   },
 
   gallery: {
-    text: "📸 <b>Our Operations in Action:</b>",
+    text: "<i class='ph ph-camera'></i> <b>Our Operations in Action:</b>",
     images: [
       { src: "../images/recycling.jpg", alt: "Weighing station" },
       { src: "../images/recycling1.jpg", alt: "Truck with glass" },
@@ -78,59 +77,71 @@ const responses = {
       { src: "../images/recycling3.jpg", alt: "Mixed glass" },
     ],
     options: [
-      { text: "🏢 Our Services", value: "services" },
-      { text: "⬅️ Main Menu", value: "menu" },
+      { text: "<i class='ph ph-buildings'></i> Our Services", value: "services" },
+      { text: "<i class='ph ph-arrow-left'></i> Main Menu", value: "menu" },
     ],
   },
 
   faqs: {
-    text: "<b>❓ Frequently Asked Questions:</b>",
+    text: "<b><i class='ph ph-question'></i> Frequently Asked Questions:</b>",
     options: [
       { text: "Do you accept aluminium?", value: "faq_aluminium" },
       { text: "Do I need to sort glass?", value: "faq_sorting" },
       { text: "How do you pay?", value: "faq_payment" },
       { text: "Do you collect?", value: "faq_collection" },
-      { text: "⬅️ Main Menu", value: "menu" },
+      { text: "Environmental Impact?", value: "faq_environment" },
+      { text: "<i class='ph ph-arrow-left'></i> Main Menu", value: "menu" },
     ],
   },
 
   faq_aluminium: {
-    text: "<b>❌ NO</b> — We do <b>NOT</b> accept aluminium cans or any metal materials. We <b>ONLY</b> accept glass bottles and jars.",
+    text: "<b><i class='ph ph-x-circle'></i> NO</b> — We do <b>NOT</b> accept aluminium cans or any metal materials. We <b>ONLY</b> accept glass bottles and jars.",
     options: [
-      { text: "✓ What We Accept", value: "materials" },
-      { text: "❓ More FAQs", value: "faqs" },
+      { text: "<i class='ph ph-check-circle'></i> What We Accept", value: "materials" },
+      { text: "<i class='ph ph-list-magnifying-glass'></i> More FAQs", value: "faqs" },
     ],
   },
 
   faq_sorting: {
-    text: "<b>No need to sort!</b> 🎉 You can bring mixed glass — we handle all the sorting at our facility.",
+    text: "<b>No need to sort!</b> <i class='ph ph-party-popper'></i> You can bring mixed glass — we handle all the sorting at our facility.",
     options: [
-      { text: "❓ More FAQs", value: "faqs" },
-      { text: "⬅️ Main Menu", value: "menu" },
+      { text: "<i class='ph ph-list-magnifying-glass'></i> More FAQs", value: "faqs" },
+      { text: "<i class='ph ph-arrow-left'></i> Main Menu", value: "menu" },
     ],
   },
 
   faq_payment: {
-    text: "<b>💵 Instant Payment!</b> We pay immediately after weighing your glass via cash or bank transfer.",
+    text: "<b><i class='ph ph-money'></i> Instant Payment!</b> We pay immediately after weighing your glass via cash or bank transfer.",
     options: [
-      { text: "💰 Get a Quote", value: "quote" },
-      { text: "❓ More FAQs", value: "faqs" },
+      { text: "<i class='ph ph-currency-circle-dollar'></i> Get a Quote", value: "quote" },
+      { text: "<i class='ph ph-list-magnifying-glass'></i> More FAQs", value: "faqs" },
     ],
   },
 
-  // FIXED: was defined twice — merged the detailed out-of-province info with the WhatsApp button
   faq_collection: {
-    text: "<b>Yes, we collect! 🚚</b><br><br>📍 <b>In KZN:</b> We collect commercial quantities.<br>📍 <b>Outside KZN (e.g., Eastern Cape, Johannesburg):</b> We collect strictly from <b>25 tons minimum</b>.<br><br>📸 <i>For out-of-province collections, please WhatsApp us images of your glass first!</i><br><br>📞 <b>Contact our team:</b><br><a href='tel:+27648784287'>064 878 4287</a> / <a href='tel:+27648145432'>064 814 5432</a> / <a href='tel:+27762507239'>076 250 7239</a>",
+    text: "<b>Yes, we collect! <i class='ph ph-truck'></i></b><br><br><i class='ph ph-map-pin'></i> <b>In KZN:</b> We collect commercial quantities.<br><i class='ph ph-map-pin'></i> <b>Outside KZN (e.g., Eastern Cape, Johannesburg):</b> We collect strictly from <b>34 tons minimum</b>.<br><br><i class='ph ph-camera'></i> <i>For out-of-province collections, please WhatsApp us images of your glass first!</i><br><br><i class='ph ph-phone'></i> <b>Contact our team:</b><br><a href='tel:+27648784287'>064 878 4287</a> / <a href='tel:+27648145432'>064 814 5432</a> / <a href='tel:+27762507239'>076 250 7239</a>",
     options: [
-      { text: "📲 WhatsApp Images", value: "whatsapp_now" },
-      { text: "❓ More FAQs", value: "faqs" },
-      { text: "⬅️ Main Menu", value: "menu" },
+      { text: "<i class='ph ph-whatsapp-logo'></i> WhatsApp Images", value: "whatsapp_now" },
+      { text: "<i class='ph ph-list-magnifying-glass'></i> More FAQs", value: "faqs" },
+      { text: "<i class='ph ph-arrow-left'></i> Main Menu", value: "menu" },
+    ],
+  },
+
+  faq_environment: {
+    text: "<b><i class='ph ph-leaf'></i> Why Recycle Glass?</b><br><br>Glass is 100% recyclable and can be recycled endlessly without loss in quality. Recycling just one glass bottle saves enough energy to power a computer for 25 minutes! Thank you for helping us keep KZN clean.",
+    options: [
+      { text: "<i class='ph ph-buildings'></i> View Services", value: "services" },
+      { text: "<i class='ph ph-arrow-left'></i> Main Menu", value: "menu" },
     ],
   },
 
   fallback: {
-    text: "I'm not sure how to answer that. 🤔 Try choosing from the main menu options!",
-    options: [{ text: "⬅️ Main Menu", value: "menu" }],
+    text: "I'm not quite sure how to answer that. Let me help you find the right information. Would you like to:",
+    options: [
+      { text: "<i class='ph ph-buildings'></i> View our services", value: "services" },
+      { text: "<i class='ph ph-currency-circle-dollar'></i> Request a quote", value: "quote" },
+      { text: "<i class='ph ph-phone-call'></i> Contact a human", value: "contact" }
+    ],
   },
 };
 
@@ -177,7 +188,7 @@ function setQuickReplies(options = []) {
   options.forEach(opt => {
     const b = document.createElement('button');
     b.className = 'qbtn';
-    b.textContent = opt.text;
+    b.innerHTML = opt.text;
     b.dataset.value = opt.value;
     $quickbar.appendChild(b);
   });
@@ -213,27 +224,27 @@ function resolveKey(lower) {
   if (lower === 'faq_collection') return 'faq_collection';
 
   // ── Keyword matching ──────────────────────────────────────────────────────
-  if (lower.includes('hi') || lower.includes('hello') || lower.includes('hey'))
+  if (lower.includes('hi') || lower.includes('hello') || lower.includes('hey') || lower.includes('start') || lower.includes('menu') || lower.includes('back'))
     return 'mainMenu';
-  if (lower.includes('service'))
+  if (lower.includes('service') || lower.includes('what do you do') || lower.includes('how it works'))
     return 'services';
-  if (lower.includes('material') || lower.includes('buy') || lower.includes('accept'))
+  if (lower.includes('material') || lower.includes('buy') || lower.includes('accept') || lower.includes('what kind of glass'))
     return 'materials';
   if (lower.includes('aluminium') || lower.includes('aluminum') || lower.includes('can') || lower.includes('metal'))
     return 'faq_aluminium';
-  if (lower.includes('plastic') || lower.includes('mirror') || lower.includes('window') || lower.includes('bulb') || lower.includes('ceramic'))
+  if (lower.includes('plastic') || lower.includes('mirror') || lower.includes('window') || lower.includes('bulb') || lower.includes('ceramic') || lower.includes('don\'t accept') || lower.includes('do not accept'))
     return 'not_accepted';
-  if (lower.includes('quote') || lower.includes('price') || lower.includes('rate') || lower.includes('cost'))
+  if (lower.includes('quote') || lower.includes('price') || lower.includes('rate') || lower.includes('cost') || lower.includes('how much') || lower.includes('sell glass'))
     return 'quote';
-  if (lower.includes('contact') || lower.includes('address') || lower.includes('location') || lower.includes('where'))
+  if (lower.includes('contact') || lower.includes('address') || lower.includes('location') || lower.includes('where are you') || lower.includes('find you'))
     return 'contact';
   if (lower.includes('hour') || lower.includes('open') || lower.includes('time'))
     return 'contact';
-  if (lower.includes('gallery') || lower.includes('photo') || lower.includes('image') || lower.includes('picture'))
+  if (lower.includes('gallery') || lower.includes('photo') || lower.includes('image') || lower.includes('picture') || lower.includes('see'))
     return 'gallery';
-  if (lower.includes('sort'))
+  if (lower.includes('sort') || lower.includes('clean') || lower.includes('wash'))
     return 'faq_sorting';
-  if (lower.includes('pay') || lower.includes('cash') || lower.includes('transfer'))
+  if (lower.includes('pay') || lower.includes('cash') || lower.includes('transfer') || lower.includes('money'))
     return 'faq_payment';
   if (
     lower.includes('collect') ||
@@ -242,12 +253,14 @@ function resolveKey(lower) {
     lower.includes('gauteng') ||
     lower.includes('eastern cape') ||
     lower.includes('province') ||
-    lower.includes('ton')
+    lower.includes('ton') ||
+    lower.includes('come to me') ||
+    lower.includes('transport')
   ) return 'faq_collection';
-  if (lower.includes('faq') || lower.includes('question'))
+  if (lower.includes('environment') || lower.includes('why recycle') || lower.includes('impact') || lower.includes('nature') || lower.includes('planet'))
+    return 'faq_environment';
+  if (lower.includes('faq') || lower.includes('question') || lower.includes('help') || lower.includes('info'))
     return 'faqs';
-  if (lower.includes('menu') || lower.includes('start') || lower.includes('back'))
-    return 'mainMenu';
 
   return 'fallback';
 }
@@ -291,7 +304,7 @@ $composer.addEventListener('submit', (e) => {
 $quickbar.addEventListener('click', (e) => {
   const btn = e.target.closest('.qbtn');
   if (!btn) return;
-  addMessage(btn.textContent, 'user');
+  addMessage(btn.innerHTML, 'user');
   handleInput(btn.dataset.value);
 });
 
