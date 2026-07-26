@@ -43,3 +43,21 @@ function calculatePrice() {
     resultValue.style.color = ""; // reset color
     resultValue.innerText = `R${total.toFixed(2)}`;
 }
+
+// --- FAQ Accordion (Auto-close siblings when opening a question) ---
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.faq-list').forEach((faqList) => {
+        faqList.addEventListener('click', (e) => {
+            const summary = e.target.closest('summary');
+            if (!summary) return;
+            const details = summary.parentElement;
+            if (!details.open) {
+                faqList.querySelectorAll('details.faq-item[open]').forEach((otherDetails) => {
+                    if (otherDetails !== details) {
+                        otherDetails.removeAttribute('open');
+                    }
+                });
+            }
+        });
+    });
+});

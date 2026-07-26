@@ -196,6 +196,17 @@
     color: #ffffff;
 }
 
+.footer-brand .footer-logo-img {
+    width: 48px;
+    height: 48px;
+    max-height: 48px;
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 8px;
+    object-fit: contain;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
 .footer-brand p {
     color: #a0a0a0;
     line-height: 1.6;

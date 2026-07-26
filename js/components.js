@@ -54,7 +54,7 @@
                 <!-- Column 1: Brand Info -->
                 <div class="footer-col footer-brand">
                     <a href="index.html" class="logo">
-                        <img src="images/amabongo-transparent-logo.png" alt="Amabongo Glass Recycling Logo" class="header-logo-img">
+                        <img src="images/amabongo-transparent-logo.png" alt="Amabongo Glass Recycling Logo" class="header-logo-img footer-logo-img">
                         <span class="logo-text">
                             <span class="brand-name">AMABONGO SOLUTIONS</span>
                             <span class="brand-tag">GLASS RECYCLING</span>
