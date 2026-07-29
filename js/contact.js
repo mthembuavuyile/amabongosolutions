@@ -125,9 +125,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000);
     }
 
+    let lastSubmitTime = 0;
+
+    function isSpamOrThrottled() {
+        // Honeypot field check
+        const honeypot = document.getElementById('website_hp');
+        if (honeypot && honeypot.value.trim() !== '') {
+            console.warn('Bot submission blocked via honeypot.');
+            return true; // Silence bot submission
+        }
+
+        // Rate limit: throttle submissions within 3 seconds
+        const now = Date.now();
+        if (now - lastSubmitTime < 3000) {
+            showNotice("Please wait a moment before sending another request.");
+            return true;
+        }
+        lastSubmitTime = now;
+        return false;
+    }
+
     // Submit via WhatsApp
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        if (isSpamOrThrottled()) return;
+
         const data = getFormData();
         const whatsappTargetNumber = "27648784287";
 
@@ -170,6 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 contactForm.reportValidity();
                 return;
             }
+
+            if (isSpamOrThrottled()) return;
 
             const data = getFormData();
             const emailTarget = "info@amabongosolutions.co.za";

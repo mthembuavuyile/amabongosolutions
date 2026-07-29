@@ -153,26 +153,31 @@
                                 </select>
                             </div>
 
+                            <!-- Honeypot Anti-Spam Field (Hidden from real users) -->
+                            <div style="display:none !important;" aria-hidden="true">
+                                <input type="text" name="website_hp" id="website_hp" tabindex="-1" autocomplete="off">
+                            </div>
+
                             <!-- Step 3: Contact & Business Information -->
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="name">Full Name <span class="required-asterisk">*</span></label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="e.g. Sipho Ndlovu" required>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="e.g. Sipho Ndlovu" maxlength="100" required>
                                 </div>
                                 <div class="form-group" id="companyGroup">
                                     <label for="companyName" id="companyLabel">Company / Business Name <span class="required-asterisk" id="companyAsterisk">*</span></label>
-                                    <input type="text" id="companyName" name="companyName" class="form-control" placeholder="e.g. Apex Bottling Corp" required>
+                                    <input type="text" id="companyName" name="companyName" class="form-control" placeholder="e.g. Apex Bottling Corp" maxlength="100" required>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="email">Email Address <span class="required-asterisk">*</span></label>
-                                    <input type="email" id="email" name="email" class="form-control" placeholder="e.g. info@company.co.za" required>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="e.g. info@company.co.za" maxlength="120" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Phone / WhatsApp Number <span class="required-asterisk">*</span></label>
-                                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="e.g. 064 878 4287" required>
+                                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="e.g. 064 878 4287" maxlength="30" required>
                                 </div>
                             </div>
 
@@ -192,19 +197,19 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="volume" id="volumeLabel">Est. Quantity / Amount (Optional)</label>
-                                    <input type="text" id="volume" name="volume" class="form-control" placeholder="e.g. 5 bags, 2 crates, or est. weight">
+                                    <input type="text" id="volume" name="volume" class="form-control" placeholder="e.g. 5 bags, 2 crates, or est. weight" maxlength="100">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="location">Location / Suburb / City</label>
-                                <input type="text" id="location" name="location" class="form-control" placeholder="e.g. Mkondeni, Pietermaritzburg">
+                                <input type="text" id="location" name="location" class="form-control" placeholder="e.g. Mkondeni, Pietermaritzburg" maxlength="150">
                             </div>
 
                             <!-- Step 5: Detailed Message -->
                             <div class="form-group">
                                 <label for="message">Message / Details <span class="required-asterisk">*</span></label>
-                                <textarea id="message" name="message" class="form-control" placeholder="Tell us about the glass you want to sell or buy, pickup/drop-off details, or any questions..." required></textarea>
+                                <textarea id="message" name="message" class="form-control" placeholder="Tell us about the glass you want to sell or buy, pickup/drop-off details, or any questions..." maxlength="3000" required></textarea>
                             </div>
 
                             <div id="formNotice" class="form-notice form-notice-success" style="display: none;">
@@ -223,7 +228,7 @@
 
                             <!-- Form Trust Guarantee Footer -->
                             <div class="form-trust-footer">
-                                <span><i class="fas fa-bolt" style="color: #f59e0b;"></i> Fast 30-min Response</span>
+                                <span><i class="fas fa-clock" style="color: #f59e0b;"></i> Response within 24 hrs</span>
                                 <span><i class="fas fa-shield-halved" style="color: #2563eb;"></i> 100% Privacy</span>
                             </div>
                         </form>
