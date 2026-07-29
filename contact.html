@@ -109,14 +109,31 @@
                         <h3>Send an Enquiry / Request a Quote</h3>
                         <form id="contactForm">
 
-                            <!-- Step 1: Account / Entity Type -->
+                            <!-- Step 1: Quick Presets & Account Type -->
+                            <div class="form-group">
+                                <label class="form-label-title">Quick Select Purpose:</label>
+                                <div class="quick-preset-chips">
+                                    <button type="button" class="preset-chip active" data-intent="sell_glass">
+                                        <i class="fas fa-coins"></i> Sell Glass (Cash)
+                                    </button>
+                                    <button type="button" class="preset-chip" data-intent="buy_cullet">
+                                        <i class="fas fa-industry"></i> Buy Cullet (RFQ)
+                                    </button>
+                                    <button type="button" class="preset-chip" data-intent="commercial_pickup">
+                                        <i class="fas fa-truck-moving"></i> Truck Pickup (34t+)
+                                    </button>
+                                    <button type="button" class="preset-chip" data-intent="general">
+                                        <i class="fas fa-circle-question"></i> General Enquiry
+                                    </button>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="form-label-title">I am contacting as:</label>
                                 <div class="entity-selector">
                                     <label class="entity-option">
                                         <input type="radio" name="entityType" value="company" checked>
-                                        <span class="entity-btn"><i class="fas fa-building"></i> Company /
-                                            Business</span>
+                                        <span class="entity-btn"><i class="fas fa-building"></i> Company / Business</span>
                                     </label>
                                     <label class="entity-option">
                                         <input type="radio" name="entityType" value="individual">
@@ -190,9 +207,25 @@
                                 <textarea id="message" name="message" class="form-control" placeholder="Tell us about the glass you want to sell or buy, pickup/drop-off details, or any questions..." required></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary" id="submitBtn">
-                                Send Enquiry via WhatsApp
-                            </button>
+                            <div id="formNotice" class="form-notice form-notice-success" style="display: none;">
+                                <i class="fas fa-check-circle"></i> <span id="noticeText">Formatting enquiry...</span>
+                            </div>
+
+                            <!-- Dual Submission Actions -->
+                            <div class="form-actions-grid">
+                                <button type="submit" id="submitWhatsappBtn" class="btn btn-whatsapp">
+                                    <i class="fab fa-whatsapp"></i> Send via WhatsApp
+                                </button>
+                                <button type="button" id="submitEmailBtn" class="btn btn-email">
+                                    <i class="fas fa-envelope"></i> Send via Email
+                                </button>
+                            </div>
+
+                            <!-- Form Trust Guarantee Footer -->
+                            <div class="form-trust-footer">
+                                <span><i class="fas fa-bolt" style="color: #f59e0b;"></i> Fast 30-min Response</span>
+                                <span><i class="fas fa-shield-halved" style="color: #2563eb;"></i> 100% Privacy</span>
+                            </div>
                         </form>
                     </div>
 
@@ -210,7 +243,7 @@
                                 <i class="fas fa-phone icon"></i>
                                 <div>
                                     <h3>Phone / WhatsApp</h3>
-                                    <p><a href="tel:+27648784287">064 878 4287</a> (MR A Mthembu)</p>
+                                    <p><a href="tel:+27648784287">064 878 4287</a> (Mr A Mthembu)</p>
                                     <p><a href="tel:+27648145432">064 814 5432</a> (F Mthembu)</p>
                                     <p><a href="tel:+27762507239">076 250 7239</a> (T Shezi)</p>
                                 </div>
