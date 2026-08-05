@@ -12,30 +12,34 @@
         // Determine current page filename for active link highlighting
         const path = window.location.pathname;
         const page = path.split('/').pop() || 'index.html';
+        const isInSubfolder = path.includes('/blog/');
+        const rootPrefix = isInSubfolder ? '../' : '';
 
         const isHome = page === '' || page === 'index.html';
         const isAbout = page === 'about.html';
         const isServices = page === 'services.html';
         const isPricing = page === 'pricing.html';
+        const isBlog = page === 'blog.html' || isInSubfolder;
         const isContact = page === 'contact.html';
 
         headerContainer.innerHTML = `
         <nav class="container nav-container">
-            <a href="index.html" class="logo">
-                <img src="images/amabongo-transparent-logo.png" alt="Amabongo Glass Recycling Logo" class="header-logo-img">
+            <a href="${rootPrefix}index.html" class="logo">
+                <img src="${rootPrefix}images/amabongo-transparent-logo.png" alt="Amabongo Glass Recycling Logo" class="header-logo-img">
                 <span class="logo-text">
                     <span class="brand-name">AMABONGO SOLUTIONS</span>
                     <span class="brand-tag">GLASS RECYCLING</span>
                 </span>
             </a>
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link ${isHome ? 'active-link' : ''}">Home</a></li>
-                <li><a href="about.html" class="nav-link ${isAbout ? 'active-link' : ''}">About Us</a></li>
-                <li><a href="services.html" class="nav-link ${isServices ? 'active-link' : ''}">Services</a></li>
-                <li><a href="index.html#industries" class="nav-link">Industries Served</a></li>
-                <li><a href="pricing.html" class="nav-link ${isPricing ? 'active-link' : ''}">Pricing</a></li>
-                <li><a href="contact.html" class="nav-link ${isContact ? 'active-link' : ''}">Contact</a></li>
-                <li><a href="contact.html#rfq" class="cta-btn">Request Quote (RFQ)</a></li>
+                <li><a href="${rootPrefix}index.html" class="nav-link ${isHome ? 'active-link' : ''}">Home</a></li>
+                <li><a href="${rootPrefix}about.html" class="nav-link ${isAbout ? 'active-link' : ''}">About Us</a></li>
+                <li><a href="${rootPrefix}services.html" class="nav-link ${isServices ? 'active-link' : ''}">Services</a></li>
+
+                <li><a href="${rootPrefix}pricing.html" class="nav-link ${isPricing ? 'active-link' : ''}">Pricing</a></li>
+                <li><a href="${rootPrefix}blog/" class="nav-link ${isBlog ? 'active-link' : ''}">Blog</a></li>
+                <li><a href="${rootPrefix}contact.html" class="nav-link ${isContact ? 'active-link' : ''}">Contact</a></li>
+                <li><a href="${rootPrefix}contact.html#rfq" class="cta-btn">Request Quote (RFQ)</a></li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -50,13 +54,17 @@
         const footerContainer = document.getElementById('main-footer') || document.querySelector('footer.footer');
         if (!footerContainer) return;
 
+        const path = window.location.pathname;
+        const isInSubfolder = path.includes('/blog/');
+        const rootPrefix = isInSubfolder ? '../' : '';
+
         footerContainer.innerHTML = `
         <div class="container">
             <div class="footer-grid">
                 <!-- Column 1: Brand Info -->
                 <div class="footer-col footer-brand">
-                    <a href="index.html" class="logo">
-                        <img src="images/amabongo-transparent-logo.png" alt="Amabongo Glass Recycling Logo" class="header-logo-img footer-logo-img">
+                    <a href="${rootPrefix}index.html" class="logo">
+                        <img src="${rootPrefix}images/amabongo-transparent-logo.png" alt="Amabongo Glass Recycling Logo" class="header-logo-img footer-logo-img">
                         <span class="logo-text">
                             <span class="brand-name">AMABONGO SOLUTIONS</span>
                             <span class="brand-tag">GLASS RECYCLING</span>
@@ -69,13 +77,14 @@
                 <div class="footer-col footer-links-col">
                     <h4 class="footer-heading">Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms & Conditions</a></li>
+                        <li><a href="${rootPrefix}index.html">Home</a></li>
+                        <li><a href="${rootPrefix}about.html">About Us</a></li>
+                        <li><a href="${rootPrefix}services.html">Services</a></li>
+                        <li><a href="${rootPrefix}pricing.html">Pricing</a></li>
+                        <li><a href="${rootPrefix}blog/">Blog & Insights</a></li>
+                        <li><a href="${rootPrefix}contact.html">Contact</a></li>
+                        <li><a href="${rootPrefix}privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="${rootPrefix}terms.html">Terms & Conditions</a></li>
                     </ul>
                 </div>
 
@@ -83,14 +92,14 @@
                 <div class="footer-col footer-downloads-col">
                     <h4 class="footer-heading">Downloads & Resources</h4>
                     <div class="footer-downloads-list">
-                        <a href="contact.html" class="footer-download-item">
+                        <a href="${rootPrefix}contact.html" class="footer-download-item">
                             <i class="fas fa-file-pdf"></i>
                             <div>
                                 <strong>Company Profile</strong>
                                 <span>Credentials & Capabilities</span>
                             </div>
                         </a>
-                        <a href="contact.html#rfq" class="footer-download-item">
+                        <a href="${rootPrefix}contact.html#rfq" class="footer-download-item">
                             <i class="fas fa-clipboard-check"></i>
                             <div>
                                 <strong>Vendor Onboarding</strong>
@@ -109,7 +118,7 @@
                 <div class="footer-info">
                     <p>&copy; 2026 AMABONGO SOLUTIONS t/a AMABONGO GLASS RECYCLING. Enterprise: K2025490106/07. All Rights Reserved.</p>
                     <p class="footer-legal-links">
-                        <a href="privacy-policy.html">Privacy Policy</a> &bull; <a href="terms.html">Terms & Conditions</a>
+                        <a href="${rootPrefix}privacy-policy.html">Privacy Policy</a> &bull; <a href="${rootPrefix}terms.html">Terms & Conditions</a>
                     </p>
                 </div>
                 <div class="dev-credit">

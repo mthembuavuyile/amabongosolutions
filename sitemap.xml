@@ -4,37 +4,56 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
 
 <url>
   <loc>https://amabongosolutions.co.za/</loc>
-  <lastmod>2026-05-02T14:51:10+00:00</lastmod>
+  <lastmod>2026-08-05T17:30:00+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://amabongosolutions.co.za/services.html</loc>
-  <lastmod>2026-05-02T14:51:10+00:00</lastmod>
+  <lastmod>2026-08-05T17:30:00+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://amabongosolutions.co.za/pricing.html</loc>
-  <lastmod>2026-05-02T14:51:10+00:00</lastmod>
+  <lastmod>2026-08-05T17:30:00+00:00</lastmod>
   <priority>0.80</priority>
+</url>
+  <url>
+    <loc>https://www.amabongosolutions.co.za/blog/</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+<url>
+  <loc>https://amabongosolutions.co.za/blog/glass-recycling-prices-kzn.html</loc>
+  <lastmod>2026-08-05T17:30:00+00:00</lastmod>
+  <priority>0.70</priority>
+</url>
+<url>
+  <loc>https://amabongosolutions.co.za/blog/commercial-glass-recycling-pietermaritzburg.html</loc>
+  <lastmod>2026-08-05T17:30:00+00:00</lastmod>
+  <priority>0.70</priority>
+</url>
+<url>
+  <loc>https://amabongosolutions.co.za/blog/how-to-prepare-glass-bottles-for-recycling.html</loc>
+  <lastmod>2026-08-05T17:30:00+00:00</lastmod>
+  <priority>0.70</priority>
 </url>
 <url>
   <loc>https://amabongosolutions.co.za/contact.html</loc>
-  <lastmod>2026-05-02T14:51:10+00:00</lastmod>
+  <lastmod>2026-08-05T17:30:00+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://amabongosolutions.co.za/privacy-policy.html</loc>
-  <lastmod>2026-07-26T14:48:00+00:00</lastmod>
+  <lastmod>2026-08-05T17:30:00+00:00</lastmod>
   <priority>0.50</priority>
 </url>
 <url>
   <loc>https://amabongosolutions.co.za/terms.html</loc>
-  <lastmod>2026-07-26T14:48:00+00:00</lastmod>
+  <lastmod>2026-08-05T17:30:00+00:00</lastmod>
   <priority>0.50</priority>
 </url>
 
