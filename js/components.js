@@ -14,6 +14,7 @@
         const page = path.split('/').pop() || 'index.html';
 
         const isHome = page === '' || page === 'index.html';
+        const isAbout = page === 'about.html';
         const isServices = page === 'services.html';
         const isPricing = page === 'pricing.html';
         const isContact = page === 'contact.html';
@@ -29,6 +30,7 @@
             </a>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link ${isHome ? 'active-link' : ''}">Home</a></li>
+                <li><a href="about.html" class="nav-link ${isAbout ? 'active-link' : ''}">About Us</a></li>
                 <li><a href="services.html" class="nav-link ${isServices ? 'active-link' : ''}">Services</a></li>
                 <li><a href="index.html#industries" class="nav-link">Industries Served</a></li>
                 <li><a href="pricing.html" class="nav-link ${isPricing ? 'active-link' : ''}">Pricing</a></li>
@@ -68,6 +70,7 @@
                     <h4 class="footer-heading">Quick Links</h4>
                     <ul class="footer-links">
                         <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
                         <li><a href="contact.html">Contact</a></li>
