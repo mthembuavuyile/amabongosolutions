@@ -111,10 +111,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const phone = document.getElementById('phone').value.trim();
         const glassType = glassTypeSelect ? glassTypeSelect.value : '';
         const volume = volumeInput ? volumeInput.value.trim() : '';
-        const location = document.getElementById('location') ? document.getElementById('location').value.trim() : '';
+        const provinceSelect = document.getElementById('province');
+        const cityInput = document.getElementById('citySuburb') || document.getElementById('location');
+        const province = provinceSelect ? provinceSelect.value.trim() : '';
+        const citySuburb = cityInput ? cityInput.value.trim() : '';
+
+        let location = '';
+        if (citySuburb && province) {
+            location = `${citySuburb} (${province})`;
+        } else if (citySuburb) {
+            location = citySuburb;
+        } else if (province) {
+            location = province;
+        }
+
         const message = messageInput.value.trim();
 
-        return { entityType, isIndividual, intentKey, intentText, name, companyName, email, phone, glassType, volume, location, message };
+        return { entityType, isIndividual, intentKey, intentText, name, companyName, email, phone, glassType, volume, location, province, citySuburb, message };
     }
 
     function cleanValue(val) {
