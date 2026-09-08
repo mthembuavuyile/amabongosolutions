@@ -103,17 +103,130 @@ document.addEventListener('DOMContentLoaded', () => {
     function getFormData() {
         const isIndividual = document.querySelector('input[name="entityType"]:checked')?.value === 'individual';
         const entityType = isIndividual ? 'Individual' : 'Company / Business';
+        const intentKey = inquiryTypeSelect ? inquiryTypeSelect.value : 'general';
         const intentText = inquiryTypeSelect.options[inquiryTypeSelect.selectedIndex]?.text || inquiryTypeSelect.value;
         const name = document.getElementById('name').value.trim();
         const companyName = companyInput ? companyInput.value.trim() : '';
         const email = document.getElementById('email').value.trim();
         const phone = document.getElementById('phone').value.trim();
-        const glassType = glassTypeSelect ? glassTypeSelect.value : 'N/A';
+        const glassType = glassTypeSelect ? glassTypeSelect.value : '';
         const volume = volumeInput ? volumeInput.value.trim() : '';
         const location = document.getElementById('location') ? document.getElementById('location').value.trim() : '';
         const message = messageInput.value.trim();
 
-        return { entityType, intentText, name, companyName, email, phone, glassType, volume, location, message };
+        return { entityType, isIndividual, intentKey, intentText, name, companyName, email, phone, glassType, volume, location, message };
+    }
+
+    function cleanValue(val) {
+        if (!val) return '';
+        const str = String(val).trim();
+        const lower = str.toLowerCase();
+        const invalidPlaceholders = ['n/a', 'na', 'none', 'non', '-', '--', 'no', 'null', 'nil', 'not applicable'];
+        if (invalidPlaceholders.includes(lower)) {
+            return '';
+        }
+        return str;
+    }
+
+    function generateTradeEnquiryMessage(data, isWhatsApp = true) {
+        const wrapBold = (text) => isWhatsApp ? `*${text}*` : text;
+
+        const name = cleanValue(data.name);
+        const company = cleanValue(data.companyName);
+        const location = cleanValue(data.location);
+        const volume = cleanValue(data.volume);
+        const phone = cleanValue(data.phone);
+        const email = cleanValue(data.email);
+        const message = cleanValue(data.message);
+        const isIndividual = data.isIndividual;
+        const intentKey = data.intentKey || 'general';
+        const glassTypeRaw = cleanValue(data.glassType);
+        const isGeneralGlass = !glassTypeRaw || glassTypeRaw === 'General Glass / Bottles' || glassTypeRaw.toLowerCase() === 'n/a';
+        const glassType = isGeneralGlass ? '' : glassTypeRaw;
+
+        const sections = [];
+
+        // 1. Header
+        sections.push(wrapBold('AMABONGO SOLUTIONS - GLASS TRADE ENQUIRY'));
+
+        // 2. Greeting
+        let greeting = `Hi, I’m ${wrapBold(name)}`;
+        if (company) {
+            greeting += ` from ${wrapBold(company)}`;
+        }
+        greeting += '.';
+
+        // 3. Entity & Purpose
+        let purposeText = '';
+        if (intentKey === 'sell_glass') {
+            const productTerm = glassTypeRaw === 'General Glass / Bottles' ? 'general glass and bottles' : 'glass and bottles';
+            purposeText = isIndividual
+                ? `I’m an individual looking to sell ${productTerm}.`
+                : `We are a business looking to sell ${productTerm}.`;
+        } else if (intentKey === 'buy_cullet') {
+            purposeText = isIndividual
+                ? `I’m an individual looking for a glass and cullet supplier.`
+                : `We are a business looking for a glass and cullet supplier.`;
+        } else if (intentKey === 'commercial_pickup') {
+            purposeText = isIndividual
+                ? `I’m an individual looking to schedule a collection.`
+                : `We are a business looking to schedule a collection.`;
+        } else {
+            purposeText = isIndividual
+                ? `I’m an individual with a general enquiry regarding glass recycling and drop-off.`
+                : `We are a business with a general enquiry regarding glass recycling and drop-off.`;
+        }
+
+        // 4. Location, Quantity & Glass
+        let detailsText = '';
+        const pronoun = isIndividual ? 'I’m' : 'We are';
+        const hasText = intentKey === 'buy_cullet' ? 'require approximately' : 'have approximately';
+        const suffixText = intentKey === 'buy_cullet' ? '' : (intentKey === 'commercial_pickup' ? ' for collection' : ' available');
+
+        if (location && volume) {
+            if (glassType) {
+                detailsText = `${pronoun} based in ${wrapBold(location)} and ${hasText} ${wrapBold(volume)} of ${glassType}${suffixText}.`;
+            } else {
+                detailsText = `${pronoun} based in ${wrapBold(location)} and ${hasText} ${wrapBold(volume)}${suffixText}.`;
+            }
+        } else if (location && !volume) {
+            if (glassType) {
+                const concernPronoun = isIndividual ? 'my enquiry concerns' : 'our enquiry concerns';
+                detailsText = `${pronoun} based in ${wrapBold(location)} and ${concernPronoun} ${glassType}.`;
+            } else {
+                detailsText = `${pronoun} based in ${wrapBold(location)}.`;
+            }
+        } else if (!location && volume) {
+            const subject = isIndividual ? 'I' : 'We';
+            if (glassType) {
+                detailsText = `${subject} ${hasText} ${wrapBold(volume)} of ${glassType}${suffixText}.`;
+            } else {
+                detailsText = `${subject} ${hasText} ${wrapBold(volume)}${suffixText}.`;
+            }
+        } else if (glassType) {
+            const concernPronoun = isIndividual ? 'My enquiry concerns' : 'Our enquiry concerns';
+            detailsText = `${concernPronoun} ${glassType}.`;
+        }
+
+        // Assemble intro paragraph
+        const introSentences = [greeting, purposeText, detailsText].filter(Boolean);
+        sections.push(introSentences.join(' '));
+
+        // 5. Customer's verbatim message
+        if (message) {
+            sections.push(message);
+        }
+
+        // 6. Contact details (phone and email are auto-linked by WhatsApp; omit asterisks to prevent syntax collision)
+        if (phone && email) {
+            sections.push(`You can contact me on ${phone} or ${email}.`);
+        } else if (phone) {
+            sections.push(`You can contact me on ${phone}.`);
+        } else if (email) {
+            sections.push(`You can contact me on ${email}.`);
+        }
+
+        return sections.join('\n\n');
     }
 
     function showNotice(msg) {
@@ -152,36 +265,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const data = getFormData();
         const whatsappTargetNumber = "27648784287";
-
-        let whatsappMessage = `*NEW WEBSITE TRADE ENQUIRY*%0A` +
-                              `----------------------------------%0A` +
-                              `*Account Type:* ${encodeURIComponent(data.entityType)}%0A` +
-                              `*Purpose:* ${encodeURIComponent(data.intentText)}%0A%0A` +
-                              `*Name:* ${encodeURIComponent(data.name)}%0A`;
-
-        if (data.companyName) {
-            whatsappMessage += `*Company:* ${encodeURIComponent(data.companyName)}%0A`;
-        }
-
-        whatsappMessage += `*Email:* ${encodeURIComponent(data.email)}%0A` +
-                          `*Phone:* ${encodeURIComponent(data.phone)}%0A`;
-
-        if (data.location) {
-            whatsappMessage += `*Location:* ${encodeURIComponent(data.location)}%0A`;
-        }
-
-        if (data.glassType) {
-            whatsappMessage += `*Glass Product:* ${encodeURIComponent(data.glassType)}%0A`;
-        }
-
-        if (data.volume) {
-            whatsappMessage += `*Est. Quantity:* ${encodeURIComponent(data.volume)}%0A`;
-        }
-
-        whatsappMessage += `%0A*Message:*%0A${encodeURIComponent(data.message)}`;
+        const messageText = generateTradeEnquiryMessage(data, true);
 
         showNotice("Opening WhatsApp with your formatted trade enquiry...");
-        const whatsappUrl = `https://wa.me/${whatsappTargetNumber}?text=${whatsappMessage}`;
+        const whatsappUrl = `https://wa.me/${whatsappTargetNumber}?text=${encodeURIComponent(messageText)}`;
         window.open(whatsappUrl, '_blank');
     });
 
@@ -198,33 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = getFormData();
             const emailTarget = "info@amabongosolutions.co.za";
             const subject = encodeURIComponent(`Trade Enquiry: ${data.intentText} - ${data.name}`);
-            
-            let bodyText = `NEW WEBSITE TRADE ENQUIRY\n` +
-                           `----------------------------------\n` +
-                           `Account Type: ${data.entityType}\n` +
-                           `Purpose: ${data.intentText}\n\n` +
-                           `Name: ${data.name}\n`;
-
-            if (data.companyName) {
-                bodyText += `Company: ${data.companyName}\n`;
-            }
-
-            bodyText += `Email: ${data.email}\n` +
-                        `Phone: ${data.phone}\n`;
-
-            if (data.location) {
-                bodyText += `Location: ${data.location}\n`;
-            }
-
-            if (data.glassType) {
-                bodyText += `Glass Product: ${data.glassType}\n`;
-            }
-
-            if (data.volume) {
-                bodyText += `Est. Quantity: ${data.volume}\n`;
-            }
-
-            bodyText += `\nMessage:\n${data.message}`;
+            const bodyText = generateTradeEnquiryMessage(data, false);
 
             showNotice("Opening your email app with pre-filled enquiry...");
             const mailtoUrl = `mailto:${emailTarget}?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
