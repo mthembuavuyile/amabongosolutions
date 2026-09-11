@@ -1,245 +1,348 @@
 /**
- * Contact Form WhatsApp/Email Redirection & Interactive Entity/Intent Switcher
- * Accommodates Companies & Individuals (Sellers and Buyers)
+ * AMABONGO SOLUTIONS - SMART CONTACT & TRADE ENQUIRY GATEKEEPER
+ * Handles dynamic distance qualification, logistics triage, payout estimation,
+ * and structured WhatsApp / Email message formatting.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contactForm');
     if (!contactForm) return;
 
+    // DOM Elements
     const entityRadios = document.querySelectorAll('input[name="entityType"]');
     const companyGroup = document.getElementById('companyGroup');
     const companyInput = document.getElementById('companyName');
-    const companyAsterisk = document.getElementById('companyAsterisk');
-    const inquiryTypeSelect = document.getElementById('inquiryType');
-    const glassTypeSelect = document.getElementById('glassType');
-    const volumeInput = document.getElementById('volume');
-    const volumeLabel = document.getElementById('volumeLabel');
-    const messageInput = document.getElementById('message');
+    const companyLabel = document.getElementById('companyLabel');
+    const logisticsRadios = document.querySelectorAll('input[name="logisticsMode"]');
+    const modeCardDropoff = document.getElementById('modeCardDropoff');
+    const modeCardCollection = document.getElementById('modeCardCollection');
     const presetChips = document.querySelectorAll('.preset-chip');
+    const inquiryTypeSelect = document.getElementById('inquiryType');
+    const provinceSelect = document.getElementById('province');
+    const cityInput = document.getElementById('citySuburb');
+    const glassConditionSelect = document.getElementById('glassCondition');
+    const volumeInput = document.getElementById('volumeTons');
+    const triageAlertBox = document.getElementById('triageAlertBox');
+    const payoutEstimatorBox = document.getElementById('payoutEstimatorBox');
+    const estimatedPayoutValue = document.getElementById('estimatedPayoutValue');
+    const collectionChecklistGroup = document.getElementById('collectionChecklistGroup');
+    const ackBags = document.getElementById('ackBags');
+    const ackLoading = document.getElementById('ackLoading');
+    const ackPhotos = document.getElementById('ackPhotos');
+    const submitWhatsappBtn = document.getElementById('submitWhatsappBtn');
     const submitEmailBtn = document.getElementById('submitEmailBtn');
     const formNotice = document.getElementById('formNotice');
     const noticeText = document.getElementById('noticeText');
+    const messageInput = document.getElementById('message');
 
-    // Simple, clear, non-intimidating intent placeholders
-    const placeholders = {
-        sell_glass: {
-            volumeLabel: "Est. Quantity / Amount (Optional)",
-            volumePlaceholder: "e.g. 5 bags, 2 crates, or est. weight",
-            messagePlaceholder: "Tell us about the glass or bottles you wish to sell, whether you need pickup or drop-off..."
-        },
-        buy_cullet: {
-            volumeLabel: "Required Supply Volume (Optional)",
-            volumePlaceholder: "e.g. 10 Tons, 500 kg, or regular order",
-            messagePlaceholder: "Describe your required glass/cullet specifications and delivery location..."
-        },
-        commercial_pickup: {
-            volumeLabel: "Estimated Waste Volume (Optional)",
-            volumePlaceholder: "e.g. 2 wheelie bins or weekly pickup",
-            messagePlaceholder: "Tell us about your venue/business location and preferred pickup schedule..."
-        },
-        general: {
-            volumeLabel: "Est. Quantity / Amount (Optional)",
-            volumePlaceholder: "e.g. N/A or optional amount",
-            messagePlaceholder: "Type your general enquiry, drop-off question, or message here..."
-        }
-    };
-
-    // Update Company field requirements based on Entity radio selection
+    // ─── 1. ENTITY TYPE LOGIC ─────────────────────────────────────────────────
     function updateEntityType() {
-        const selectedEntity = document.querySelector('input[name="entityType"]:checked')?.value || 'company';
-        if (selectedEntity === 'individual') {
-            if (companyAsterisk) companyAsterisk.style.display = 'none';
-            if (companyInput) {
-                companyInput.removeAttribute('required');
-                companyInput.placeholder = "Optional for individuals";
-            }
-        } else {
-            if (companyAsterisk) companyAsterisk.style.display = 'inline';
+        const selectedEntity = document.querySelector('input[name="entityType"]:checked')?.value || 'individual';
+        if (selectedEntity === 'company') {
+            if (companyGroup) companyGroup.style.display = 'flex';
             if (companyInput) {
                 companyInput.setAttribute('required', 'required');
                 companyInput.placeholder = "e.g. Apex Bottling Corp";
             }
+        } else {
+            if (companyGroup) companyGroup.style.display = 'none';
+            if (companyInput) {
+                companyInput.removeAttribute('required');
+                companyInput.value = '';
+            }
         }
     }
 
-    // Update form placeholders & labels based on selected Purpose / Intent
-    function updateIntentUI(intentKey) {
-        const key = intentKey || inquiryTypeSelect.value;
-        const config = placeholders[key] || placeholders.general;
+    entityRadios.forEach(radio => radio.addEventListener('change', updateEntityType));
 
-        if (inquiryTypeSelect && inquiryTypeSelect.value !== key) {
-            inquiryTypeSelect.value = key;
+    // ─── 2. LOGISTICS MODE TOGGLE ─────────────────────────────────────────────
+    function getSelectedLogisticsMode() {
+        return document.querySelector('input[name="logisticsMode"]:checked')?.value || 'dropoff';
+    }
+
+    function updateLogisticsMode(mode) {
+        if (mode === 'collection') {
+            if (modeCardCollection) modeCardCollection.classList.add('active');
+            if (modeCardDropoff) modeCardDropoff.classList.remove('active');
+            if (collectionChecklistGroup) collectionChecklistGroup.style.display = 'block';
+            if (ackBags) ackBags.required = true;
+            if (ackLoading) ackLoading.required = true;
+            if (ackPhotos) ackPhotos.required = true;
+        } else {
+            if (modeCardDropoff) modeCardDropoff.classList.add('active');
+            if (modeCardCollection) modeCardCollection.classList.remove('active');
+            if (collectionChecklistGroup) collectionChecklistGroup.style.display = 'none';
+            if (ackBags) ackBags.required = false;
+            if (ackLoading) ackLoading.required = false;
+            if (ackPhotos) ackPhotos.required = false;
         }
+        evaluateQualificationAndPayout();
+    }
 
-        presetChips.forEach(chip => {
-            if (chip.getAttribute('data-intent') === key) {
-                chip.classList.add('active');
-            } else {
-                chip.classList.remove('active');
+    logisticsRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => updateLogisticsMode(e.target.value));
+    });
+
+    if (modeCardDropoff) {
+        modeCardDropoff.addEventListener('click', () => {
+            const radio = modeCardDropoff.querySelector('input[type="radio"]');
+            if (radio) {
+                radio.checked = true;
+                updateLogisticsMode('dropoff');
             }
         });
-
-        if (volumeLabel) volumeLabel.textContent = config.volumeLabel;
-        if (volumeInput) volumeInput.placeholder = config.volumePlaceholder;
-        if (messageInput) messageInput.placeholder = config.messagePlaceholder;
     }
 
-    // Event listeners
-    entityRadios.forEach(radio => radio.addEventListener('change', updateEntityType));
-    if (inquiryTypeSelect) inquiryTypeSelect.addEventListener('change', (e) => updateIntentUI(e.target.value));
+    if (modeCardCollection) {
+        modeCardCollection.addEventListener('click', () => {
+            const radio = modeCardCollection.querySelector('input[type="radio"]');
+            if (radio) {
+                radio.checked = true;
+                updateLogisticsMode('collection');
+            }
+        });
+    }
 
+    // ─── 3. PRESET CHIPS INTERACTION ──────────────────────────────────────────
     presetChips.forEach(chip => {
         chip.addEventListener('click', () => {
+            presetChips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
             const intent = chip.getAttribute('data-intent');
-            updateIntentUI(intent);
+
+            if (inquiryTypeSelect) inquiryTypeSelect.value = intent;
+
+            if (intent === 'commercial_pickup') {
+                const colRadio = document.querySelector('input[name="logisticsMode"][value="collection"]');
+                if (colRadio) {
+                    colRadio.checked = true;
+                    updateLogisticsMode('collection');
+                }
+                if (volumeInput && (!volumeInput.value || parseFloat(volumeInput.value) < 20)) {
+                    volumeInput.value = '34';
+                }
+            } else if (intent === 'sell_glass') {
+                // Default to depot or keep current
+                evaluateQualificationAndPayout();
+            }
         });
     });
 
-    // Initial trigger
-    updateEntityType();
-    updateIntentUI();
+    // ─── 4. DYNAMIC PRE-QUALIFICATION & PAYOUT CALCULATOR ──────────────────────
+    function evaluateQualificationAndPayout() {
+        const mode = getSelectedLogisticsMode();
+        const province = provinceSelect ? provinceSelect.value : '';
+        const condition = glassConditionSelect ? glassConditionSelect.value : 'crushed';
+        const volumeVal = volumeInput ? parseFloat(volumeInput.value) : 0;
+        const hasVolume = !isNaN(volumeVal) && volumeVal > 0;
 
+        // Base payout calculation
+        let ratePerTonne = condition === 'crushed' ? 600 : 500;
+        if (hasVolume && volumeVal >= 40) {
+            ratePerTonne = condition === 'crushed' ? 650 : 520; // Bulk bonus rate
+        }
+
+        const estimatedPayout = hasVolume ? volumeVal * ratePerTonne : 0;
+
+        // Update Payout Banner
+        if (payoutEstimatorBox && estimatedPayoutValue) {
+            if (hasVolume) {
+                payoutEstimatorBox.style.display = 'flex';
+                estimatedPayoutValue.textContent = `R${estimatedPayout.toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            } else {
+                payoutEstimatorBox.style.display = 'none';
+            }
+        }
+
+        // Triage Alert Logic
+        if (!triageAlertBox) return;
+
+        // Reset submit button state
+        if (submitWhatsappBtn) {
+            submitWhatsappBtn.disabled = false;
+            submitWhatsappBtn.removeAttribute('title');
+        }
+
+        if (mode === 'dropoff') {
+            triageAlertBox.style.display = 'block';
+            triageAlertBox.className = 'triage-alert triage-alert-info';
+            triageAlertBox.innerHTML = `
+                <h4><i class="fas fa-warehouse text-success"></i> Depot Self-Delivery (Mkondeni, PMB)</h4>
+                You are welcome to deliver any quantity (walk-ins, trailers, bakkies, or trucks) directly to our Mkondeni depot.
+                Scale weighing and payment settlement are completed <strong>immediately on site upon delivery</strong>!
+            `;
+            return;
+        }
+
+        // Mode is Truck Collection
+        if (!province) {
+            triageAlertBox.style.display = 'block';
+            triageAlertBox.className = 'triage-alert triage-alert-info';
+            triageAlertBox.innerHTML = `
+                <h4><i class="fas fa-location-dot text-primary"></i> Select Your Province</h4>
+                Please select your province above to verify truck collection feasibility and minimum tonnage thresholds.
+            `;
+            return;
+        }
+
+        const isOutsideKZN = province !== 'KwaZulu-Natal';
+
+        if (isOutsideKZN) {
+            const minOutKZN = 34;
+            if (hasVolume && volumeVal < minOutKZN) {
+                // UNVIABLE OUT-OF-PROVINCE LOAD
+                const diff = (minOutKZN - volumeVal).toFixed(1);
+                triageAlertBox.style.display = 'block';
+                triageAlertBox.className = 'triage-alert triage-alert-warning';
+                triageAlertBox.innerHTML = `
+                    <h4><i class="fas fa-triangle-exclamation"></i> Collection Not Commercially Viable (${volumeVal} tonnes in ${province})</h4>
+                    Due to diesel and long-haul freight costs from Pietermaritzburg (5+ hours drive), our collection trucks strictly require a <strong>minimum load of 34 tonnes</strong> (34x 1-tonne bulk bags).
+                    <br><br>
+                    <strong>Recommended Options:</strong>
+                    <ul style="margin: 0.5rem 0 0.25rem 1.25rem; font-size: 0.85rem;">
+                        <li><strong>Keep Collecting:</strong> Gather ${diff} more tonnes to reach 34t (at R600/t crushed = <strong>R20,400 guaranteed payout</strong>).</li>
+                        <li><strong>Depot Drop-off:</strong> If you have private transport, drop off any quantity at our Mkondeni depot in PMB.</li>
+                        <li><strong>Local Referral:</strong> Sell to a local glass recycling depot in ${province} (e.g. Johannesburg / regional aggregators).</li>
+                    </ul>
+                `;
+                // Disable WhatsApp button to prevent dead-end spam chats
+                if (submitWhatsappBtn) {
+                    submitWhatsappBtn.disabled = true;
+                    submitWhatsappBtn.title = "Collection is unviable for under 34 tonnes outside KZN. Switch to Depot Drop-off or increase volume.";
+                }
+            } else if (hasVolume && volumeVal >= minOutKZN) {
+                // QUALIFYING OUT-OF-PROVINCE BULK LOAD
+                triageAlertBox.style.display = 'block';
+                triageAlertBox.className = 'triage-alert triage-alert-success';
+                triageAlertBox.innerHTML = `
+                    <h4><i class="fas fa-check-circle"></i> Qualifying Commercial Bulk Load (${volumeVal} Tonnes)</h4>
+                    Your volume meets our 34-tonne long-distance collection threshold for ${province}!
+                    Estimated Payout: <strong>R${estimatedPayout.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}</strong>.
+                    <br><small>Please ensure all 3 readiness checkboxes below are confirmed before submitting.</small>
+                `;
+            } else {
+                // Province selected, waiting for volume
+                triageAlertBox.style.display = 'block';
+                triageAlertBox.className = 'triage-alert triage-alert-warning';
+                triageAlertBox.innerHTML = `
+                    <h4><i class="fas fa-circle-info"></i> Long-Distance Threshold for ${province}</h4>
+                    For collection in ${province}, our trucks require a <strong>strict minimum of 34 metric tonnes</strong> (34 bulk bags) to cover diesel and toll expenses.
+                `;
+            }
+        } else {
+            // Inside KwaZulu-Natal
+            if (hasVolume && volumeVal < 20) {
+                triageAlertBox.style.display = 'block';
+                triageAlertBox.className = 'triage-alert triage-alert-info';
+                triageAlertBox.innerHTML = `
+                    <h4><i class="fas fa-info-circle"></i> Regional KZN Collection Review (${volumeVal} Tonnes)</h4>
+                    Standard KZN truck collections require <strong>20 metric tonnes</strong>. Smaller loads are evaluated on a case-by-case basis (a transport/diesel contribution may apply), or you can drop off directly at Mkondeni for full payout without deductions.
+                `;
+            } else if (hasVolume && volumeVal >= 20) {
+                triageAlertBox.style.display = 'block';
+                triageAlertBox.className = 'triage-alert triage-alert-success';
+                triageAlertBox.innerHTML = `
+                    <h4><i class="fas fa-check-circle"></i> Qualifying KZN Commercial Load (${volumeVal} Tonnes)</h4>
+                    Meets KZN collection threshold! Estimated Payout: <strong>R${estimatedPayout.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}</strong>.
+                `;
+            } else {
+                triageAlertBox.style.display = 'block';
+                triageAlertBox.className = 'triage-alert triage-alert-info';
+                triageAlertBox.innerHTML = `
+                    <h4><i class="fas fa-truck text-primary"></i> KZN Collection Logistics</h4>
+                    Local PMB & surrounds (< 1–2 hours): 20 tonnes standard minimum. Far distances in KZN (e.g. Jozini/Zululand): 34 tonnes minimum.
+                `;
+            }
+        }
+    }
+
+    // Attach listeners for live evaluation
+    if (provinceSelect) provinceSelect.addEventListener('change', evaluateQualificationAndPayout);
+    if (glassConditionSelect) glassConditionSelect.addEventListener('change', evaluateQualificationAndPayout);
+    if (volumeInput) volumeInput.addEventListener('input', evaluateQualificationAndPayout);
+
+    // Initial evaluation
+    updateEntityType();
+    evaluateQualificationAndPayout();
+
+    // ─── 5. DATA EXTRACTION & WHATSAPP FORMATTING ─────────────────────────────
     function getFormData() {
         const isIndividual = document.querySelector('input[name="entityType"]:checked')?.value === 'individual';
         const entityType = isIndividual ? 'Individual' : 'Company / Business';
-        const intentKey = inquiryTypeSelect ? inquiryTypeSelect.value : 'general';
-        const intentText = inquiryTypeSelect.options[inquiryTypeSelect.selectedIndex]?.text || inquiryTypeSelect.value;
+        const mode = getSelectedLogisticsMode();
+        const modeText = mode === 'collection' ? 'Truck Collection Request' : 'Depot Self-Delivery (Mkondeni, PMB)';
         const name = document.getElementById('name').value.trim();
         const companyName = companyInput ? companyInput.value.trim() : '';
-        const email = document.getElementById('email').value.trim();
         const phone = document.getElementById('phone').value.trim();
-        const glassType = glassTypeSelect ? glassTypeSelect.value : '';
-        const volume = volumeInput ? volumeInput.value.trim() : '';
-        const provinceSelect = document.getElementById('province');
-        const cityInput = document.getElementById('citySuburb') || document.getElementById('location');
+        const email = document.getElementById('email').value.trim();
         const province = provinceSelect ? provinceSelect.value.trim() : '';
         const citySuburb = cityInput ? cityInput.value.trim() : '';
+        const condition = glassConditionSelect ? glassConditionSelect.value : 'crushed';
+        const conditionText = condition === 'crushed' ? 'Crushed Cullet (R600/t)' : 'Whole / Uncrushed Bottles (R500/t)';
+        const volumeVal = volumeInput ? parseFloat(volumeInput.value) : 0;
+        const rate = condition === 'crushed' ? (volumeVal >= 40 ? 650 : 600) : (volumeVal >= 40 ? 520 : 500);
+        const payout = volumeVal > 0 ? (volumeVal * rate).toLocaleString('en-ZA', { minimumFractionDigits: 2 }) : 'TBD';
+        const userMessage = messageInput ? messageInput.value.trim() : '';
 
-        let location = '';
-        if (citySuburb && province) {
-            location = `${citySuburb} (${province})`;
-        } else if (citySuburb) {
-            location = citySuburb;
-        } else if (province) {
-            location = province;
-        }
-
-        const message = messageInput.value.trim();
-
-        return { entityType, isIndividual, intentKey, intentText, name, companyName, email, phone, glassType, volume, location, province, citySuburb, message };
-    }
-
-    function cleanValue(val) {
-        if (!val) return '';
-        const str = String(val).trim();
-        const lower = str.toLowerCase();
-        const invalidPlaceholders = ['n/a', 'na', 'none', 'non', '-', '--', 'no', 'null', 'nil', 'not applicable'];
-        if (invalidPlaceholders.includes(lower)) {
-            return '';
-        }
-        return str;
+        return {
+            isIndividual,
+            entityType,
+            mode,
+            modeText,
+            name,
+            companyName,
+            phone,
+            email,
+            province,
+            citySuburb,
+            conditionText,
+            volumeVal,
+            payout,
+            userMessage
+        };
     }
 
     function generateTradeEnquiryMessage(data, isWhatsApp = true) {
         const wrapBold = (text) => isWhatsApp ? `*${text}*` : text;
 
-        const name = cleanValue(data.name);
-        const company = cleanValue(data.companyName);
-        const location = cleanValue(data.location);
-        const volume = cleanValue(data.volume);
-        const phone = cleanValue(data.phone);
-        const email = cleanValue(data.email);
-        const message = cleanValue(data.message);
-        const isIndividual = data.isIndividual;
-        const intentKey = data.intentKey || 'general';
-        const glassTypeRaw = cleanValue(data.glassType);
-        const isGeneralGlass = !glassTypeRaw || glassTypeRaw === 'General Glass / Bottles' || glassTypeRaw.toLowerCase() === 'n/a';
-        const glassType = isGeneralGlass ? '' : glassTypeRaw;
+        const lines = [];
+        lines.push(wrapBold('AMABONGO SOLUTIONS - VERIFIED GLASS TRADE ENQUIRY'));
+        lines.push('──────────────────────────────────');
 
-        const sections = [];
-
-        // 1. Header
-        sections.push(wrapBold('AMABONGO SOLUTIONS - GLASS TRADE ENQUIRY'));
-
-        // 2. Greeting
-        let greeting = `Hi, I’m ${wrapBold(name)}`;
-        if (company) {
-            greeting += ` from ${wrapBold(company)}`;
+        // Customer Info
+        let fromLine = `From: ${wrapBold(data.name)}`;
+        if (!data.isIndividual && data.companyName) {
+            fromLine += ` (${wrapBold(data.companyName)})`;
         }
-        greeting += '.';
+        fromLine += ` [${data.entityType}]`;
+        lines.push(fromLine);
 
-        // 3. Entity & Purpose
-        let purposeText = '';
-        if (intentKey === 'sell_glass') {
-            const productTerm = glassTypeRaw === 'General Glass / Bottles' ? 'general glass and bottles' : 'glass and bottles';
-            purposeText = isIndividual
-                ? `I’m an individual looking to sell ${productTerm}.`
-                : `We are a business looking to sell ${productTerm}.`;
-        } else if (intentKey === 'buy_cullet') {
-            purposeText = isIndividual
-                ? `I’m an individual looking for a glass and cullet supplier.`
-                : `We are a business looking for a glass and cullet supplier.`;
-        } else if (intentKey === 'commercial_pickup') {
-            purposeText = isIndividual
-                ? `I’m an individual looking to schedule a collection.`
-                : `We are a business looking to schedule a collection.`;
-        } else {
-            purposeText = isIndividual
-                ? `I’m an individual with a general enquiry regarding glass recycling and drop-off.`
-                : `We are a business with a general enquiry regarding glass recycling and drop-off.`;
+        lines.push(`Contact: ${data.phone}${data.email ? ' | ' + data.email : ''}`);
+        lines.push(`Location: ${wrapBold(data.citySuburb || 'Not specified')}, ${wrapBold(data.province || 'KZN')}`);
+        lines.push('──────────────────────────────────');
+
+        // Logistics & Glass Volume
+        lines.push(`Method: ${wrapBold(data.modeText)}`);
+        lines.push(`Material: ${data.conditionText}`);
+        lines.push(`Est. Volume: ${wrapBold(data.volumeVal + ' Metric Tonnes')} (${data.volumeVal} bulk bags)`);
+        lines.push(`Est. Scale Payout: ${wrapBold('R' + data.payout)}`);
+
+        // Checklists (if collection)
+        if (data.mode === 'collection') {
+            lines.push('──────────────────────────────────');
+            lines.push('Readiness Confirmations:');
+            lines.push('• Packed in 1-Tonne Bulk Bags: Confirmed YES');
+            lines.push('• Manual Loading Workers (3-4): Confirmed YES');
+            lines.push('• Photos & Google Pin Ready: Confirmed YES');
         }
 
-        // 4. Location, Quantity & Glass
-        let detailsText = '';
-        const pronoun = isIndividual ? 'I’m' : 'We are';
-        const hasText = intentKey === 'buy_cullet' ? 'require approximately' : 'have approximately';
-        const suffixText = intentKey === 'buy_cullet' ? '' : (intentKey === 'commercial_pickup' ? ' for collection' : ' available');
-
-        if (location && volume) {
-            if (glassType) {
-                detailsText = `${pronoun} based in ${wrapBold(location)} and ${hasText} ${wrapBold(volume)} of ${glassType}${suffixText}.`;
-            } else {
-                detailsText = `${pronoun} based in ${wrapBold(location)} and ${hasText} ${wrapBold(volume)}${suffixText}.`;
-            }
-        } else if (location && !volume) {
-            if (glassType) {
-                const concernPronoun = isIndividual ? 'my enquiry concerns' : 'our enquiry concerns';
-                detailsText = `${pronoun} based in ${wrapBold(location)} and ${concernPronoun} ${glassType}.`;
-            } else {
-                detailsText = `${pronoun} based in ${wrapBold(location)}.`;
-            }
-        } else if (!location && volume) {
-            const subject = isIndividual ? 'I' : 'We';
-            if (glassType) {
-                detailsText = `${subject} ${hasText} ${wrapBold(volume)} of ${glassType}${suffixText}.`;
-            } else {
-                detailsText = `${subject} ${hasText} ${wrapBold(volume)}${suffixText}.`;
-            }
-        } else if (glassType) {
-            const concernPronoun = isIndividual ? 'My enquiry concerns' : 'Our enquiry concerns';
-            detailsText = `${concernPronoun} ${glassType}.`;
+        // Additional Message
+        if (data.userMessage) {
+            lines.push('──────────────────────────────────');
+            lines.push(`Client Notes: ${data.userMessage}`);
         }
 
-        // Assemble intro paragraph
-        const introSentences = [greeting, purposeText, detailsText].filter(Boolean);
-        sections.push(introSentences.join(' '));
-
-        // 5. Customer's verbatim message
-        if (message) {
-            sections.push(message);
-        }
-
-        // 6. Contact details (phone and email are auto-linked by WhatsApp; omit asterisks to prevent syntax collision)
-        if (phone && email) {
-            sections.push(`You can contact me on ${phone} or ${email}.`);
-        } else if (phone) {
-            sections.push(`You can contact me on ${phone}.`);
-        } else if (email) {
-            sections.push(`You can contact me on ${email}.`);
-        }
-
-        return sections.join('\n\n');
+        return lines.join('\n');
     }
 
     function showNotice(msg) {
@@ -252,16 +355,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let lastSubmitTime = 0;
-
     function isSpamOrThrottled() {
-        // Honeypot field check
         const honeypot = document.getElementById('website_hp');
         if (honeypot && honeypot.value.trim() !== '') {
-            console.warn('Bot submission blocked via honeypot.');
-            return true; // Silence bot submission
+            return true;
         }
-
-        // Rate limit: throttle submissions within 3 seconds
         const now = Date.now();
         if (now - lastSubmitTime < 3000) {
             showNotice("Please wait a moment before sending another request.");
@@ -271,21 +369,39 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
     }
 
-    // Submit via WhatsApp
+    // ─── 6. FORM SUBMISSION ───────────────────────────────────────────────────
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
+
+        const mode = getSelectedLogisticsMode();
+        const province = provinceSelect ? provinceSelect.value : '';
+        const volumeVal = volumeInput ? parseFloat(volumeInput.value) : 0;
+
+        // Block unviable long-distance collection
+        if (mode === 'collection' && province !== 'KwaZulu-Natal' && volumeVal < 34) {
+            alert(`Collection in ${province} requires a minimum load of 34 tonnes due to diesel and transport costs from Pietermaritzburg. You entered ${volumeVal} tonnes.\n\nPlease deliver to our Mkondeni depot or reach 34 tonnes before requesting truck collection.`);
+            return;
+        }
+
+        // Check required checklist confirmations for collection
+        if (mode === 'collection') {
+            if (!ackBags?.checked || !ackLoading?.checked || !ackPhotos?.checked) {
+                alert("Please check all 3 Collection Readiness boxes to confirm you have 1-tonne bulk bags and manual loading helpers available.");
+                return;
+            }
+        }
+
         if (isSpamOrThrottled()) return;
 
         const data = getFormData();
         const whatsappTargetNumber = "27648784287";
         const messageText = generateTradeEnquiryMessage(data, true);
 
-        showNotice("Opening WhatsApp with your formatted trade enquiry...");
+        showNotice("Opening WhatsApp with your pre-qualified trade enquiry...");
         const whatsappUrl = `https://wa.me/${whatsappTargetNumber}?text=${encodeURIComponent(messageText)}`;
         window.open(whatsappUrl, '_blank');
     });
 
-    // Submit via Email (mailto pre-filled)
     if (submitEmailBtn) {
         submitEmailBtn.addEventListener('click', function() {
             if (!contactForm.checkValidity()) {
@@ -293,14 +409,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            const mode = getSelectedLogisticsMode();
+            const province = provinceSelect ? provinceSelect.value : '';
+            const volumeVal = volumeInput ? parseFloat(volumeInput.value) : 0;
+
+            if (mode === 'collection' && province !== 'KwaZulu-Natal' && volumeVal < 34) {
+                alert(`Collection in ${province} requires a minimum of 34 tonnes due to diesel costs. Please switch to Depot Drop-off or reach 34 tonnes.`);
+                return;
+            }
+
+            if (mode === 'collection') {
+                if (!ackBags?.checked || !ackLoading?.checked || !ackPhotos?.checked) {
+                    alert("Please check all 3 Collection Readiness boxes before sending.");
+                    return;
+                }
+            }
+
             if (isSpamOrThrottled()) return;
 
             const data = getFormData();
             const emailTarget = "info@amabongosolutions.co.za";
-            const subject = encodeURIComponent(`Trade Enquiry: ${data.intentText} - ${data.name}`);
+            const subject = encodeURIComponent(`Trade Enquiry: ${data.modeText} - ${data.name} (${data.volumeVal}t in ${data.province})`);
             const bodyText = generateTradeEnquiryMessage(data, false);
 
-            showNotice("Opening your email app with pre-filled enquiry...");
+            showNotice("Opening your email client with your enquiry...");
             const mailtoUrl = `mailto:${emailTarget}?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
             window.location.href = mailtoUrl;
         });

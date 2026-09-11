@@ -360,3 +360,210 @@ select.form-control {
     .entity-selector { grid-template-columns: 1fr; gap: 0.5rem; }
     .form-trust-footer { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 }
+
+/* =========================================
+   NEW: LOGISTICS MODE & TRIAGE GATING STYLES
+   ========================================= */
+.logistics-mode-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
+}
+
+.logistics-mode-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border: 2px solid var(--color-border-subtle, #d1d5db);
+    border-radius: 8px;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.logistics-mode-card:hover {
+    border-color: var(--color-primary, #2e7d32);
+    background: #f9fbf9;
+}
+
+.logistics-mode-card input[type="radio"] {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    accent-color: var(--color-primary, #2e7d32);
+}
+
+.logistics-mode-card.active {
+    border-color: var(--color-primary, #2e7d32);
+    background: #f0fdf4;
+    box-shadow: 0 4px 14px rgba(46, 125, 50, 0.15);
+}
+
+.logistics-card-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-text-primary, #1e293b);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.logistics-card-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 0.35rem;
+    width: fit-content;
+}
+
+.badge-green {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.badge-amber {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.logistics-card-desc {
+    font-size: 0.825rem;
+    color: #64748b;
+    margin-top: 0.35rem;
+    line-height: 1.35;
+}
+
+/* Feasibility and Threshold Alerts */
+.triage-alert {
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    animation: fadeIn 0.3s ease;
+}
+
+.triage-alert-warning {
+    background-color: #fffbeb;
+    border: 1.5px solid #fde68a;
+    color: #92400e;
+}
+
+.triage-alert-warning h4 {
+    color: #b45309;
+    font-size: 0.975rem;
+    margin: 0 0 0.4rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.triage-alert-success {
+    background-color: #f0fdf4;
+    border: 1.5px solid #bbf7d0;
+    color: #166534;
+}
+
+.triage-alert-success h4 {
+    color: #15803d;
+    font-size: 0.975rem;
+    margin: 0 0 0.4rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.triage-alert-info {
+    background-color: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    color: #334155;
+}
+
+.triage-alert-info h4 {
+    color: #0f172a;
+    font-size: 0.975rem;
+    margin: 0 0 0.4rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.payout-estimate-badge {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1e293b;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.payout-estimate-badge span.amount {
+    color: #4ade80;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+/* Acknowledgement Checkboxes */
+.collection-checklists {
+    background: #f8fafc;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 1.2rem;
+    margin-bottom: 1.25rem;
+}
+
+.collection-checklists-title {
+    font-size: 0.925rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ack-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-bottom: 0.65rem;
+    font-size: 0.85rem;
+    color: #334155;
+    cursor: pointer;
+    line-height: 1.35;
+}
+
+.ack-item input[type="checkbox"] {
+    margin-top: 0.2rem;
+    accent-color: var(--color-primary, #2e7d32);
+    min-width: 16px;
+    min-height: 16px;
+}
+
+.ack-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Disabled button state for unviable submissions */
+.btn:disabled,
+.btn[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(0.5);
+}
+
+/* Responsive tweaks for Logistics selector */
+@media (max-width: 600px) {
+    .logistics-mode-selector {
+        grid-template-columns: 1fr;
+    }
+}

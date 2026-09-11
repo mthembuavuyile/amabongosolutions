@@ -70,7 +70,7 @@
                             <span class="brand-tag">GLASS RECYCLING</span>
                         </span>
                     </a>
-                    <p>South Africa's premier Level 1 B-BBEE industrial glass cullet supplier & commercial glass recycling partner — turning waste glass into instant cash.</p>
+                    <p>South Africa's premier Level 1 B-BBEE industrial glass cullet supplier & commercial glass recycling partner — turning waste glass into verified value.</p>
                 </div>
 
                 <!-- Column 2: Quick Links -->

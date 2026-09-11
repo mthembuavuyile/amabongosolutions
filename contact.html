@@ -114,13 +114,13 @@
                                 <label class="form-label-title">Quick Select Purpose:</label>
                                 <div class="quick-preset-chips">
                                     <button type="button" class="preset-chip active" data-intent="sell_glass">
-                                        <i class="fas fa-coins"></i> Sell Glass (Cash)
-                                    </button>
-                                    <button type="button" class="preset-chip" data-intent="buy_cullet">
-                                        <i class="fas fa-industry"></i> Buy Cullet (RFQ)
+                                        <i class="fas fa-coins"></i> Sell Glass
                                     </button>
                                     <button type="button" class="preset-chip" data-intent="commercial_pickup">
                                         <i class="fas fa-truck-moving"></i> Truck Pickup (34t+)
+                                    </button>
+                                    <button type="button" class="preset-chip" data-intent="buy_cullet">
+                                        <i class="fas fa-industry"></i> Buy Cullet (RFQ)
                                     </button>
                                     <button type="button" class="preset-chip" data-intent="general">
                                         <i class="fas fa-circle-question"></i> General Enquiry
@@ -128,27 +128,50 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="form-label-title">I am contacting as:</label>
-                                <div class="entity-selector">
-                                    <label class="entity-option">
-                                        <input type="radio" name="entityType" value="company" checked>
-                                        <span class="entity-btn"><i class="fas fa-building"></i> Company / Business</span>
+                            <!-- Fulfillment / Logistics Method Selector -->
+                            <div class="form-group" id="logisticsGroup">
+                                <label class="form-label-title">Fulfillment Method <span class="required-asterisk">*</span></label>
+                                <div class="logistics-mode-selector">
+                                    <label class="logistics-mode-card active" id="modeCardDropoff">
+                                        <input type="radio" name="logisticsMode" value="dropoff" checked>
+                                        <div class="logistics-card-title">
+                                            <i class="fas fa-warehouse" style="color: #15803d;"></i> Depot Self-Delivery
+                                        </div>
+                                        <span class="logistics-card-badge badge-green">No Minimum • Immediate Scale Payout</span>
+                                        <div class="logistics-card-desc">Deliver to Mkondeni Depot, Pietermaritzburg. Any quantity welcome (walk-ins, bakkies, trucks).</div>
                                     </label>
-                                    <label class="entity-option">
-                                        <input type="radio" name="entityType" value="individual">
-                                        <span class="entity-btn"><i class="fas fa-user"></i> Individual</span>
+                                    <label class="logistics-mode-card" id="modeCardCollection">
+                                        <input type="radio" name="logisticsMode" value="collection">
+                                        <div class="logistics-card-title">
+                                            <i class="fas fa-truck-moving" style="color: #2563eb;"></i> Request Truck Collection
+                                        </div>
+                                        <span class="logistics-card-badge badge-amber">Strict Thresholds • 20t to 34t+</span>
+                                        <div class="logistics-card-desc">Collection truck dispatched to your site. Requires qualifying minimum load and manual loading labour.</div>
                                     </label>
                                 </div>
                             </div>
 
-                            <!-- Step 2: Primary Purpose / Intent -->
                             <div class="form-group">
-                                <label for="inquiryType">Primary Purpose / Intent <span class="required-asterisk">*</span></label>
-                                <select id="inquiryType" name="inquiryType" class="form-control" required>
-                                    <option value="sell_glass">I want to Sell Glass / Bottles</option>
-                                    <option value="buy_cullet">Looking for a Glass / Cullet Supplier</option>
+                                <label class="form-label-title">I am contacting as:</label>
+                                <div class="entity-selector">
+                                    <label class="entity-option">
+                                        <input type="radio" name="entityType" value="individual" checked>
+                                        <span class="entity-btn"><i class="fas fa-user"></i> Individual Seller</span>
+                                    </label>
+                                    <label class="entity-option">
+                                        <input type="radio" name="entityType" value="company">
+                                        <span class="entity-btn"><i class="fas fa-building"></i> Company / Business</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Primary Purpose / Intent (Hidden or Synced with Presets) -->
+                            <div class="form-group" style="display: none;">
+                                <label for="inquiryType">Primary Purpose / Intent</label>
+                                <select id="inquiryType" name="inquiryType" class="form-control">
+                                    <option value="sell_glass" selected>I want to Sell Glass / Bottles</option>
                                     <option value="commercial_pickup">Schedule Business / Venue Collection</option>
+                                    <option value="buy_cullet">Looking for a Glass / Cullet Supplier</option>
                                     <option value="general">General Enquiry / Drop-off Information</option>
                                 </select>
                             </div>
@@ -164,70 +187,95 @@
                                     <label for="name">Full Name <span class="required-asterisk">*</span></label>
                                     <input type="text" id="name" name="name" class="form-control" placeholder="e.g. Sipho Ndlovu" maxlength="100" required>
                                 </div>
-                                <div class="form-group" id="companyGroup">
-                                    <label for="companyName" id="companyLabel">Company / Business Name <span class="required-asterisk" id="companyAsterisk">*</span></label>
-                                    <input type="text" id="companyName" name="companyName" class="form-control" placeholder="e.g. Apex Bottling Corp" maxlength="100" required>
+                                <div class="form-group" id="companyGroup" style="display: none;">
+                                    <label for="companyName" id="companyLabel">Company / Business Name</label>
+                                    <input type="text" id="companyName" name="companyName" class="form-control" placeholder="e.g. Apex Bottling Corp" maxlength="100">
                                 </div>
                             </div>
 
                             <div class="form-row">
-                                <div class="form-group">
-                                    <label for="email">Email Address <span class="required-asterisk">*</span></label>
-                                    <input type="email" id="email" name="email" class="form-control" placeholder="e.g. info@company.co.za" maxlength="120" required>
-                                </div>
                                 <div class="form-group">
                                     <label for="phone">Phone / WhatsApp Number <span class="required-asterisk">*</span></label>
                                     <input type="tel" id="phone" name="phone" class="form-control" placeholder="e.g. 064 878 4287" maxlength="30" required>
                                 </div>
-                            </div>
-
-                            <!-- Step 4: Glass & Supply Details -->
-                            <div class="form-row">
                                 <div class="form-group">
-                                    <label for="glassType">Glass Category / Product</label>
-                                    <select id="glassType" name="glassType" class="form-control">
-                                        <option value="General Glass / Bottles">General Glass / Bottles</option>
-                                        <option value="Mixed Glass Bottles">Mixed Glass Bottles</option>
-                                        <option value="Whole Bottles & Containers">Whole Bottles & Containers</option>
-                                        <option value="Clear / Flint Glass">Clear / Flint Glass</option>
-                                        <option value="Amber / Brown Glass">Amber / Brown Glass</option>
-                                        <option value="Green Glass">Green Glass</option>
-                                        <option value="Industrial Cullet / Other">Industrial Cullet / Other</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="volume" id="volumeLabel">Est. Quantity / Amount (Optional)</label>
-                                    <input type="text" id="volume" name="volume" class="form-control" placeholder="e.g. 5 bags, 2 crates, or est. weight" maxlength="100">
+                                    <label for="email">Email Address <span class="required-asterisk">*</span></label>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="e.g. yourname@gmail.com" maxlength="120" required>
                                 </div>
                             </div>
 
+                            <!-- Step 4: Location & Volume Pre-Qualification -->
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="province">Province / Region <span class="required-asterisk">*</span></label>
                                     <select id="province" name="province" class="form-control" required>
                                         <option value="" disabled selected>Select Province</option>
-                                        <option value="KwaZulu-Natal">KwaZulu-Natal (KZN)</option>
-                                        <option value="Gauteng">Gauteng</option>
-                                        <option value="Eastern Cape">Eastern Cape</option>
-                                        <option value="Mpumalanga">Mpumalanga</option>
-                                        <option value="Free State">Free State</option>
-                                        <option value="Limpopo">Limpopo</option>
-                                        <option value="North West">North West</option>
-                                        <option value="Western Cape">Western Cape</option>
-                                        <option value="Northern Cape">Northern Cape</option>
-                                        <option value="Outside SA / Cross-border">Outside SA (e.g. Eswatini)</option>
+                                        <option value="KwaZulu-Natal">KwaZulu-Natal (KZN - Local/Regional)</option>
+                                        <option value="Gauteng">Gauteng (Long Distance - 34t Min)</option>
+                                        <option value="Eastern Cape">Eastern Cape (Long Distance - 34t Min)</option>
+                                        <option value="Mpumalanga">Mpumalanga (Long Distance - 34t Min)</option>
+                                        <option value="Free State">Free State (Long Distance - 34t Min)</option>
+                                        <option value="Limpopo">Limpopo (Long Distance - 34t Min)</option>
+                                        <option value="North West">North West (Long Distance - 34t Min)</option>
+                                        <option value="Western Cape">Western Cape (Long Distance - 34t Min)</option>
+                                        <option value="Northern Cape">Northern Cape (Long Distance - 34t Min)</option>
+                                        <option value="Outside SA / Cross-border">Outside SA (e.g. Eswatini / Exports)</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="citySuburb">City / Suburb / Town <span class="required-asterisk">*</span></label>
-                                    <input type="text" id="citySuburb" name="citySuburb" class="form-control" placeholder="e.g. Mkondeni, Pietermaritzburg" maxlength="120" required>
+                                    <input type="text" id="citySuburb" name="citySuburb" class="form-control" placeholder="e.g. Mkondeni, Pietermaritzburg or Mthatha" maxlength="120" required>
                                 </div>
                             </div>
 
-                            <!-- Step 5: Detailed Message -->
-                            <div class="form-group">
-                                <label for="message">Message / Details <span class="required-asterisk">*</span></label>
-                                <textarea id="message" name="message" class="form-control" placeholder="Tell us about the glass you want to sell or buy, pickup/drop-off details, or any questions..." maxlength="3000" required></textarea>
+                            <!-- Glass Condition & Weight Estimation -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="glassCondition">Material Condition / Preparation <span class="required-asterisk">*</span></label>
+                                    <select id="glassCondition" name="glassCondition" class="form-control">
+                                        <option value="crushed" selected>Crushed Glass Cullet (R0.60/kg ≈ R600/Tonne - Higher Payout)</option>
+                                        <option value="uncrushed">Whole / Uncrushed Bottles (R0.50/kg ≈ R500/Tonne)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="volumeTons" id="volumeLabel">Estimated Tonnes / 1-Tonne Bags <span class="required-asterisk">*</span></label>
+                                    <input type="number" id="volumeTons" name="volumeTons" class="form-control" placeholder="e.g. 34 (or 1 for 1,000kg bag)" min="0.1" step="0.5" required>
+                                    <small id="volumeHelpText" style="color: #64748b; font-size: 0.775rem; margin-top: 0.25rem;">1 Tonne = 1,000 kg (one standard full bulk bag).</small>
+                                </div>
+                            </div>
+
+                            <!-- Live Feasibility Alert Box -->
+                            <div id="triageAlertBox" style="display: none;" class="triage-alert"></div>
+
+                            <!-- Live Payout Estimator Banner -->
+                            <div id="payoutEstimatorBox" style="display: none;" class="payout-estimate-badge">
+                                <span><i class="fas fa-calculator"></i> Estimated Scale Payout:</span>
+                                <span id="estimatedPayoutValue" class="amount">R0.00</span>
+                            </div>
+
+                            <!-- Mandatory Collection Readiness Checklists (Shown for Collection) -->
+                            <div id="collectionChecklistGroup" class="collection-checklists" style="display: none;">
+                                <div class="collection-checklists-title">
+                                    <i class="fas fa-clipboard-check text-success"></i> Collection Readiness Verification (Required)
+                                </div>
+                                <label class="ack-item">
+                                    <input type="checkbox" id="ackBags">
+                                    <span><strong>1-Tonne Bulk Bags (Amasaka):</strong> I confirm my glass is packed (or will be packed) in 1-tonne woven bulk bags. <em>(Amabongo does NOT provide, loan, or sell bags).</em></span>
+                                </label>
+                                <label class="ack-item">
+                                    <input type="checkbox" id="ackLoading">
+                                    <span><strong>Manual Loading Helpers:</strong> I confirm I will provide 3–4 workers on-site to help load bags onto the truck bed <em>(collection trucks do not carry forklifts).</em></span>
+                                </label>
+                                <label class="ack-item">
+                                    <input type="checkbox" id="ackPhotos">
+                                    <span><strong>WhatsApp Media Verification:</strong> I understand I must send photos or videos of the packed bags and an exact Google Maps pin before any truck is dispatched.</span>
+                                </label>
+                            </div>
+
+                            <!-- Additional Message / Notes -->
+                            <div class="form-group" style="margin-top: 1rem;">
+                                <label for="message">Additional Notes / Questions (Optional)</label>
+                                <textarea id="message" name="message" class="form-control" placeholder="Specify if your location is a dump site, township, rural, or commercial property, or any extra details..." rows="3" maxlength="3000"></textarea>
                             </div>
 
                             <div id="formNotice" class="form-notice form-notice-success" style="display: none;">
@@ -246,8 +294,9 @@
 
                             <!-- Form Trust Guarantee Footer -->
                             <div class="form-trust-footer">
-                                <span><i class="fas fa-clock" style="color: #f59e0b;"></i> Response within 24 hrs</span>
-                                <span><i class="fas fa-shield-halved" style="color: #2563eb;"></i> 100% Privacy</span>
+                                <span><i class="fas fa-truck-fast" style="color: #2e7d32;"></i> Certified Scale Weighing</span>
+                                <span><i class="fas fa-money-bill-wave" style="color: #15803d;"></i> Instant Scale Payout / EFT</span>
+                                <span><i class="fas fa-shield-halved" style="color: #2563eb;"></i> Direct Trade Enquiry</span>
                             </div>
                         </form>
                     </div>
@@ -258,25 +307,25 @@
                             <div class="info-item">
                                 <i class="fas fa-map-marker-alt icon"></i>
                                 <div>
-                                    <h3>Our Address</h3>
+                                    <h3>Depot Address</h3>
                                     <p>72 C B Downes Rd, Mkondeni, <br> Pietermaritzburg, 3201</p>
+                                    <small style="color: var(--color-primary); font-weight: 600;">Open for all self-deliveries (no minimum load)</small>
                                 </div>
                             </div>
                             <div class="info-item">
                                 <i class="fas fa-phone icon"></i>
                                 <div>
-                                    <h3>Phone / WhatsApp</h3>
-                                    <p><a href="tel:+27648784287">064 878 4287</a> (Mr A Mthembu)</p>
-                                    <p><a href="tel:+27648145432">064 814 5432</a> (F Mthembu)</p>
-                                    <p><a href="tel:+27762507239">076 250 7239</a> (T Shezi)</p>
+                                    <h3>Phone & WhatsApp</h3>
+                                    <p><a href="tel:+27648784287">064 878 4287</a> (Mr A Mthembu - Enquiries)</p>
+                                    <p><a href="tel:+27762507239">076 250 7239</a> (Mr T Shezi - Operations/Logistics)</p>
+                                    <p><a href="tel:+27648145432">064 814 5432</a> (F Mthembu - Support)</p>
                                 </div>
                             </div>
                             <div class="info-item">
                                 <i class="fas fa-envelope icon"></i>
                                 <div>
-                                    <h3>Email</h3>
-                                    <p><a href="mailto:info@amabongosolutions.co.za">info@amabongosolutions.co.za</a>
-                                    </p>
+                                    <h3>Official Email</h3>
+                                    <p><a href="mailto:info@amabongosolutions.co.za">info@amabongosolutions.co.za</a></p>
                                 </div>
                             </div>
                             <div class="info-item">
@@ -295,6 +344,94 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== FREQUENTLY ASKED QUESTIONS SECTION ========== -->
+        <section class="bg-alt" style="padding: 4rem 0; background-color: var(--color-background-main);">
+            <div class="container">
+                <div class="section-title text-center" style="text-align: center; margin-bottom: 2.5rem;">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Everything you need to know about pricing, collections, bags, and delivery rules.</p>
+                </div>
+
+                <div class="faq-list" style="max-width: 850px; margin: 0 auto;">
+                    <details class="faq-item" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 1rem; padding: 1rem 1.25rem;">
+                        <summary style="font-weight: 700; font-size: 1.05rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--color-text-primary);">
+                            <span>What are your buying prices, and how do you pay?</span>
+                            <i class="fas fa-chevron-down" style="color: var(--color-primary);"></i>
+                        </summary>
+                        <div style="margin-top: 0.85rem; color: #475569; line-height: 1.6; font-size: 0.95rem;">
+                            <p>We pay <strong>R0.60 per kg (R600 per tonne)</strong> for crushed glass cullet, and <strong>R0.50 per kg (R500 per tonne)</strong> for whole, uncrushed bottles and jars.</p>
+                            <p>For qualifying bulk commercial supply of 40–50+ tonnes, higher rates (e.g. R0.65/kg) can be negotiated. Payouts are processed <strong>promptly upon certified scale weighing</strong> at our Mkondeni depot, or via direct bank transfer once collection loads are verified.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 1rem; padding: 1rem 1.25rem;">
+                        <summary style="font-weight: 700; font-size: 1.05rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--color-text-primary);">
+                            <span>What is the minimum volume required for a truck collection?</span>
+                            <i class="fas fa-chevron-down" style="color: var(--color-primary);"></i>
+                        </summary>
+                        <div style="margin-top: 0.85rem; color: #475569; line-height: 1.6; font-size: 0.95rem;">
+                            <p>Due to high diesel and road freight expenses, collection rules depend on your distance from Pietermaritzburg:</p>
+                            <ul style="padding-left: 1.25rem; margin-top: 0.5rem;">
+                                <li><strong>Depot Self-Delivery (Mkondeni, PMB):</strong> <em>NO MINIMUM.</em> Deliver any amount from a few bags to a full truckload.</li>
+                                <li><strong>Local PMB & Surrounds (< 1–2 hours drive):</strong> Flexible minimums, typically <strong>20 metric tonnes</strong> (20 bulk bags) subject to review.</li>
+                                <li><strong>Long-Distance / Outside KZN (Gauteng, Mpumalanga, Eastern Cape, etc.):</strong> <strong>STRICT MINIMUM OF 34 METRIC TONNES</strong> (34x 1-tonne bags). Quantities below 34 tonnes outside KZN are commercially unviable for our trucks to collect.</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 1rem; padding: 1rem 1.25rem;">
+                        <summary style="font-weight: 700; font-size: 1.05rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--color-text-primary);">
+                            <span>Do you provide 1-tonne bulk bags (amasaka) or crushing machines (stampers)?</span>
+                            <i class="fas fa-chevron-down" style="color: var(--color-primary);"></i>
+                        </summary>
+                        <div style="margin-top: 0.85rem; color: #475569; line-height: 1.6; font-size: 0.95rem;">
+                            <p><strong>NO.</strong> Amabongo Solutions does <em>not</em> sell, supply, or loan 1-tonne bulk bags or crushing machinery. Collectors and sellers are responsible for sourcing their own heavy-duty 1-tonne woven bulk bags (jumbo bags) from local industrial packaging suppliers.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 1rem; padding: 1rem 1.25rem;">
+                        <summary style="font-weight: 700; font-size: 1.05rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--color-text-primary);">
+                            <span>Who loads the collection truck? Do you bring a forklift?</span>
+                            <i class="fas fa-chevron-down" style="color: var(--color-primary);"></i>
+                        </summary>
+                        <div style="margin-top: 0.85rem; color: #475569; line-height: 1.6; font-size: 0.95rem;">
+                            <p>Our collection trucks <strong>do NOT travel with forklifts</strong>. The seller must provide <strong>3 to 4 strong workers</strong> on site to assist with manually loading the bulk bags onto the truck bed.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 1rem; padding: 1rem 1.25rem;">
+                        <summary style="font-weight: 700; font-size: 1.05rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--color-text-primary);">
+                            <span>Do I need to wash or separate bottles by colour?</span>
+                            <i class="fas fa-chevron-down" style="color: var(--color-primary);"></i>
+                        </summary>
+                        <div style="margin-top: 0.85rem; color: #475569; line-height: 1.6; font-size: 0.95rem;">
+                            <p><strong>NO.</strong> You do not need to wash bottles or remove labels. Minor liquid residue and dust are 100% acceptable. We buy mixed bottles (clear, brown, green) as well as colour-sorted cullet.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 1rem; padding: 1rem 1.25rem;">
+                        <summary style="font-weight: 700; font-size: 1.05rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--color-text-primary);">
+                            <span>What materials do you NOT accept?</span>
+                            <i class="fas fa-chevron-down" style="color: var(--color-primary);"></i>
+                        </summary>
+                        <div style="margin-top: 0.85rem; color: #475569; line-height: 1.6; font-size: 0.95rem;">
+                            <p>We deal <strong>EXCLUSIVELY in glass bottles and jars</strong>. We strictly reject: window pane glass, car windscreens, mirrors, light bulbs, Pyrex, ceramics, tiles, pottery, cardboard, plastics, and scrap metal.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item" style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 1rem; padding: 1rem 1.25rem;">
+                        <summary style="font-weight: 700; font-size: 1.05rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--color-text-primary);">
+                            <span>Do you handle international export sales (e.g. Angola, Mozambique)?</span>
+                            <i class="fas fa-chevron-down" style="color: var(--color-primary);"></i>
+                        </summary>
+                        <div style="margin-top: 0.85rem; color: #475569; line-height: 1.6; font-size: 0.95rem;">
+                            <p>Amabongo Solutions operates strictly in the South African domestic market. We do not provide CIF shipping or SARS export clearing. International buyers purchasing cullet must arrange and fund their own container sea freight and customs clearance from Durban harbour (FOB/ex-works pickup).</p>
+                        </div>
+                    </details>
                 </div>
             </div>
         </section>
