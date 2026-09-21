@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad-pricing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1826" />
+      <stop offset="50%" stop-color="#0f2942" />
+      <stop offset="100%" stop-color="#0b1b2d" />
+    </linearGradient>
+
+    <!-- Gold Gradients -->
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE082" />
+      <stop offset="40%" stop-color="#FFC107" />
+      <stop offset="100%" stop-color="#FF8F00" />
+    </linearGradient>
+    <linearGradient id="gold-coin-edge" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F" />
+      <stop offset="100%" stop-color="#C77700" />
+    </linearGradient>
+
+    <!-- Green Emerald Gradient -->
+    <linearGradient id="emerald-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4CAF50" />
+      <stop offset="60%" stop-color="#2E7D32" />
+      <stop offset="100%" stop-color="#1B5E20" />
+    </linearGradient>
+
+    <!-- Amber Glass Gradient -->
+    <linearGradient id="amber-glass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e29b14" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#9a5a04" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#542e00" stop-opacity="0.95" />
+    </linearGradient>
+
+    <!-- Flint Glass Gradient -->
+    <linearGradient id="flint-glass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4ecfa" stop-opacity="0.7" />
+      <stop offset="50%" stop-color="#99cde8" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#4a8ba8" stop-opacity="0.8" />
+    </linearGradient>
+
+    <!-- Metallic Scale Gradients -->
+    <linearGradient id="metal-base" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#37474F" />
+      <stop offset="50%" stop-color="#263238" />
+      <stop offset="100%" stop-color="#1c252a" />
+    </linearGradient>
+    <linearGradient id="metal-plate" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#455A64" />
+      <stop offset="50%" stop-color="#607D8B" />
+      <stop offset="100%" stop-color="#37474F" />
+    </linearGradient>
+
+    <!-- Glow & Shadow Filters -->
+    <filter id="glow-gold" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+    <filter id="soft-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+
+    <!-- Tread Pattern for Weighbridge -->
+    <pattern id="tread-plate" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M2,8 L8,2 M8,14 L14,8 M2,14 L14,2" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" stroke-linecap="round" />
+    </pattern>
+
+    <!-- Tech Grid Background Pattern -->
+    <pattern id="grid-dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="12" r="1" fill="rgba(255,255,255,0.08)" />
+    </pattern>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="800" height="480" fill="url(#bg-grad-pricing)" />
+  <rect width="800" height="480" fill="url(#grid-dots)" />
+
+  <!-- Abstract Radial Glows -->
+  <circle cx="620" cy="220" r="220" fill="#FFC107" opacity="0.08" filter="url(#glow-gold)" />
+  <circle cx="220" cy="280" r="180" fill="#2E7D32" opacity="0.12" filter="url(#glow-gold)" />
+
+  <!-- Ambient Decorative Circuit Lines -->
+  <path d="M 50,420 L 750,420" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+  <path d="M 120,50 L 120,420" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 4" />
+  <path d="M 680,50 L 680,420" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 4" />
+
+  <!-- ==================== LEFT: INDUSTRIAL SCALE & BOTTLES ==================== -->
+
+  <!-- Scale Platform Shadow -->
+  <ellipse cx="280" cy="410" rx="190" ry="22" fill="#050d14" opacity="0.8" filter="url(#glow-gold)" />
+
+  <!-- Weighbridge Platform Base -->
+  <g filter="url(#drop-shadow)">
+    <!-- Bottom Rim -->
+    <polygon points="110,380 450,380 430,405 130,405" fill="#1c252a" />
+    <!-- Metallic Deck -->
+    <polygon points="120,355 440,355 450,380 110,380" fill="url(#metal-plate)" />
+    <!-- Tread Overlay -->
+    <polygon points="120,355 440,355 450,380 110,380" fill="url(#tread-plate)" />
+    <!-- Corner Edge Brackets -->
+    <rect x="120" y="355" width="6" height="25" fill="#FFC107" />
+    <rect x="434" y="355" width="6" height="25" fill="#FFC107" />
+    <!-- Scale Edge Hazard Stripes -->
+    <rect x="135" y="375" width="290" height="4" fill="rgba(255,193,7,0.4)" />
+  </g>
+
+  <!-- Digital Readout Terminal Head -->
+  <g filter="url(#soft-shadow)">
+    <rect x="70" y="270" width="10" height="90" fill="#455A64" rx="2" />
+    <rect x="40" y="210" width="90" height="64" rx="6" fill="#1e293b" stroke="#334155" stroke-width="2" />
+    <!-- Digital Screen -->
+    <rect x="48" y="218" width="74" height="32" rx="3" fill="#021a12" stroke="#0f3e28" stroke-width="1" />
+    <text x="85" y="240" font-family="'Oswald', sans-serif" font-size="14" font-weight="700" fill="#10b981" text-anchor="middle" letter-spacing="1">
+      34.00 T
+    </text>
+    <circle cx="56" cy="260" r="3" fill="#10b981" filter="url(#glow-cyan)" />
+    <text x="64" y="263" font-family="'Roboto', sans-serif" font-size="7" font-weight="700" fill="#94a3b8" letter-spacing="0.5">NET WT</text>
+    <rect x="98" y="256" width="18" height="7" rx="2" fill="#2E7D32" />
+    <text x="107" y="262" font-family="'Roboto', sans-serif" font-size="6" font-weight="700" fill="#ffffff" text-anchor="middle">STABLE</text>
+  </g>
+
+  <!-- Glass Bottles on the Scale Platform -->
+
+  <!-- Bottle 1: Amber Beer Bottle (Left) -->
+  <g filter="url(#soft-shadow)" transform="translate(180, 160)">
+    <!-- Bottle Silhouette -->
+    <path d="M 22,0 L 32,0 C 33,0 34,2 34,4 L 34,35 C 34,45 46,65 48,80 L 48,190 C 48,195 44,198 38,198 L 16,198 C 10,198 6,195 6,190 L 6,80 C 8,65 20,45 20,35 L 20,4 C 20,2 21,0 22,0 Z"
+          fill="url(#amber-glass)" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+    <!-- Crown Cap -->
+    <rect x="20" y="-4" width="14" height="6" rx="1" fill="#FFC107" />
+    <!-- Label -->
+    <rect x="10" y="105" width="34" height="42" rx="2" fill="rgba(255,255,255,0.85)" />
+    <rect x="13" y="112" width="28" height="4" fill="#b78103" />
+    <rect x="13" y="120" width="22" height="3" fill="#64748b" />
+    <!-- Glass Highlight Reflection -->
+    <path d="M 12,85 L 12,185" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round" />
+    <path d="M 23,10 L 23,35" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" />
+  </g>
+
+  <!-- Bottle 2: Emerald Green Wine Bottle (Center-Right) -->
+  <g filter="url(#soft-shadow)" transform="translate(245, 130)">
+    <!-- Bottle Silhouette -->
+    <path d="M 26,0 L 38,0 C 39,0 40,3 40,6 L 40,55 C 40,75 56,100 58,120 L 58,225 C 58,228 54,230 48,230 L 16,230 C 10,230 6,228 6,225 L 6,120 C 8,100 24,75 24,55 L 24,6 C 24,3 25,0 26,0 Z"
+          fill="url(#emerald-grad)" stroke="rgba(255,255,255,0.25)" stroke-width="1" />
+    <!-- Foil Capsule -->
+    <path d="M 24,0 L 40,0 L 40,25 L 24,25 Z" fill="#c0392b" />
+    <!-- Bottle Body Label -->
+    <rect x="12" y="135" width="40" height="50" rx="2" fill="#fafafa" />
+    <circle cx="32" cy="155" r="10" fill="#2E7D32" opacity="0.2" />
+    <path d="M 28,155 L 36,155" stroke="#2E7D32" stroke-width="2" />
+    <rect x="18" y="172" width="28" height="3" fill="#64748b" />
+    <!-- Glass Reflections -->
+    <path d="M 14,120 L 14,218" stroke="rgba(255,255,255,0.45)" stroke-width="2.5" stroke-linecap="round" />
+    <path d="M 28,10 L 28,45" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" />
+  </g>
+
+  <!-- Bottle 3: Clear Flint Spirit Bottle (Right) -->
+  <g filter="url(#soft-shadow)" transform="translate(325, 175)">
+    <!-- Heavy-base bottle silhouette -->
+    <path d="M 22,0 L 34,0 L 34,30 C 34,42 48,55 50,70 L 50,180 C 50,184 46,186 40,186 L 16,186 C 10,186 6,184 6,180 L 6,70 C 8,55 22,42 22,30 Z"
+          fill="url(#flint-glass)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" />
+    <!-- Heavy glass base -->
+    <rect x="7" y="168" width="42" height="16" fill="rgba(255,255,255,0.25)" />
+    <!-- Cork Stopper -->
+    <rect x="22" y="-5" width="12" height="6" rx="1" fill="#b07d4b" />
+    <!-- Vertical Highlight Stripes -->
+    <path d="M 12,75 L 12,165" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" />
+    <path d="M 17,80 L 17,160" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linecap="round" />
+    <path d="M 44,75 L 44,165" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" />
+  </g>
+
+  <!-- Crushed Glass Cullet Gems at Scale Base -->
+  <g opacity="0.85">
+    <polygon points="140,360 152,352 160,358 148,366" fill="#69f0ae" opacity="0.8" />
+    <polygon points="165,362 175,355 182,364 170,368" fill="#ffd54f" opacity="0.9" />
+    <polygon points="220,362 232,354 240,365 225,368" fill="#40c4ff" opacity="0.8" />
+    <polygon points="310,364 322,356 330,366 318,370" fill="#81c784" opacity="0.8" />
+    <polygon points="390,360 405,352 415,362 400,368" fill="#ffb74d" opacity="0.85" />
+    <polygon points="412,365 422,358 428,368" fill="#80d8ff" opacity="0.75" />
+  </g>
+
+  <!-- ==================== RIGHT: MONETIZATION & CASH PAYOUT ==================== -->
+
+  <!-- Card Background Panel -->
+  <g filter="url(#drop-shadow)">
+    <rect x="470" y="80" width="280" height="310" rx="12" fill="#132337" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" />
+    <!-- Panel Top Accent Bar -->
+    <path d="M 470,92 C 470,85 475,80 482,80 L 738,80 C 745,80 750,85 750,92 L 750,96 L 470,96 Z" fill="#FFC107" />
+  </g>
+
+  <!-- Giant Rand Coin Symbol -->
+  <g filter="url(#glow-gold)" transform="translate(610, 165)">
+    <circle cx="0" cy="0" r="46" fill="url(#gold-coin-edge)" />
+    <circle cx="0" cy="0" r="41" fill="url(#gold-grad)" stroke="#FFF8E1" stroke-width="2" />
+    <!-- Coin Inner Inset Ridge -->
+    <circle cx="0" cy="0" r="35" fill="none" stroke="#C77700" stroke-width="1.5" stroke-dasharray="3 2" />
+    <!-- South African Rand "R" Symbol -->
+    <text x="0" y="16" font-family="'Oswald', sans-serif" font-size="44" font-weight="700" fill="#5c3800" text-anchor="middle">
+      R
+    </text>
+  </g>
+
+  <!-- Sub-heading Tag -->
+  <g transform="translate(610, 236)">
+    <rect x="-85" y="-12" width="170" height="24" rx="12" fill="rgba(46,125,50,0.25)" stroke="#2E7D32" stroke-width="1" />
+    <text x="0" y="4" font-family="'Roboto', sans-serif" font-size="10" font-weight="700" fill="#4CAF50" text-anchor="middle" letter-spacing="1">
+      INSTANT SCALE SETTLEMENT
+    </text>
+  </g>
+
+  <!-- Primary Rate Display: R600 / Tonne -->
+  <text x="610" y="285" font-family="'Oswald', sans-serif" font-size="34" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">
+    R600 <tspan font-size="18" font-weight="400" fill="#94a3b8">/ TONNE</tspan>
+  </text>
+
+  <!-- Secondary Rate: R0.60 / kg -->
+  <text x="610" y="315" font-family="'Roboto', sans-serif" font-size="15" font-weight="500" fill="#FFC107" text-anchor="middle">
+    ≈ R0.60 per kg <tspan fill="#64748b">•</tspan> Cash on Scale
+  </text>
+
+  <!-- Market Growth Line Graph -->
+  <g transform="translate(500, 345)">
+    <!-- Graph Grid Lines -->
+    <line x1="0" y1="20" x2="220" y2="20" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+    <!-- Trend Area Fill -->
+    <polygon points="0,20 35,16 80,18 125,10 170,12 215,2 215,20 0,20" fill="rgba(76,175,80,0.15)" />
+    <!-- Trend Line -->
+    <polyline points="0,20 35,16 80,18 125,10 170,12 215,2" fill="none" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round" />
+    <!-- Sparkle Nodes -->
+    <circle cx="215" cy="2" r="4" fill="#FFC107" filter="url(#glow-gold)" />
+    <circle cx="125" cy="10" r="2.5" fill="#4CAF50" />
+    <text x="110" y="32" font-family="'Roboto', sans-serif" font-size="9" font-weight="500" fill="#64748b" text-anchor="middle">
+      CRUSHED CULLET COMMANDS TOP RATES
+    </text>
+  </g>
+
+  <!-- Top Left Section Badge -->
+  <g transform="translate(45, 45)">
+    <rect x="0" y="0" width="200" height="28" rx="6" fill="#FFC107" />
+    <text x="14" y="18" font-family="'Oswald', sans-serif" font-size="12" font-weight="700" fill="#212529" letter-spacing="1">
+      MARKET PAYOUT GUIDE 2026
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,243 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad-commercial" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071729" />
+      <stop offset="50%" stop-color="#0f2b48" />
+      <stop offset="100%" stop-color="#0a1d33" />
+    </linearGradient>
+
+    <!-- Brand Green Gradient -->
+    <linearGradient id="truck-green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#388E3C" />
+      <stop offset="100%" stop-color="#1B5E20" />
+    </linearGradient>
+
+    <!-- Blue Corporate Gradient -->
+    <linearGradient id="blue-card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1565C0" />
+      <stop offset="100%" stop-color="#0D47A1" />
+    </linearGradient>
+
+    <!-- Gold Accent Gradient -->
+    <linearGradient id="accent-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F" />
+      <stop offset="100%" stop-color="#FFA000" />
+    </linearGradient>
+
+    <!-- Truck Metallic Body -->
+    <linearGradient id="truck-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ECEFF1" />
+      <stop offset="60%" stop-color="#CFD8DC" />
+      <stop offset="100%" stop-color="#90A4AE" />
+    </linearGradient>
+
+    <!-- Wheel Gradients -->
+    <radialGradient id="wheel-rubber" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#455A64" />
+      <stop offset="65%" stop-color="#263238" />
+      <stop offset="100%" stop-color="#10171a" />
+    </radialGradient>
+    <radialGradient id="wheel-hub" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ECEFF1" />
+      <stop offset="60%" stop-color="#78909C" />
+      <stop offset="100%" stop-color="#37474F" />
+    </radialGradient>
+
+    <!-- Filters -->
+    <filter id="shadow-comm" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+    <filter id="soft-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Dot Grid Pattern -->
+    <pattern id="grid-dots-comm" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="12" r="1" fill="rgba(255,255,255,0.07)" />
+    </pattern>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="800" height="480" fill="url(#bg-grad-commercial)" />
+  <rect width="800" height="480" fill="url(#grid-dots-comm)" />
+
+  <!-- Ambient Lights -->
+  <circle cx="200" cy="200" r="190" fill="#0D47A1" opacity="0.15" filter="url(#soft-glow)" />
+  <circle cx="560" cy="240" r="210" fill="#2E7D32" opacity="0.12" filter="url(#soft-glow)" />
+
+  <!-- Road / Ground Horizon -->
+  <rect x="0" y="390" width="800" height="90" fill="#0b1723" />
+  <line x1="0" y1="390" x2="800" y2="390" stroke="#334155" stroke-width="2" />
+  <!-- Road Dash Markers -->
+  <line x1="40" y1="435" x2="140" y2="435" stroke="#FFC107" stroke-width="3" stroke-dasharray="25 20" opacity="0.4" />
+  <line x1="200" y1="435" x2="760" y2="435" stroke="#FFC107" stroke-width="3" stroke-dasharray="25 20" opacity="0.4" />
+
+  <!-- ==================== LEFT: HOSPITALITY VENUE ARCHITECTURE ==================== -->
+  <g transform="translate(60, 150)" filter="url(#shadow-comm)">
+    <!-- Venue Building Silhouette -->
+    <rect x="0" y="50" width="180" height="190" rx="4" fill="#142436" stroke="#25384d" stroke-width="1.5" />
+    <!-- Roof Awning (Restaurant / Bistro style) -->
+    <polygon points="-10,50 190,50 180,25 0,25" fill="#1b5e20" />
+    <!-- Awning Stripes -->
+    <polygon points="15,50 40,50 35,25 15,25" fill="#2e7d32" />
+    <polygon points="65,50 90,50 85,25 65,25" fill="#2e7d32" />
+    <polygon points="115,50 140,50 135,25 115,25" fill="#2e7d32" />
+    <polygon points="165,50 190,50 180,25 165,25" fill="#2e7d32" />
+
+    <!-- Neon Sign: "BAR & RESTAURANT" -->
+    <rect x="30" y="5" width="120" height="18" rx="3" fill="#0f1f2e" stroke="#FFC107" stroke-width="1" />
+    <text x="90" y="18" font-family="'Oswald', sans-serif" font-size="10" font-weight="700" fill="#FFC107" text-anchor="middle" letter-spacing="1">
+      RESTAURANT & BAR
+    </text>
+
+    <!-- Warm Glowing Windows -->
+    <rect x="20" y="70" width="60" height="70" rx="4" fill="#ffecb3" opacity="0.15" stroke="#FFC107" stroke-width="1" />
+    <line x1="50" y1="70" x2="50" y2="140" stroke="#FFC107" stroke-width="1" opacity="0.4" />
+    <line x1="20" y1="105" x2="80" y2="105" stroke="#FFC107" stroke-width="1" opacity="0.4" />
+
+    <rect x="100" y="70" width="60" height="70" rx="4" fill="#ffecb3" opacity="0.15" stroke="#FFC107" stroke-width="1" />
+    <line x1="130" y1="70" x2="130" y2="140" stroke="#FFC107" stroke-width="1" opacity="0.4" />
+    <line x1="100" y1="105" x2="160" y2="105" stroke="#FFC107" stroke-width="1" opacity="0.4" />
+
+    <!-- Entrance Door -->
+    <rect x="60" y="160" width="60" height="80" fill="#0e1b27" stroke="#25384d" stroke-width="1" />
+    <rect x="68" y="168" width="44" height="35" rx="2" fill="#ffecb3" opacity="0.1" />
+    <circle cx="112" cy="205" r="2.5" fill="#FFC107" />
+
+    <!-- Wine / Cocktail Glass Icons Inside Window -->
+    <path d="M 45,95 L 55,95 L 50,105 L 50,115 M 46,115 L 54,115" stroke="#FFD54F" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.7" />
+    <path d="M 125,93 C 125,102 135,102 135,93 Z M 130,102 L 130,115 M 126,115 L 134,115" stroke="#FFD54F" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.7" />
+  </g>
+
+  <!-- Hospitality Glass Collection Crates Outside Door -->
+  <g transform="translate(185, 310)" filter="url(#shadow-comm)">
+    <!-- Plastic Bottle Crate 1 (Green) -->
+    <rect x="0" y="45" width="55" height="35" rx="2" fill="#1b5e20" stroke="#2e7d32" stroke-width="1.5" />
+    <line x1="0" y1="58" x2="55" y2="58" stroke="#2e7d32" stroke-width="1" />
+    <!-- Hand Hole -->
+    <rect x="18" y="50" width="18" height="6" rx="3" fill="#0c1e33" />
+    <!-- Bottles sticking out of Crate 1 -->
+    <rect x="8" y="28" width="6" height="17" fill="#4CAF50" rx="1" />
+    <rect x="18" y="25" width="6" height="20" fill="#81C784" rx="1" />
+    <rect x="28" y="27" width="6" height="18" fill="#4CAF50" rx="1" />
+    <rect x="38" y="24" width="6" height="21" fill="#81C784" rx="1" />
+
+    <!-- Plastic Bottle Crate 2 (Yellow Stacked) -->
+    <rect x="35" y="18" width="50" height="32" rx="2" fill="#e65100" stroke="#ff9800" stroke-width="1.5" />
+    <rect x="52" y="24" width="16" height="5" rx="2.5" fill="#0c1e33" />
+    <!-- Bottles in Crate 2 (Amber) -->
+    <rect x="42" y="2" width="6" height="16" fill="#FFA000" rx="1" />
+    <rect x="52" y="-2" width="6" height="20" fill="#FFB74D" rx="1" />
+    <rect x="62" y="0" width="6" height="18" fill="#FFA000" rx="1" />
+    <rect x="72" y="-1" width="6" height="19" fill="#FFB74D" rx="1" />
+  </g>
+
+  <!-- Dynamic Recycling Arrow connecting Venue to Logistics -->
+  <path d="M 270,300 C 310,250 350,250 390,290" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4" />
+  <polygon points="392,298 394,284 382,290" fill="#4CAF50" />
+
+  <!-- ==================== RIGHT: 34-TONNE BULK LOGISTICS TRUCK ==================== -->
+  <g transform="translate(360, 190)" filter="url(#shadow-comm)">
+    <!-- Truck Flatbed Trailer Frame -->
+    <rect x="0" y="140" width="370" height="20" fill="#263238" rx="2" />
+    <rect x="10" y="156" width="350" height="4" fill="#cfd8dc" opacity="0.3" />
+
+    <!-- Bulk Industrial Glass Container 1 (Left Bin) -->
+    <g transform="translate(15, 40)">
+      <rect x="0" y="0" width="105" height="100" rx="4" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1.5" />
+      <line x1="0" y1="35" x2="105" y2="35" stroke="#3b82f6" stroke-width="1" />
+      <line x1="0" y1="70" x2="105" y2="70" stroke="#3b82f6" stroke-width="1" />
+      <!-- Vertical Reinforcement Ribs -->
+      <line x1="35" y1="0" x2="35" y2="100" stroke="#3b82f6" stroke-width="1" opacity="0.6" />
+      <line x1="70" y1="0" x2="70" y2="100" stroke="#3b82f6" stroke-width="1" opacity="0.6" />
+      <!-- Green Glass Bottles Icon inside bin -->
+      <circle cx="52" cy="52" r="20" fill="rgba(46,125,50,0.3)" />
+      <path d="M 48,42 L 56,42 L 56,48 L 59,52 L 59,62 L 45,62 L 45,52 L 48,48 Z" fill="#4CAF50" />
+      <!-- Label -->
+      <rect x="20" y="80" width="65" height="12" rx="2" fill="#0d47a1" />
+      <text x="52" y="89" font-family="'Roboto', sans-serif" font-size="7" font-weight="700" fill="#ffffff" text-anchor="middle">SORTED GREEN</text>
+    </g>
+
+    <!-- Bulk Industrial Glass Container 2 (Right Bin) -->
+    <g transform="translate(130, 40)">
+      <rect x="0" y="0" width="105" height="100" rx="4" fill="#4a2e0a" stroke="#f59e0b" stroke-width="1.5" />
+      <line x1="0" y1="35" x2="105" y2="35" stroke="#f59e0b" stroke-width="1" />
+      <line x1="0" y1="70" x2="105" y2="70" stroke="#f59e0b" stroke-width="1" />
+      <line x1="35" y1="0" x2="35" y2="100" stroke="#f59e0b" stroke-width="1" opacity="0.6" />
+      <line x1="70" y1="0" x2="70" y2="100" stroke="#f59e0b" stroke-width="1" opacity="0.6" />
+      <circle cx="52" cy="52" r="20" fill="rgba(245,158,11,0.25)" />
+      <path d="M 48,42 L 56,42 L 56,48 L 59,52 L 59,62 L 45,62 L 45,52 L 48,48 Z" fill="#f59e0b" />
+      <!-- Label -->
+      <rect x="20" y="80" width="65" height="12" rx="2" fill="#b45309" />
+      <text x="52" y="89" font-family="'Roboto', sans-serif" font-size="7" font-weight="700" fill="#ffffff" text-anchor="middle">AMBER CULLET</text>
+    </g>
+
+    <!-- Truck Heavy Cab (Modern Aerodynamic Commercial Rig) -->
+    <g transform="translate(245, 20)">
+      <!-- Cab Main Body -->
+      <path d="M 0,40 L 45,40 L 80,75 L 95,95 L 95,140 L 0,140 Z" fill="url(#truck-green)" stroke="#14532d" stroke-width="1.5" />
+      <!-- Cab Windshield & Side Window -->
+      <path d="M 42,48 L 72,78 L 72,96 L 22,96 L 22,48 Z" fill="#90caf9" opacity="0.85" />
+      <line x1="48" y1="48" x2="48" y2="96" stroke="#14532d" stroke-width="2" />
+      <!-- Chrome Grill & Bumper -->
+      <rect x="85" y="105" width="16" height="35" rx="2" fill="#cfd8dc" stroke="#78909c" stroke-width="1" />
+      <line x1="88" y1="112" x2="98" y2="112" stroke="#37474f" stroke-width="1.5" />
+      <line x1="88" y1="118" x2="98" y2="118" stroke="#37474f" stroke-width="1.5" />
+      <line x1="88" y1="124" x2="98" y2="124" stroke="#37474f" stroke-width="1.5" />
+      <line x1="88" y1="130" x2="98" y2="130" stroke="#37474f" stroke-width="1.5" />
+      <!-- Headlight Beam -->
+      <rect x="94" y="105" width="6" height="10" fill="#FFF59D" rx="2" />
+      <polygon points="100,105 170,95 170,140 100,120" fill="url(#accent-gold)" opacity="0.15" />
+      <!-- Amabongo Leaf / Logo Mark on Door -->
+      <circle cx="15" cy="115" r="10" fill="#ffffff" />
+      <path d="M 12,110 C 12,120 18,122 18,122 C 18,122 19,114 15,110 Z" fill="#2E7D32" />
+      <!-- Driver Door Handle -->
+      <rect x="32" y="112" width="8" height="2.5" fill="#37474f" />
+    </g>
+
+    <!-- Wheels / Axles -->
+    <!-- Rear Tandem Wheels 1 & 2 -->
+    <circle cx="55" cy="162" r="24" fill="url(#wheel-rubber)" />
+    <circle cx="55" cy="162" r="13" fill="url(#wheel-hub)" />
+    <circle cx="105" cy="162" r="24" fill="url(#wheel-rubber)" />
+    <circle cx="105" cy="162" r="13" fill="url(#wheel-hub)" />
+    <!-- Middle Axle -->
+    <circle cx="175" cy="162" r="24" fill="url(#wheel-rubber)" />
+    <circle cx="175" cy="162" r="13" fill="url(#wheel-hub)" />
+    <!-- Front Cab Steer Wheel -->
+    <circle cx="310" cy="162" r="24" fill="url(#wheel-rubber)" />
+    <circle cx="310" cy="162" r="13" fill="url(#wheel-hub)" />
+  </g>
+
+  <!-- ==================== FLOATING BADGES & CALLOUTS ==================== -->
+
+  <!-- Top Right Metric Badge: 34-TONNE COMMERCIAL PAYLOAD -->
+  <g transform="translate(540, 45)" filter="url(#shadow-comm)">
+    <rect x="0" y="0" width="220" height="70" rx="8" fill="#0f263d" stroke="#2563eb" stroke-width="1.5" />
+    <rect x="0" y="0" width="6" height="70" fill="#3b82f6" />
+    <text x="18" y="24" font-family="'Roboto', sans-serif" font-size="9" font-weight="700" fill="#93c5fd" letter-spacing="1">
+      BULK LOGISTICS CAPACITY
+    </text>
+    <text x="18" y="52" font-family="'Oswald', sans-serif" font-size="24" font-weight="700" fill="#ffffff">
+      34-TONNE <tspan font-size="14" fill="#60a5fa">MAX LOAD</tspan>
+    </text>
+  </g>
+
+  <!-- Top Left Section Badge -->
+  <g transform="translate(45, 45)">
+    <rect x="0" y="0" width="210" height="28" rx="6" fill="#1565C0" />
+    <text x="14" y="18" font-family="'Oswald', sans-serif" font-size="12" font-weight="700" fill="#ffffff" letter-spacing="1">
+      COMMERCIAL & B2B RECYCLING
+    </text>
+  </g>
+
+  <!-- Bottom Hospitality Service Pill Banner -->
+  <g transform="translate(250, 430)">
+    <rect x="-10" y="-12" width="320" height="26" rx="13" fill="rgba(15,35,55,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+    <text x="150" y="5" font-family="'Roboto', sans-serif" font-size="10" font-weight="600" fill="#cbd5e1" text-anchor="middle">
+      HOTELS <tspan fill="#FFC107">•</tspan> BARS <tspan fill="#FFC107">•</tspan> RESTAURANTS <tspan fill="#FFC107">•</tspan> BOTTLERS
+    </text>
+  </g>
+</svg>
