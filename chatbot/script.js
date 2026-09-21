@@ -9,10 +9,16 @@ const $input = document.getElementById('input');
 // Runtime-decoded key allows public client-side AI fallback without triggering Git secret push scanners
 const _DEFAULT_KEY = atob('c2stb3ItdjEtMGRjNWU5ODg4NTViZWM3NTNkYWY0MGRjMWFiYmQzNTg5YmQ0MjhiMWE4MzRkMjRjZjI3MGY4MDRjY2ZlMzhhYg==');
 
+const FALLBACK_MODELS = [
+  'openrouter/free',
+  'nvidia/nemotron-3-ultra-550b-a55b:free',
+  'nex-agi/nex-n2.5-mini:free',
+];
+
 const AI_CONFIG = {
   apiKey: (typeof localStorage !== 'undefined' && localStorage.getItem('OPENROUTER_API_KEY')) || _DEFAULT_KEY,
   endpoint: 'https://openrouter.ai/api/v1/chat/completions',
-  model: (typeof localStorage !== 'undefined' && localStorage.getItem('OPENROUTER_MODEL')) || 'nex-agi/nex-n2.5-mini:free',
+  model: (typeof localStorage !== 'undefined' && localStorage.getItem('OPENROUTER_MODEL')) || 'openrouter/free',
   maxTokens: 500,
   temperature: 0.4,
 };
@@ -423,46 +429,49 @@ async function getAIResponse(userMessage) {
     conversationHistory = conversationHistory.slice(-20);
   }
 
-  try {
-    const response = await fetch(AI_CONFIG.endpoint, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${AI_CONFIG.apiKey}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://www.amabongosolutions.co.za',
-        'X-Title': 'Amabongo Solutions Virtual Assistant',
-      },
-      body: JSON.stringify({
-        model: AI_CONFIG.model,
-        messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
-          ...conversationHistory,
-        ],
-        max_tokens: AI_CONFIG.maxTokens,
-        temperature: AI_CONFIG.temperature,
-      }),
-    });
+  // Deduplicate candidate models starting with user configured model
+  const modelsToTry = Array.from(new Set([AI_CONFIG.model, ...FALLBACK_MODELS]));
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      console.error('OpenRouter API error:', response.status, errorData);
-      return null;
+  for (const model of modelsToTry) {
+    try {
+      const response = await fetch(AI_CONFIG.endpoint, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${AI_CONFIG.apiKey}`,
+          'Content-Type': 'application/json',
+          'HTTP-Referer': 'https://www.amabongosolutions.co.za',
+          'X-Title': 'Amabongo Solutions Virtual Assistant',
+        },
+        body: JSON.stringify({
+          model: model,
+          messages: [
+            { role: 'system', content: SYSTEM_PROMPT },
+            ...conversationHistory,
+          ],
+          max_tokens: AI_CONFIG.maxTokens,
+          temperature: AI_CONFIG.temperature,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.warn(`OpenRouter (${model}) returned ${response.status}:`, errorData);
+        continue; // Try next model candidate
+      }
+
+      const data = await response.json();
+      const assistantMessage = data.choices?.[0]?.message?.content;
+
+      if (assistantMessage) {
+        conversationHistory.push({ role: 'assistant', content: assistantMessage });
+        return assistantMessage;
+      }
+    } catch (err) {
+      console.warn(`OpenRouter request failed for ${model}:`, err);
     }
-
-    const data = await response.json();
-    const assistantMessage = data.choices?.[0]?.message?.content;
-
-    if (assistantMessage) {
-      // Add assistant reply to history for context
-      conversationHistory.push({ role: 'assistant', content: assistantMessage });
-      return assistantMessage;
-    }
-
-    return null;
-  } catch (err) {
-    console.error('AI request failed:', err);
-    return null;
   }
+
+  return null;
 }
 
 // Format plain text AI response to HTML
