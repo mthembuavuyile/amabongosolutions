@@ -39,7 +39,7 @@
                 <li><a href="${rootPrefix}pricing.html" class="nav-link ${isPricing ? 'active-link' : ''}">Pricing</a></li>
                 <li><a href="${rootPrefix}blog/" class="nav-link ${isBlog ? 'active-link' : ''}">Blog</a></li>
                 <li><a href="${rootPrefix}contact.html" class="nav-link ${isContact ? 'active-link' : ''}">Contact</a></li>
-                <li><a href="${rootPrefix}contact.html#rfq" class="cta-btn">Request Quote (RFQ)</a></li>
+                <li><a href="${rootPrefix}contact.html#rfq" class="cta-btn"><i class="fas fa-file-invoice" aria-hidden="true"></i> Request Quote (RFQ)</a></li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>

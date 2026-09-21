@@ -13,7 +13,7 @@
     text-align: center;
     padding: calc(var(--header-height) + 3rem) 1.5rem 5rem;
     background:
-        linear-gradient(rgba(20, 20, 20, 0.65), rgba(20, 20, 20, 0.65)),
+        linear-gradient(rgba(10, 10, 10, 0.72), rgba(10, 10, 10, 0.72)),
         url(../images/recycling3.jpg) no-repeat center center;
     background-size: cover;
     color: var(--color-text-on-dark);
@@ -22,6 +22,7 @@
 .hero-content {
     max-width: 1000px;
     margin: 0 auto;
+    font-variant-numeric: tabular-nums;
 }
 
 .hero-content h1 {
@@ -39,7 +40,7 @@
     font-size: 1.25rem;
     line-height: 1.5;
     margin: 0 auto 2rem;
-    max-width: 750px;
+    max-width: 680px;
     opacity: 0.95;
 }
 
@@ -88,7 +89,7 @@
         padding-top: calc(var(--header-height) + 2rem);
         padding-bottom: 3rem;
     }
-    .hero-content h1 { font-size: 2.2rem; }
+    .hero-content h1 { font-size: 2.2rem; margin-bottom: 0.85rem; }
     .hero-content p { font-size: 1.05rem; }
     .hero-buttons {
         display: flex;
