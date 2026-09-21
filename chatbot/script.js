@@ -12,7 +12,7 @@ const _DEFAULT_KEY = atob('c2stb3ItdjEtMGRjNWU5ODg4NTViZWM3NTNkYWY0MGRjMWFiYmQzN
 const AI_CONFIG = {
   apiKey: (typeof localStorage !== 'undefined' && localStorage.getItem('OPENROUTER_API_KEY')) || _DEFAULT_KEY,
   endpoint: 'https://openrouter.ai/api/v1/chat/completions',
-  model: 'google/gemini-2.0-flash-001',
+  model: (typeof localStorage !== 'undefined' && localStorage.getItem('OPENROUTER_MODEL')) || 'nex-agi/nex-n2.5-mini:free',
   maxTokens: 500,
   temperature: 0.4,
 };
