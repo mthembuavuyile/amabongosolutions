@@ -1,23 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
     const openChatbotBtn = document.getElementById('open-chatbot-btn');
     const chatbotPopup = document.getElementById('chatbot-popup');
+
+    if (!openChatbotBtn || !chatbotPopup) return;
+
     let chatbotLoaded = false;
 
     const toggleChatbot = () => {
-        chatbotPopup.classList.toggle('active');
+        const isActive = chatbotPopup.classList.toggle('active');
         const icon = openChatbotBtn.querySelector('i');
 
-        if (chatbotPopup.classList.contains('active')) {
-            // Change to close icon
-            icon.classList.remove('fa-robot');
-            icon.classList.add('fa-times');
-            openChatbotBtn.setAttribute('aria-label', 'Close Virtual Assistant');
-        } else {
-            // Change back to robot icon
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-robot');
-            openChatbotBtn.setAttribute('aria-label', 'Open Virtual Assistant');
+        if (icon) {
+            if (isActive) {
+                icon.classList.remove('fa-robot');
+                icon.classList.add('fa-times');
+                openChatbotBtn.setAttribute('aria-label', 'Close Virtual Assistant');
+                // Prevent background scrolling on mobile when modal sheet is open
+                if (window.innerWidth <= 768) {
+                    document.body.style.overflow = 'hidden';
+                }
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-robot');
+                openChatbotBtn.setAttribute('aria-label', 'Open Virtual Assistant');
+                document.body.style.overflow = '';
+            }
         }
+    };
+
+    // Initialize or bind close button
+    const setupCloseButton = () => {
+        let closeBtn = document.getElementById('close-chatbot-btn');
+        if (!closeBtn) {
+            closeBtn = chatbotPopup.querySelector('.close-btn');
+        }
+        if (!closeBtn) {
+            closeBtn = document.createElement('button');
+            closeBtn.id = 'close-chatbot-btn';
+            closeBtn.className = 'close-btn';
+            closeBtn.innerHTML = '&times;';
+            closeBtn.setAttribute('aria-label', 'Close chat');
+            chatbotPopup.appendChild(closeBtn);
+        }
+        closeBtn.onclick = toggleChatbot;
     };
 
     const loadChatbot = () => {
@@ -27,36 +52,36 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // --- Load for the first time ---
         try {
-            // 1. Create the close button for the popup
-            const closeBtn = document.createElement('button');
-            closeBtn.innerHTML = '&times;';
-            closeBtn.className = 'close-btn';
-            closeBtn.setAttribute('aria-label', 'Close chat');
-            closeBtn.onclick = toggleChatbot; // Clicking it closes the popup
-            chatbotPopup.appendChild(closeBtn);
+            setupCloseButton();
 
-            // 2. Create the iframe that will securely contain the chatbot
+            // Resolve relative path dynamically if on a subdirectory page (e.g. /blog/)
+            const isSubdir = window.location.pathname.includes('/blog/') || window.location.pathname.includes('\\blog\\');
+            const chatbotSrc = isSubdir ? '../chatbot/index.html' : 'chatbot/index.html';
+
             const iframe = document.createElement('iframe');
-            iframe.src = 'chatbot/index.html'; // Path to your self-contained chatbot
+            iframe.src = chatbotSrc;
             iframe.setAttribute('title', 'Amabongo Solutions Virtual Assistant');
+            iframe.setAttribute('allow', 'clipboard-write');
 
-            // 3. Append the iframe to the popup container
             chatbotPopup.appendChild(iframe);
+            chatbotLoaded = true;
 
-            chatbotLoaded = true; // Set flag so we don't load it again
-
-            // Wait a moment before showing the animation
-            setTimeout(toggleChatbot, 100);
-
+            setTimeout(toggleChatbot, 80);
         } catch (error) {
             console.error('Error loading chatbot:', error);
             chatbotPopup.innerHTML = '<p style="color:white; padding: 20px;">Sorry, the chat assistant could not be loaded.</p>';
-            toggleChatbot(); // Show the error message
+            toggleChatbot();
         }
     };
 
-    // Attach the event listener to the main button
+    // Attach click listener to floating toggler
     openChatbotBtn.addEventListener('click', loadChatbot);
+
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && chatbotPopup.classList.contains('active')) {
+            toggleChatbot();
+        }
+    });
 });
