@@ -51,6 +51,8 @@
 .featured-card-img {
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    background-color: #071929;
     min-height: 350px;
     position: relative;
 }
@@ -161,6 +163,8 @@
     height: 220px;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    background-color: #071929;
     position: relative;
 }
 

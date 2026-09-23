@@ -56,7 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
             setupCloseButton();
 
             // Resolve relative path dynamically if on a subdirectory page (e.g. /blog/)
-            const isSubdir = window.location.pathname.includes('/blog/') || window.location.pathname.includes('\\blog\\');
+            const path = window.location.pathname.replace(/\\/g, '/');
+            const isSubdir = path.includes('/blog/') || path.endsWith('/blog');
             const chatbotSrc = isSubdir ? '../chatbot/index.html' : 'chatbot/index.html';
 
             const iframe = document.createElement('iframe');

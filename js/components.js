@@ -10,17 +10,19 @@
         if (!headerContainer) return;
 
         // Determine current page filename for active link highlighting
-        const path = window.location.pathname;
-        const page = path.split('/').pop() || 'index.html';
-        const isInSubfolder = path.includes('/blog/');
-        const rootPrefix = isInSubfolder ? '../' : '';
+        const path = window.location.pathname.replace(/\\/g, '/');
+        const isInBlog = path.includes('/blog/') || path.endsWith('/blog');
+        const rootPrefix = isInBlog ? '../' : '';
 
-        const isHome = page === '' || page === 'index.html';
-        const isAbout = page === 'about.html';
-        const isServices = page === 'services.html';
-        const isPricing = page === 'pricing.html';
-        const isBlog = page === 'blog.html' || isInSubfolder;
-        const isContact = page === 'contact.html';
+        // Extract filename from path
+        const page = path.split('/').filter(Boolean).pop() || 'index.html';
+
+        const isBlog = isInBlog || page === 'blog.html';
+        const isHome = !isBlog && (page === 'index.html' || path.endsWith('/'));
+        const isAbout = !isBlog && page === 'about.html';
+        const isServices = !isBlog && page === 'services.html';
+        const isPricing = !isBlog && page === 'pricing.html';
+        const isContact = !isBlog && page === 'contact.html';
 
         headerContainer.innerHTML = `
         <nav class="container nav-container">
@@ -54,9 +56,9 @@
         const footerContainer = document.getElementById('main-footer') || document.querySelector('footer.footer');
         if (!footerContainer) return;
 
-        const path = window.location.pathname;
-        const isInSubfolder = path.includes('/blog/');
-        const rootPrefix = isInSubfolder ? '../' : '';
+        const path = window.location.pathname.replace(/\\/g, '/');
+        const isInBlog = path.includes('/blog/') || path.endsWith('/blog');
+        const rootPrefix = isInBlog ? '../' : '';
 
         footerContainer.innerHTML = `
         <div class="container">
