@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ─── 5. DATA EXTRACTION & WHATSAPP FORMATTING ─────────────────────────────
     function getFormData() {
         const isIndividual = document.querySelector('input[name="entityType"]:checked')?.value === 'individual';
-        const entityType = isIndividual ? 'Individual' : 'Company / Business';
+        const entityType = isIndividual ? 'Individual' : 'Business';
         const mode = getSelectedLogisticsMode();
         const modeText = mode === 'collection' ? 'Truck Collection Request' : 'Depot Self-Delivery (Mkondeni, PMB)';
         const name = document.getElementById('name').value.trim();
