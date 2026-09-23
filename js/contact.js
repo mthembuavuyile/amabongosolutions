@@ -2,6 +2,9 @@
  * AMABONGO SOLUTIONS - SMART CONTACT & TRADE ENQUIRY GATEKEEPER
  * Handles dynamic distance qualification, logistics triage, payout estimation,
  * and structured WhatsApp / Email message formatting.
+ *
+ * v2 — Intent-adaptive form: General Enquiry shows minimal fields,
+ * Sell Glass / Truck Pickup / Buy Cullet show full trade fields.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -34,6 +37,104 @@ document.addEventListener('DOMContentLoaded', () => {
     const formNotice = document.getElementById('formNotice');
     const noticeText = document.getElementById('noticeText');
     const messageInput = document.getElementById('message');
+    const messageLabel = document.getElementById('messageLabel');
+    const messageGroup = document.getElementById('messageGroup');
+
+    // Intent-adaptive section wrappers
+    const tradeSectionFields = document.getElementById('tradeSectionFields');
+    const tradeDetailFields = document.getElementById('tradeDetailFields');
+
+    // Trade-specific fields that need required toggled
+    const tradeRequiredFields = [provinceSelect, cityInput, volumeInput];
+
+    // Current active intent
+    let currentIntent = 'sell_glass';
+
+    // ─── INTENT-ADAPTIVE FORM LOGIC ──────────────────────────────────────────
+    function isTradeIntent(intent) {
+        return intent === 'sell_glass' || intent === 'commercial_pickup';
+    }
+
+    function isBuyIntent(intent) {
+        return intent === 'buy_cullet';
+    }
+
+    function isGeneralIntent(intent) {
+        return intent === 'general';
+    }
+
+    function updateFormForIntent(intent) {
+        currentIntent = intent;
+
+        if (isGeneralIntent(intent) || isBuyIntent(intent)) {
+            // MINIMAL FORM: hide trade sections
+            if (tradeSectionFields) tradeSectionFields.classList.add('hidden');
+            if (tradeDetailFields) tradeDetailFields.classList.add('hidden');
+
+            // Remove required from trade-specific fields so they don't block submission
+            tradeRequiredFields.forEach(field => {
+                if (field) field.removeAttribute('required');
+            });
+
+            // Hide payout/triage/checklists
+            if (triageAlertBox) triageAlertBox.style.display = 'none';
+            if (payoutEstimatorBox) payoutEstimatorBox.style.display = 'none';
+            if (collectionChecklistGroup) collectionChecklistGroup.style.display = 'none';
+            if (ackBags) ackBags.required = false;
+            if (ackLoading) ackLoading.required = false;
+            if (ackPhotos) ackPhotos.required = false;
+
+            // Hide company group (no entity selector visible)
+            if (companyGroup) companyGroup.style.display = 'none';
+            if (companyInput) companyInput.removeAttribute('required');
+
+            // Re-enable submit button in case it was disabled
+            if (submitWhatsappBtn) {
+                submitWhatsappBtn.disabled = false;
+                submitWhatsappBtn.removeAttribute('title');
+            }
+
+            // Adapt message field for General Enquiry
+            if (isGeneralIntent(intent)) {
+                if (messageLabel) messageLabel.textContent = 'Your Question or Message *';
+                if (messageInput) {
+                    messageInput.placeholder = 'What would you like to know? e.g. Do you buy green bottles? What are your hours?';
+                    messageInput.setAttribute('required', 'required');
+                    messageInput.rows = 4;
+                }
+            } else {
+                // Buy Cullet
+                if (messageLabel) messageLabel.textContent = 'Describe your cullet requirements *';
+                if (messageInput) {
+                    messageInput.placeholder = 'e.g. We need 80 tonnes of clear flint cullet per month for our furnace. What are your supply terms?';
+                    messageInput.setAttribute('required', 'required');
+                    messageInput.rows = 4;
+                }
+            }
+
+        } else {
+            // FULL TRADE FORM: show everything
+            if (tradeSectionFields) tradeSectionFields.classList.remove('hidden');
+            if (tradeDetailFields) tradeDetailFields.classList.remove('hidden');
+
+            // Restore required on trade fields
+            tradeRequiredFields.forEach(field => {
+                if (field) field.setAttribute('required', 'required');
+            });
+
+            // Message back to optional
+            if (messageLabel) messageLabel.textContent = 'Additional Notes / Questions (Optional)';
+            if (messageInput) {
+                messageInput.placeholder = 'Any extra details or questions...';
+                messageInput.removeAttribute('required');
+                messageInput.rows = 3;
+            }
+
+            // Re-run entity type and qualification logic
+            updateEntityType();
+            evaluateQualificationAndPayout();
+        }
+    }
 
     // ─── 1. ENTITY TYPE LOGIC ─────────────────────────────────────────────────
     function updateEntityType() {
@@ -83,8 +184,11 @@ document.addEventListener('DOMContentLoaded', () => {
         radio.addEventListener('change', (e) => updateLogisticsMode(e.target.value));
     });
 
+    // Fix scroll-jump: intercept label clicks on logistics cards and prevent default
+    // The label wrapping the radio causes the browser to focus/scroll to the input
     if (modeCardDropoff) {
-        modeCardDropoff.addEventListener('click', () => {
+        modeCardDropoff.addEventListener('click', (e) => {
+            e.preventDefault();
             const radio = modeCardDropoff.querySelector('input[type="radio"]');
             if (radio) {
                 radio.checked = true;
@@ -94,7 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (modeCardCollection) {
-        modeCardCollection.addEventListener('click', () => {
+        modeCardCollection.addEventListener('click', (e) => {
+            e.preventDefault();
             const radio = modeCardCollection.querySelector('input[type="radio"]');
             if (radio) {
                 radio.checked = true;
@@ -111,6 +216,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const intent = chip.getAttribute('data-intent');
 
             if (inquiryTypeSelect) inquiryTypeSelect.value = intent;
+
+            // Update form visibility based on intent
+            updateFormForIntent(intent);
 
             if (intent === 'commercial_pickup') {
                 const colRadio = document.querySelector('input[name="logisticsMode"][value="collection"]');
@@ -130,6 +238,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ─── 4. DYNAMIC PRE-QUALIFICATION & PAYOUT CALCULATOR ──────────────────────
     function evaluateQualificationAndPayout() {
+        // Skip evaluation if form is in minimal mode
+        if (isGeneralIntent(currentIntent) || isBuyIntent(currentIntent)) return;
+
         const mode = getSelectedLogisticsMode();
         const province = provinceSelect ? provinceSelect.value : '';
         const condition = glassConditionSelect ? glassConditionSelect.value : 'crushed';
@@ -345,6 +456,26 @@ document.addEventListener('DOMContentLoaded', () => {
         return lines.join('\n');
     }
 
+    function generateSimpleEnquiryMessage(data, isWhatsApp = true) {
+        const wrapBold = (text) => isWhatsApp ? `*${text}*` : text;
+        const intentLabel = currentIntent === 'buy_cullet' ? 'CULLET PURCHASE ENQUIRY' : 'GENERAL ENQUIRY';
+
+        const lines = [];
+        lines.push(wrapBold(`AMABONGO SOLUTIONS - ${intentLabel}`));
+        lines.push('──────────────────────────────────');
+        lines.push(`From: ${wrapBold(data.name)}`);
+        lines.push(`Phone: ${data.phone}`);
+        if (data.email) lines.push(`Email: ${data.email}`);
+        lines.push('──────────────────────────────────');
+        if (data.userMessage) {
+            lines.push(`Message: ${data.userMessage}`);
+        }
+        lines.push('──────────────────────────────────');
+        lines.push(`Sent via amabongosolutions.co.za contact form`);
+
+        return lines.join('\n');
+    }
+
     function showNotice(msg) {
         if (!formNotice || !noticeText) return;
         noticeText.textContent = msg;
@@ -373,21 +504,25 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const mode = getSelectedLogisticsMode();
-        const province = provinceSelect ? provinceSelect.value : '';
-        const volumeVal = volumeInput ? parseFloat(volumeInput.value) : 0;
+        const isMinimalMode = isGeneralIntent(currentIntent) || isBuyIntent(currentIntent);
 
-        // Block unviable long-distance collection
-        if (mode === 'collection' && province !== 'KwaZulu-Natal' && volumeVal < 34) {
-            alert(`Collection in ${province} requires a minimum load of 34 tonnes due to diesel and transport costs from Pietermaritzburg. You entered ${volumeVal} tonnes.\n\nPlease deliver to our Mkondeni depot or reach 34 tonnes before requesting truck collection.`);
-            return;
-        }
+        if (!isMinimalMode) {
+            const mode = getSelectedLogisticsMode();
+            const province = provinceSelect ? provinceSelect.value : '';
+            const volumeVal = volumeInput ? parseFloat(volumeInput.value) : 0;
 
-        // Check required checklist confirmations for collection
-        if (mode === 'collection') {
-            if (!ackBags?.checked || !ackLoading?.checked || !ackPhotos?.checked) {
-                alert("Please check all 3 Collection Readiness boxes to confirm you have 1-tonne bulk bags and manual loading helpers available.");
+            // Block unviable long-distance collection
+            if (mode === 'collection' && province !== 'KwaZulu-Natal' && volumeVal < 34) {
+                alert(`Collection in ${province} requires a minimum load of 34 tonnes due to diesel and transport costs from Pietermaritzburg. You entered ${volumeVal} tonnes.\n\nPlease deliver to our Mkondeni depot or reach 34 tonnes before requesting truck collection.`);
                 return;
+            }
+
+            // Check required checklist confirmations for collection
+            if (mode === 'collection') {
+                if (!ackBags?.checked || !ackLoading?.checked || !ackPhotos?.checked) {
+                    alert("Please check all 3 Collection Readiness boxes to confirm you have 1-tonne bulk bags and manual loading helpers available.");
+                    return;
+                }
             }
         }
 
@@ -395,9 +530,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const data = getFormData();
         const whatsappTargetNumber = "27648784287";
-        const messageText = generateTradeEnquiryMessage(data, true);
+        const messageText = isMinimalMode
+            ? generateSimpleEnquiryMessage(data, true)
+            : generateTradeEnquiryMessage(data, true);
 
-        showNotice("Opening WhatsApp with your pre-qualified trade enquiry...");
+        showNotice("Opening WhatsApp with your enquiry...");
         const whatsappUrl = `https://wa.me/${whatsappTargetNumber}?text=${encodeURIComponent(messageText)}`;
         window.open(whatsappUrl, '_blank');
     });
@@ -409,19 +546,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const mode = getSelectedLogisticsMode();
-            const province = provinceSelect ? provinceSelect.value : '';
-            const volumeVal = volumeInput ? parseFloat(volumeInput.value) : 0;
+            const isMinimalMode = isGeneralIntent(currentIntent) || isBuyIntent(currentIntent);
 
-            if (mode === 'collection' && province !== 'KwaZulu-Natal' && volumeVal < 34) {
-                alert(`Collection in ${province} requires a minimum of 34 tonnes due to diesel costs. Please switch to Depot Drop-off or reach 34 tonnes.`);
-                return;
-            }
+            if (!isMinimalMode) {
+                const mode = getSelectedLogisticsMode();
+                const province = provinceSelect ? provinceSelect.value : '';
+                const volumeVal = volumeInput ? parseFloat(volumeInput.value) : 0;
 
-            if (mode === 'collection') {
-                if (!ackBags?.checked || !ackLoading?.checked || !ackPhotos?.checked) {
-                    alert("Please check all 3 Collection Readiness boxes before sending.");
+                if (mode === 'collection' && province !== 'KwaZulu-Natal' && volumeVal < 34) {
+                    alert(`Collection in ${province} requires a minimum of 34 tonnes due to diesel costs. Please switch to Depot Drop-off or reach 34 tonnes.`);
                     return;
+                }
+
+                if (mode === 'collection') {
+                    if (!ackBags?.checked || !ackLoading?.checked || !ackPhotos?.checked) {
+                        alert("Please check all 3 Collection Readiness boxes before sending.");
+                        return;
+                    }
                 }
             }
 
@@ -429,8 +570,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = getFormData();
             const emailTarget = "info@amabongosolutions.co.za";
-            const subject = encodeURIComponent(`Trade Enquiry: ${data.modeText} - ${data.name} (${data.volumeVal}t in ${data.province})`);
-            const bodyText = generateTradeEnquiryMessage(data, false);
+
+            let subject, bodyText;
+            if (isMinimalMode) {
+                const intentLabel = currentIntent === 'buy_cullet' ? 'Cullet Purchase Enquiry' : 'General Enquiry';
+                subject = encodeURIComponent(`${intentLabel} - ${data.name}`);
+                bodyText = generateSimpleEnquiryMessage(data, false);
+            } else {
+                subject = encodeURIComponent(`Trade Enquiry: ${data.modeText} - ${data.name} (${data.volumeVal}t in ${data.province})`);
+                bodyText = generateTradeEnquiryMessage(data, false);
+            }
 
             showNotice("Opening your email client with your enquiry...");
             const mailtoUrl = `mailto:${emailTarget}?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
