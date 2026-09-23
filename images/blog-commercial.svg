@@ -89,7 +89,7 @@
     <!-- Neon Sign: "BAR & RESTAURANT" -->
     <rect x="30" y="5" width="120" height="18" rx="3" fill="#0f1f2e" stroke="#FFC107" stroke-width="1" />
     <text x="90" y="18" font-family="'Oswald', sans-serif" font-size="10" font-weight="700" fill="#FFC107" text-anchor="middle" letter-spacing="1">
-      RESTAURANT & BAR
+      RESTAURANT &amp; BAR
     </text>
 
     <!-- Warm Glowing Windows -->
@@ -229,7 +229,7 @@
   <g transform="translate(45, 45)">
     <rect x="0" y="0" width="210" height="28" rx="6" fill="#1565C0" />
     <text x="14" y="18" font-family="'Oswald', sans-serif" font-size="12" font-weight="700" fill="#ffffff" letter-spacing="1">
-      COMMERCIAL & B2B RECYCLING
+      COMMERCIAL &amp; B2B RECYCLING
     </text>
   </g>
 

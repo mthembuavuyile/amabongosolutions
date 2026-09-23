@@ -186,7 +186,7 @@
   <g transform="translate(45, 45)">
     <rect x="0" y="0" width="220" height="28" rx="6" fill="#2E7D32" />
     <text x="14" y="18" font-family="'Oswald', sans-serif" font-size="12" font-weight="700" fill="#ffffff" letter-spacing="1">
-      PREPARATION & COLOR SORTING
+      PREPARATION &amp; COLOR SORTING
     </text>
   </g>
 
