@@ -50,9 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Current active intent
     let currentIntent = 'sell_glass';
 
-    // ─── INTENT-ADAPTIVE FORM LOGIC ──────────────────────────────────────────
     function isTradeIntent(intent) {
-        return intent === 'sell_glass' || intent === 'commercial_pickup';
+        return intent === 'sell_glass';
     }
 
     function isBuyIntent(intent) {
@@ -210,7 +209,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ─── 3. PRESET CHIPS INTERACTION ──────────────────────────────────────────
     presetChips.forEach(chip => {
-        chip.addEventListener('click', () => {
+        chip.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent scroll-to-top bug
             presetChips.forEach(c => c.classList.remove('active'));
             chip.classList.add('active');
             const intent = chip.getAttribute('data-intent');
@@ -220,17 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update form visibility based on intent
             updateFormForIntent(intent);
 
-            if (intent === 'commercial_pickup') {
-                const colRadio = document.querySelector('input[name="logisticsMode"][value="collection"]');
-                if (colRadio) {
-                    colRadio.checked = true;
-                    updateLogisticsMode('collection');
-                }
-                if (volumeInput && (!volumeInput.value || parseFloat(volumeInput.value) < 20)) {
-                    volumeInput.value = '34';
-                }
-            } else if (intent === 'sell_glass') {
-                // Default to depot or keep current
+            if (intent === 'sell_glass') {
+                // Keep current logistics mode evaluation
                 evaluateQualificationAndPayout();
             }
         });
@@ -417,40 +408,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const wrapBold = (text) => isWhatsApp ? `*${text}*` : text;
 
         const lines = [];
-        lines.push(wrapBold('AMABONGO SOLUTIONS - VERIFIED GLASS TRADE ENQUIRY'));
-        lines.push('──────────────────────────────────');
-
-        // Customer Info
-        let fromLine = `From: ${wrapBold(data.name)}`;
+        lines.push(`Hi Amabongo Solutions, I would like to sell glass.`);
+        lines.push('');
+        
+        let fromLine = `My name is ${wrapBold(data.name)}`;
         if (!data.isIndividual && data.companyName) {
-            fromLine += ` (${wrapBold(data.companyName)})`;
+            fromLine += ` from ${wrapBold(data.companyName)}`;
         }
-        fromLine += ` [${data.entityType}]`;
-        lines.push(fromLine);
-
-        lines.push(`Contact: ${data.phone}${data.email ? ' | ' + data.email : ''}`);
-        lines.push(`Location: ${wrapBold(data.citySuburb || 'Not specified')}, ${wrapBold(data.province || 'KZN')}`);
-        lines.push('──────────────────────────────────');
-
-        // Logistics & Glass Volume
-        lines.push(`Method: ${wrapBold(data.modeText)}`);
-        lines.push(`Material: ${data.conditionText}`);
-        lines.push(`Est. Volume: ${wrapBold(data.volumeVal + ' Metric Tonnes')} (${data.volumeVal} bulk bags)`);
-        lines.push(`Est. Scale Payout: ${wrapBold('R' + data.payout)}`);
-
-        // Checklists (if collection)
+        lines.push(fromLine + '.');
+        
+        lines.push(`I am located in ${wrapBold(data.citySuburb)}, ${wrapBold(data.province)}.`);
+        lines.push('');
+        
+        lines.push(`I have approx. ${wrapBold(data.volumeVal + ' Tonnes')} of ${data.conditionText.split('(')[0].trim()}.`);
+        lines.push(`Preferred method: ${wrapBold(data.modeText)}.`);
+        
         if (data.mode === 'collection') {
-            lines.push('──────────────────────────────────');
-            lines.push('Readiness Confirmations:');
-            lines.push('• Packed in 1-Tonne Bulk Bags: Confirmed YES');
-            lines.push('• Manual Loading Workers (3-4): Confirmed YES');
-            lines.push('• Photos & Google Pin Ready: Confirmed YES');
+            lines.push('');
+            lines.push('I confirm:');
+            lines.push('✅ Packed in 1-Tonne Bulk Bags');
+            lines.push('✅ Manual Loading Helpers Ready');
         }
 
-        // Additional Message
         if (data.userMessage) {
-            lines.push('──────────────────────────────────');
-            lines.push(`Client Notes: ${data.userMessage}`);
+            lines.push('');
+            lines.push(`Notes: ${data.userMessage}`);
         }
 
         return lines.join('\n');
